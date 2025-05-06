@@ -4,6 +4,7 @@ import type { AppProps } from 'next/app';
 import Layout from '@/components/Layout';
 import Head from '@/components/Head';
 
+import { PersonalityProvider } from '@/components/PersonalityContext';
 import '@/styles/globals.css';
 import '@/styles/themes.css';
 
@@ -16,10 +17,12 @@ function MyApp({ Component, pageProps }: AppProps) {
   }, []);
 
   return (
-    <Layout>
-      <Head title={`Dhrumil Shukla | ${pageProps.title}`} />
-      <Component {...pageProps} />
-    </Layout>
+    <PersonalityProvider>
+      <Layout>
+        <Head title={`Dhrumil Shukla | ${pageProps.title}`} />
+        <Component {...pageProps} />
+      </Layout>
+    </PersonalityProvider>
   );
 }
 

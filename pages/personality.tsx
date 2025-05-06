@@ -1,10 +1,8 @@
 import PersonalityInfo from '@/components/PersonalityInfo';
 import styles from '@/styles/SettingsPage.module.css';
 
-
 const PersonalityPage = () => {
   return (
-
         <div className={styles.layout}>
             <h1 className={styles.title}>Choose my personality</h1>
             <div className={styles.subtitle}>This will be reflected everywhere in the site</div>

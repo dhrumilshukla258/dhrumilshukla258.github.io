@@ -1,18 +1,18 @@
 import Image from 'next/image';
 import styles from '@/styles/ThemeInfo.module.css';
+import { usePersonality } from '@/components/PersonalityContext';
+
 
 interface PersonalityInfoProps {
   imagepath: string;
-  personality: string;
+  personality: 'professional' | 'playful' | 'technical' | 'casual' | 'narrative';
   buttontext: string;
 }
 
 const PersonalityInfo = ({ imagepath, personality, buttontext }: PersonalityInfoProps) => {
-  const setPersonality = (personality: string) => {
-    document.documentElement.setAttribute('data-personality', personality);
-    localStorage.setItem('personality', personality);
-  };
-
+ 
+  const { personality: currentPersonality, setPersonality } = usePersonality();
+  
   return (
     <div className={styles.container}>
       <div className={styles.imageWrapper}>
