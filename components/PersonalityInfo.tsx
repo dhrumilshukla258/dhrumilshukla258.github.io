@@ -12,7 +12,7 @@ interface PersonalityInfoProps {
 const PersonalityInfo = ({ imagepath, personality, buttontext }: PersonalityInfoProps) => {
  
   const { personality: currentPersonality, setPersonality } = usePersonality();
-  
+  currentPersonality;
   return (
     <div className={styles.container}>
       <div className={styles.imageWrapper}>
