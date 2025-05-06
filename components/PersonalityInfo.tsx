@@ -10,9 +10,8 @@ interface PersonalityInfoProps {
 }
 
 const PersonalityInfo = ({ imagepath, personality, buttontext }: PersonalityInfoProps) => {
- 
+  /* eslint-disable-next-line @typescript-eslint/no-unused-vars */
   const { personality: currentPersonality, setPersonality } = usePersonality();
-  currentPersonality;
   return (
     <div className={styles.container}>
       <div className={styles.imageWrapper}>

@@ -18,7 +18,7 @@ export default function HomePage() {
           Welcome! Here, you&apos;ll find a collection of projects I&apos;ve crafted, 
           from dynamic game engines to intuitive websites and mobile apps. With experience at 
           industry-leading teams, including NBA 2K and Lego 2K Drive, I&apos;m dedicated to delivering high-quality, 
-          user-centric solutions in the gaming world and beyond."
+          user-centric solutions in the gaming world and beyond.
           </p>
 
           <div className={styles.actionLinks}>
