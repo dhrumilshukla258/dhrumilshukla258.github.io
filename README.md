@@ -1,5 +1,5 @@
-# unity-portfolio
-A Unity themed developer portfolio website built with Next.js and deployed on Vercel.
+# ide-portfolio
+A IDE themed developer portfolio website built with Next.js and deployed on Vercel.
 
 ## Features Roadmap
 
@@ -13,10 +13,6 @@ A Unity themed developer portfolio website built with Next.js and deployed on Ve
 
 For other features and themes suggestions, please open an issue.
 
-## Environment Variables
-
-For fetching your articles from dev.to, create an `.env.local` file inside the project directory. Check the `.env.local.example` file for more information.
-
 ## Running Development Server
 
 ```bash
@@ -27,7 +23,7 @@ yarn dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-All VSCode related components can be found in the `components` folder. To change the content of the portfolio, check out the `pages` folder. To add or remove pages, modify `components/Sidebar.jsx` and `components/Tabsbar.jsx`.
+All components can be found in the `components` folder. To change the content of the portfolio, check out the `pages` folder. To add or remove pages, modify `components/Sidebar.jsx` and `components/Tabsbar.jsx`.
 
 ## Next.js Resources
 

@@ -26,11 +26,11 @@ const explorerItems = [
     path: '/projects',
     icon: '/logos/js_icon.svg',
   },
-  /*{
-    name: 'articles.json',
-    path: '/articles',
+  {
+    name: 'work.json',
+    path: '/work',
     icon: '/logos/json_icon.svg',
-  },*/
+  },
   {
     name: 'github.md',
     path: '/github',

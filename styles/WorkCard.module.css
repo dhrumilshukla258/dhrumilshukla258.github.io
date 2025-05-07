@@ -1,18 +1,16 @@
 .card {
   background: var(--article-bg);
-  flex-direction: row;
+  display: flex;
+  flex-direction: column;
   border-radius: 12px;
   cursor: pointer;
   overflow: hidden;
   position: relative;
+  height: 250px;
   border: 1px solid rgba(255, 255, 255, 0.08);
   transition: all 0.25s ease;
   text-decoration: none;
   color: inherit;
-  align-items: stretch;
-  height: auto; /* Let content dictate height */
-  width: 100%;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
 }
 
 .card:hover {
@@ -38,10 +36,9 @@
 .content {
   padding: 1.75rem;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: space-between;
   height: 100%;
-  flex: 1; /* ← allow it to grow in width */
 }
 
 .logoWrapper {
@@ -69,6 +66,13 @@
   font-weight: 600;
   margin-bottom: 0.75rem;
   color: var(--accent-color);
+}
+
+.description {
+  font-size: 0.9rem;
+  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.8);
+  margin-bottom: 1rem;
 }
 
 .link {
@@ -131,20 +135,4 @@
 
 .underline:hover {
   background-size: 100% 88%;
-}
-
-.descriptionList {
-  list-style-type: square;
-  padding-left: 1rem;
-  color: rgba(255, 255, 255, 0.6);
-  font-size: 0.95rem;
-  margin-top: 0.5rem;
-  direction: ltr; /* Ensures left-to-right text direction */
-  text-align: left; /* Aligns text and bullets to the left */
-}
-
-.thumbnail {
-  width: 200px;
-  background: var(--accent-color);
-  flex-shrink: 0;
 }

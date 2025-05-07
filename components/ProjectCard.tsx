@@ -18,23 +18,41 @@ const ProjectCard = ({ project }: ProjectCardProps) => {
     >
       <div className={styles.content}>
         {
-        project.logos?.length > 0 && (
-          <div className={styles.logoWrapper}>
-            {project.logos.map((logo, idx) => (
-              <Image
-                key={idx}
-                src={logo}
-                alt={`${project.title} logo ${idx + 1}`}
-                width={24}
-                height={24}
-                className={styles.logo}
-              />
-            ))}
-          </div>
-        )
+          project.logos && project.logos?.length > 0 && (
+            <div className={styles.logoWrapper}>
+              {project.logos.map((logo, idx) => (
+                <Image
+                  key={idx}
+                  src={logo}
+                  alt={`${project.title} logo ${idx + 1}`}
+                  width={24}
+                  height={24}
+                  className={styles.logo}
+                />
+              ))}
+            </div>
+          )
         }
+        <div className={styles.header}>
         <h3 className={styles.title}>{project.title}</h3>
-        <p className={styles.description}>{project.description}</p>
+        {
+          project.startDate && (
+            <p className={styles.timeline}>
+              {project.startDate?.toLocaleDateString('en-US', { month: 'short', year: 'numeric' })} –{' '}
+              {project.endDate
+                ? project.endDate.toLocaleDateString('en-US', { month: 'short', year: 'numeric' })
+                : 'Present'}
+            </p>
+          )
+        }
+        </div>
+        <ul className={styles.descriptionList}>
+          {
+            project.description.map((point, idx) => (
+              <li key={idx}>{point}</li>
+            ))
+          }
+        </ul>
       </div>
     </a>
   );

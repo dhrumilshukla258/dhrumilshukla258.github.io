@@ -6,6 +6,7 @@ import {
   VscMail,
   VscGithubAlt,
   VscCode,
+  VscEdit,
   VscFiles,
 } from 'react-icons/vsc';
 
@@ -15,7 +16,7 @@ const sidebarTopItems = [
   { Icon: VscFiles, path: '/' },
   { Icon: VscGithubAlt, path: '/github' },
   { Icon: VscCode, path: '/projects' },
-  //{ Icon: VscEdit, path: '/articles' },
+  { Icon: VscEdit, path: '/work' },
   { Icon: VscMail, path: '/contact' },
 ];
 

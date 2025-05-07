@@ -14,7 +14,7 @@ const GithubPage = () => {
 
   useEffect(() => {
     async function fetchGitHubData() {
-      const username = process.env.NEXT_PUBLIC_GITHUB_USERNAME;
+      const username = "dhrumilshukla258";
       if (!username) return;
 
       try {
@@ -83,7 +83,7 @@ const GithubPage = () => {
         </div>
         <div className={styles.contributions}>
           <GitHubCalendar
-            username={process.env.NEXT_PUBLIC_GITHUB_USERNAME!}
+            username={"dhrumilshukla258"}
             hideColorLegend
             hideMonthLabels
             colorScheme="dark"
