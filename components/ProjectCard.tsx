@@ -17,15 +17,22 @@ const ProjectCard = ({ project }: ProjectCardProps) => {
       className={styles.card}
     >
       <div className={styles.content}>
-        <div className={styles.logoWrapper}>
-          <Image
-            src={project.logo}
-            alt={`${project.title} logo`}
-            width={24}
-            height={24}
-            className={styles.logo}
-          />
-        </div>
+        {
+        project.logos?.length > 0 && (
+          <div className={styles.logoWrapper}>
+            {project.logos.map((logo, idx) => (
+              <Image
+                key={idx}
+                src={logo}
+                alt={`${project.title} logo ${idx + 1}`}
+                width={24}
+                height={24}
+                className={styles.logo}
+              />
+            ))}
+          </div>
+        )
+        }
         <h3 className={styles.title}>{project.title}</h3>
         <p className={styles.description}>{project.description}</p>
       </div>

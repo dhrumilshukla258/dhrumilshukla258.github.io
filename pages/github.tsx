@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import GitHubCalendar from 'react-github-calendar';
 import { VscRepo, VscPerson } from 'react-icons/vsc';
@@ -7,12 +8,33 @@ import { Repo, User } from '@/types';
 
 import styles from '@/styles/GithubPage.module.css';
 
-interface GithubPageProps {
-  repos: Repo[];
-  user: User;
-}
+const GithubPage = () => {
+  const [user, setUser] = useState<User | null>(null);
+  const [repos, setRepos] = useState<Repo[]>([]);
 
-const GithubPage = ({ repos, user }: GithubPageProps) => {
+  useEffect(() => {
+    async function fetchGitHubData() {
+      const username = process.env.NEXT_PUBLIC_GITHUB_USERNAME;
+      if (!username) return;
+
+      try {
+        const userRes = await fetch(`https://api.github.com/users/${username}`);
+        const userData = await userRes.json();
+        setUser(userData);
+
+        const repoRes = await fetch(`https://api.github.com/users/${username}/repos?sort=pushed&per_page=6`);
+        const repoData = await repoRes.json();
+        setRepos(repoData);
+      } catch (err) {
+        console.error('Failed to fetch GitHub data:', err);
+      }
+    }
+
+    fetchGitHubData();
+  }, []);
+
+  if (!user) return <p>Loading...</p>;
+
   return (
     <div className={styles.layout}>
       <div className={styles.pageHeading}>
@@ -69,30 +91,12 @@ const GithubPage = ({ repos, user }: GithubPageProps) => {
               dark: ['#161B22', '#0e4429', '#006d32', '#26a641', '#39d353'],
               light: ['#161B22', '#0e4429', '#006d32', '#26a641', '#39d353'],
             }}
-            style={{
-              width: '100%',
-            }}
+            style={{ width: '100%' }}
           />
         </div>
       </div>
     </div>
   );
 };
-
-export async function getStaticProps() {
-  const userRes = await fetch(
-    `https://api.github.com/users/${process.env.NEXT_PUBLIC_GITHUB_USERNAME}`
-  );
-  const user = await userRes.json();
-
-  const repoRes = await fetch(
-    `https://api.github.com/users/${process.env.NEXT_PUBLIC_GITHUB_USERNAME}/repos?sort=pushed&per_page=6`
-  );
-  const repos = await repoRes.json();
-
-  return {
-    props: { title: 'GitHub', repos, user },
-  };
-}
 
 export default GithubPage;

@@ -14,23 +14,24 @@ const CustomHead = ({ title }: CustomHeadProps) => {
       />
       <meta
         name="keywords"
-        content="dhrumil, shukla, dhrumil shukla,  
-                software, engineer, software engineer,
-                game, developer, game developer
-                programmer, data, data engineer
-                portfolio, developer portfolio, 
-                dhrumil engineer, dhrumil developer, dhrumil portfolio
-                shukla engineer, shulka developer, shukla portfolio
-                 mern stack, unity-portfolio, unreal-portfolio, ide-portfolio, vscode-portfolio"
+        content="dhrumil,             shukla,               dhrumil shukla,  
+                 software,            engineer,             software engineer,
+                 game,                developer,            game developer
+                 programmer,          data,                 data engineer
+                 portfolio,           developer portfolio,  vscode-portfolio,
+                 dhrumil engineer,    dhrumil developer,    dhrumil portfolio,
+                 shukla engineer,     shukla developer,     shukla portfolio,
+                 unity-portfolio,     unreal-portfolio,     ide-portfolio,
+                 unreal,              unreal,               digipen,
+                 visual concepts,     nba,                  nba 2k,
+                 lego 2k drive,       lego 2k               2k,
+                 take-two,            taketwo"
       />
       <meta property="og:title" content="Dhrumil Shukla's Portfolio" />
       <meta
         property="og:description"
         content="A software engineer building games that you'd like to use."
       />
-      <meta property="og:image" content="https://imgur.com/4zi5KkQ.png" />
-      <meta property="og:url" content="https://vscode-portfolio.vercel.app" />
-      <meta name="twitter:card" content="summary_large_image" />
     </Head>
   );
 };

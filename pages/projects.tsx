@@ -9,9 +9,8 @@ const ProjectsPage = () => {
       <h1 className={styles.pageTitle}>My Projects</h1>
       <p className={styles.pageSubtitle}>
         Here&apos;s a collection of my recent work. These projects showcase my
-        skills in web development, design, and problem-solving.
+        skills in software and game development, design, and problem-solving.
       </p>
-
       <div className={styles.container}>
         {projects.map((project) => (
           <ProjectCard key={project.slug} project={project} />

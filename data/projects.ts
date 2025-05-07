@@ -1,7 +1,7 @@
 export interface Project {
   title: string;
   description: string;
-  logo: string;
+  logos?: string[];
   link: string;
   slug: string;
 }
@@ -11,32 +11,32 @@ export const projects: Project[] = [
     title: 'Belly Blaster',
     description:
       'Discover creative websites and developers. A portal for you to share your projects.',
-    logo: '/logos/driwwwle.svg',
-    link: 'https://github.com/itsnitinr/driwwwle',
-    slug: 'driwwwle',
+    logos: [],
+    link: 'https://github.com/augdirt/BellyBlaster',
+    slug: 'BellyBlaster',
   },
   {
-    title: 'Unity Themed Portfolio Website',
+    title: 'IDE Themed Portfolio Website',
     description:
-      'A Unity themed developer portfolio built with Next.js and CSS Modules.',
-    logo: '/logos/vsc.svg',
-    link: 'https://github.com/itsnitinr/vscode-portfolio',
-    slug: 'vscode-portfolio',
+      'An IDE themed developer portfolio built with Next.js and CSS Modules.',
+    logos: [],
+    link: 'https://github.com/dhrumilshukla258/dhrumilshukla258.github.io',
+    slug: 'ide-portfolio',
   },
   {
-    title: 'Subtrackt',
+    title: 'Masters Thesis',
     description:
-      'A simple and elegant way to track your subscriptions and save money.',
-    logo: '/logos/subtrackt.svg',
-    link: 'https://github.com/itsnitinr/subtrackt',
+      'Deep dive in cyclones and clustering analysis.',
+    logos: [],
+    link: 'https://github.com/dhrumilshukla258/Thesis-Code',
     slug: 'subtrackt',
   },
   {
-    title: 'Coolify Deployments',
+    title: 'Robotest',
     description:
-      'VSCode extension to track and deploy your Coolify applications.',
-    logo: '/logos/coolify.svg',
-    link: 'https://github.com/itsnitinr/coolify-vscode-extension',
-    slug: 'coolify-vscode-extension',
+      'A 2.5D platformer game built on a custom game engine.',
+    logos: [],
+    link: 'https://github.com/dhrumilshukla258/Robotest',
+    slug: 'Robotest',
   },
 ];

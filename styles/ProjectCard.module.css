@@ -42,15 +42,17 @@
 }
 
 .logoWrapper {
-  background: rgba(255, 255, 255, 0.05);
-  width: 42px;
-  height: 42px;
-  border-radius: 8px;
+  /* background: rgba(255, 255, 255, 0.05); */
+  /* border-radius: 8px; */
   display: flex;
-  align-items: center;
-  justify-content: center;
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  justify-content: flex-start;
+  /* border: 1px solid rgba(255, 255, 255, 0.1); */
   margin-bottom: 1.25rem;
+  flex-wrap: wrap;         /* allows logos to go to the next line if needed */
+  gap: 0.5rem;             /* space between logos */
+  align-items: center;
+  max-width: 100%;         /* prevent overflow */
+  overflow: hidden;        /* prevent spillover if needed */
 }
 
 .logo {
