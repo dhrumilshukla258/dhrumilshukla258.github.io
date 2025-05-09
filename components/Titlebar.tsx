@@ -1,8 +1,9 @@
 import Image from 'next/image';
-
+import { usePersonality } from '@/components/PersonalityContext';
 import styles from '@/styles/Titlebar.module.css';
 
 const Titlebar = () => {
+  const { personality } = usePersonality();
   return (
     <section className={styles.titlebar}>
       <Image
@@ -21,7 +22,17 @@ const Titlebar = () => {
         <p>Terminal</p>
         <p>Help</p>
       </div>
-      <p className={styles.title}>Dhrumil Shukla - Visual Studio Code</p>
+      <div style={{ width: '24px', height: '24px', marginRight: '8px', position: 'relative'}}>
+          <Image
+            src={'/personality/' + personality + '.png'}
+            alt="Personality"
+            fill
+            className="image-contain"
+          />
+        </div>
+      <p>
+        Dhrumil Shukla - Visual Studio Code
+      </p>
       <div className={styles.windowButtons}>
         <span className={styles.minimize}></span>
         <span className={styles.maximize}></span>

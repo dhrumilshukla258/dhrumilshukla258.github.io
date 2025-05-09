@@ -11,3 +11,7 @@
 a {
   text-decoration: none;
 }
+
+html {
+  font-size: 18.67px; /* Increased base font size */
+}

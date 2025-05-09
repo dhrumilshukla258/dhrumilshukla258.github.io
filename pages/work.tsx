@@ -21,7 +21,7 @@ const WorkPage = () => {
 
 export async function getStaticProps() {
   return {
-    props: { title: 'Work' },
+    props: { title: 'Experience' },
   };
 }
 

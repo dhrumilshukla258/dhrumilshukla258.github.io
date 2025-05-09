@@ -3,35 +3,30 @@ import { WorkExp } from '@/types';
 
 export const workexp: WorkExp[] = [
   {
-    title: 'Visual Concepts Entertainment',
+    company: 'Visual Concepts Entertainment - 2K Games',
+    jobtitle: 'Software Engineer',
+    overview:
+      'Worked on NBA 2K series, Lego 2K Drive and in unannounced moblie game',
     description:
-      'Discover creative websites and developers. A portal for you to share your projects.',
-    logos: [],
-    link: 'https://github.com/augdirt/BellyBlaster',
-    slug: 'BellyBlaster',
+    ['Engineered diverse gameplay and UI elements, including overlays, menus, and camera systems, across multiple online and offline game modes',
+      'Successfully migrated features between different gaming platforms, ensuring a consistent player experience',
+      'Integrated innovative features including Instant Replay, Photo Moments, Highlight Builder, seamless Activity transitions and the engaging Quest system within the open world, empowering players with a wide range of interactive capabilities'],
+    techStack: [['C++','/logos/file_type_cpp3.svg'],['Perforce and Helix','/logos/file_type_helix.svg'],['','']],
+    startDate: new Date('2020-10-05'),
+    link: 'https://vcentertainment.com/',
+    slug: 'VisualConceptsEntertainment',
   },
   {
-    title: 'IDE Themed Portfolio Website',
+    company: 'DigiPen Institute of Technology',
+    jobtitle: 'Research Assistant in Data Visualization and Machine Learning Techniques',
+    overview:
+      'Thesis work',
     description:
-      'An IDE themed developer portfolio built with Next.js and CSS Modules.',
-    logos: [],
-    link: 'https://github.com/dhrumilshukla258/dhrumilshukla258.github.io',
-    slug: 'ide-portfolio',
-  },
-  {
-    title: 'Masters Thesis',
-    description:
-      'Deep dive in cyclones and clustering analysis.',
-    logos: [],
-    link: 'https://github.com/dhrumilshukla258/Thesis-Code',
-    slug: 'subtrackt',
-  },
-  {
-    title: 'Robotest',
-    description:
-      'A 2.5D platformer game built on a custom game engine.',
-    logos: [],
-    link: 'https://github.com/dhrumilshukla258/Robotest',
-    slug: 'Robotest',
+    ['Extracted cleaned and analyzed the brightness temperature of cyclone provided by the SSMIS satellite',
+      'Implemented multi-processing by paralleling the creation of Images to reduce the run time overhead taking 1/4th of the initial time',
+      'Determined the efficiency of Clustering techniques by applying them to the dataset through intensive research and data analysis'],
+    techStack: [['Python','/logos/file_type_python.svg'],['Jupyter Notebook','/logos/file_type_jupyter.svg'],['Visual Studio Code','/logos/file_type_vscode.svg']],
+    link: 'https://vcentertainment.com/',
+    slug: 'VisualConceptsEntertainment',
   },
 ];

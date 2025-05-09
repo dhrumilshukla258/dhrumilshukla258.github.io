@@ -18,10 +18,10 @@ const CustomHead = ({ title }: CustomHeadProps) => {
                  software,            engineer,             software engineer,
                  game,                developer,            game developer
                  programmer,          data,                 data engineer
-                 portfolio,           developer portfolio,  vscode-portfolio,
+                 portfolio,           developer portfolio,  ide-portfolio,
                  dhrumil engineer,    dhrumil developer,    dhrumil portfolio,
                  shukla engineer,     shukla developer,     shukla portfolio,
-                 unity-portfolio,     unreal-portfolio,     ide-portfolio,
+                 unity-portfolio,     unreal-portfolio,     vscode-portfolio,
                  unreal,              unreal,               digipen,
                  visual concepts,     nba,                  nba 2k,
                  lego 2k drive,       lego 2k               2k,

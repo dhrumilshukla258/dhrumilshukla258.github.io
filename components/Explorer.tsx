@@ -7,29 +7,29 @@ import styles from '@/styles/Explorer.module.css';
 
 const explorerItems = [
   {
-    name: 'home.tsx',
+    name: 'home.cs',
     path: '/',
-    icon: '/logos/react_icon.svg',
+    icon: '/logos/file_type_csharp2.svg',
   },
   {
-    name: 'about.html',
-    path: '/about',
-    icon: '/logos/html_icon.svg',
-  },
-  {
-    name: 'contact.css',
-    path: '/contact',
-    icon: '/logos/css_icon.svg',
-  },
-  {
-    name: 'projects.js',
-    path: '/projects',
-    icon: '/logos/js_icon.svg',
-  },
-  {
-    name: 'work.json',
+    name: 'experience.py',
     path: '/work',
+    icon: '/logos/file_type_python.svg',
+  },
+  {
+    name: 'projects.cpp',
+    path: '/projects',
+    icon: '/logos/file_type_cpp3.svg',
+  },
+  {
+    name: 'about.json',
+    path: '/about',
     icon: '/logos/json_icon.svg',
+  },
+  {
+    name: 'contact.c',
+    path: '/contact',
+    icon: '/logos/file_type_c.svg',
   },
   {
     name: 'github.md',

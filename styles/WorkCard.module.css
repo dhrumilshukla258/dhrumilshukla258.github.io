@@ -6,7 +6,6 @@
   cursor: pointer;
   overflow: hidden;
   position: relative;
-  height: 250px;
   border: 1px solid rgba(255, 255, 255, 0.08);
   transition: all 0.25s ease;
   text-decoration: none;
@@ -41,6 +40,29 @@
   height: 100%;
 }
 
+.button {
+  padding: 0.35rem 0.75rem;
+  background: var(--accent-color);
+  filter: brightness(0.9);
+  color: var(--bg-color);
+  font-size: 0.75rem;
+  font-weight: 500;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.25s ease, transform 0.1s ease;
+  align-self: flex-end;
+}
+
+.button:hover {
+  filter: brightness(0.8);
+}
+
+.button:active {
+  transform: translateY(0);
+  opacity: 0.9;
+}
+
 .logoWrapper {
   /* background: rgba(255, 255, 255, 0.05); */
   /* border-radius: 8px; */
@@ -61,18 +83,43 @@
   object-fit: contain;
 }
 
-.title {
-  font-size: 1.35rem;
+.logo:hover {
+  transform: scale(1.1);
+  opacity: 1;
+}
+
+.companytitle {
+  font-size: 1.10rem;
   font-weight: 600;
-  margin-bottom: 0.75rem;
+  margin-bottom: 0.5rem; /* Slightly reduced margin */
   color: var(--accent-color);
 }
 
-.description {
-  font-size: 0.9rem;
+.jobtitle {
+  font-size: 1.0rem; /* Smaller font size */
+  font-weight: 500; /* Slightly lighter font weight */
+  margin-bottom: 0.75rem; /* Keep or adjust the margin */
+  color: var(--secondary-accent-color); /* Different color variable */
+}
+
+.footerRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap; /* Optional: make it responsive */
+  margin-top: auto;
+}
+
+.overview {
+  font-size: 0.85rem;
   line-height: 1.5;
   color: rgba(255, 255, 255, 0.8);
   margin-bottom: 1rem;
+  flex: 1;
+  margin: 0;
+  /* Add text wrapping & control width if needed */
+  word-break: break-word;
 }
 
 .link {
@@ -135,4 +182,93 @@
 
 .underline:hover {
   background-size: 100% 88%;
+}
+
+.pythonKeyword {
+  color: #569CD6;
+  font-weight: bold;
+}
+
+.pythonClassName {
+  color: #4EC9B0; /* Light blue for class names */
+  font-weight: bold;
+}
+
+.pythonFunctionName {
+  color: #DCDCAA; /* Orange for function names */
+  font-weight: bold;
+}
+
+.pythonString {
+  color: #CE9178; /* Pink for strings */
+}
+
+.pythonVariable {
+  color: #9CDCFE; /* Pink for strings */
+}
+
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+
+.modal {
+  background: var(--article-bg);
+  padding: 1rem;
+  border-radius: 1px;
+  width: 80%;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+  position: relative;
+  color: white;
+  max-height: 80vh; /* Add this line */
+  overflow-y: auto;  /* Add this line */
+}
+
+.closeButton {
+  margin-top: .5rem;
+  padding: 0.5rem 1rem;
+  background: var(--accent-color);
+  border: none;
+  color: var(--bg-color);
+  font-weight: bold;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+  position: relative; /* Position absolutely within the modal */
+  left: 94.9%;     /* Position from the right */
+}
+
+.closeButton:hover {
+  filter: brightness(0.8);
+}
+
+.techLogos {
+  margin-top: 1rem;
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+}
+
+.codeBlock {
+  background-color: #1e1e1e;
+  color: #dcdcdc;
+  font-family: 'Courier New', monospace;
+  font-size: 0.9rem;
+  padding: 0.5rem;
+  border-radius: 10px;
+  overflow-x: auto;
+  white-space: pre-wrap;
+  margin-top: 0;
+  line-height: 1.6;
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }

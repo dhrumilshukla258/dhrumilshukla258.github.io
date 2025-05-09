@@ -1,33 +1,42 @@
 import Link from 'next/link';
 import { useRouter } from 'next/router';
+import { usePersonality, PersonalityType } from '@/components/PersonalityContext';
 import {
-  VscAccount,
-  VscSettings,
-  VscMail,
-  VscGithubAlt,
+  VscHome,
+  VscBriefcase,
   VscCode,
-  VscEdit,
   VscFiles,
+  VscMail,
+  VscGithub,
+  VscSettings,
 } from 'react-icons/vsc';
-
+import Image from 'next/image';
 import styles from '@/styles/Sidebar.module.css';
 
 const sidebarTopItems = [
-  { Icon: VscFiles, path: '/' },
-  { Icon: VscGithubAlt, path: '/github' },
+  { Icon: VscHome, path: '/' },
+  { Icon: VscBriefcase, path: '/work' },
   { Icon: VscCode, path: '/projects' },
-  { Icon: VscEdit, path: '/work' },
+  { Icon: VscFiles, path: '/about' },
   { Icon: VscMail, path: '/contact' },
+  { Icon: VscGithub, path: '/github' },
 ];
 
+const sidebarMiddleItems = [
+  { IconPath: '/personality/gamer.png', IconPersonality: "gamer" },
+  { IconPath: '/personality/technical.png', IconPersonality: "technical" },
+  { IconPath: '/personality/professional.png', IconPersonality: "professional" },
+  { IconPath: '/personality/casual.png', IconPersonality: "casual" },
+  { IconPath: '/personality/narrative.png', IconPersonality: "narrative" },
+]
+
 const sidebarBottomItems = [
-  { Icon: VscAccount, path: '/personality' },
   { Icon: VscSettings, path: '/settings' },
 ];
 
 const Sidebar = () => {
   const router = useRouter();
-
+  const { personality: currentPersonality, setPersonality } = usePersonality();
   return (
     <aside className={styles.sidebar}>
       <div className={styles.sidebarTop}>
@@ -51,11 +60,38 @@ const Sidebar = () => {
           </Link>
         ))}
       </div>
+
+      <div className={styles.sidebarMiddle}>
+      <div className={styles.iconsWrapper}>
+        {sidebarMiddleItems.map(({ IconPath, IconPersonality }) => (
+          <div className= {`${styles.iconContainer} ${
+            currentPersonality === IconPersonality ? styles.active : styles.inactive
+          }`}
+          
+          key={IconPath} onClick={() => setPersonality(IconPersonality as PersonalityType)}>
+            <div className={styles.bottomicon} style={{ position: 'relative', marginTop: '10px'}}>
+            <Image
+              src={IconPath}
+              alt={'Set my Personality to ' + IconPersonality}
+              fill
+              className="image-contain"
+            />
+            </div>
+          </div>
+        ))}
+      </div>
+      </div>
+
       <div className={styles.sidebarBottom}>
         {sidebarBottomItems.map(({ Icon, path }) => (
-          <div className={styles.iconContainer} key={path}>
-            <Link href={path}>
+          <Link href={path} key={path}>
+            <div
+              className={`${styles.iconContainer} ${
+                router.pathname === path && styles.active
+              }`}
+            >
               <Icon
+                size={16}
                 fill={
                   router.pathname === path
                     ? 'rgb(225, 228, 232)'
@@ -63,10 +99,12 @@ const Sidebar = () => {
                 }
                 className={styles.icon}
               />
-            </Link>
-          </div>
+            </div>
+          </Link>
         ))}
       </div>
+
+      
     </aside>
   );
 };

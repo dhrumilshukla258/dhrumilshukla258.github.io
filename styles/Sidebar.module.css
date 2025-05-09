@@ -19,6 +19,8 @@
 
 .active {
   border-left: 2px solid var(--accent-color);
+  opacity: 1;
+  filter: none;
 }
 
 .icon {
@@ -27,6 +29,29 @@
   padding: 0.65rem 0;
   display: block;
   margin: 0 auto;
+}
+
+/*
+.iconsWrapper {
+  display: flex;
+  flex-direction: column;
+  // Calculate position to center the middle icon
+  top: 50%;
+  transform: translateY(-50%);
+}
+*/
+
+.bottomicon {
+  height: 38px;
+  width: 38px;
+  padding: 0.65rem 0;
+  display: block;
+  margin: 0 auto
+}
+
+.inactive {
+  opacity: 0.5;
+  filter: grayscale(100%);
 }
 
 @media screen and (min-width: 2000px) {

@@ -36,7 +36,7 @@ const bios = {
         </section>
     </div>
   ),
-  playful: (
+  gamer: (
     <p>
       Hey! I&apos;m a code goblin who fell into the programming rabbit hole after printing &quot;Hello, World&quot; in C — and I&apos;ve been stuck there ever since. These days, I build games, tools, apps, and probably over-engineer my to-do list. Powered by caffeine, curiosity, and the occasional side quest.
     </p>

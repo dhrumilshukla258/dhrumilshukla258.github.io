@@ -1,19 +1,24 @@
 export interface WorkExp {
-  title: string;
-  description: string;
-  logos?: string[];
+  company: string;
+  jobtitle: string;
+  overview: string;
+  description: string[];
+  techStack: string[][];
+  startDate?: Date;
+  endDate?: Date | null;
   link: string;
   slug: string;
 }
 
 export interface Project {
   title: string;
+  overview: string;
   description: string[];
-  logos?: string[];
-  link: string;
-  slug: string;
+  techLogo?: string[];
   startDate?: Date;
   endDate?: Date | null;
+  link: string;
+  slug: string;
 }
 
 export interface Repo {

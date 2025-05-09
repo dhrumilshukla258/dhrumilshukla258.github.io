@@ -18,9 +18,9 @@ const ProjectCard = ({ project }: ProjectCardProps) => {
     >
       <div className={styles.content}>
         {
-          project.logos && project.logos?.length > 0 && (
+          project.techLogo && project.techLogo?.length > 0 && (
             <div className={styles.logoWrapper}>
-              {project.logos.map((logo, idx) => (
+              {project.techLogo.map((logo, idx) => (
                 <Image
                   key={idx}
                   src={logo}

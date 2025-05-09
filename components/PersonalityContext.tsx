@@ -1,6 +1,6 @@
 import { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 
-type PersonalityType = 'professional' | 'playful' | 'technical' | 'casual' | 'narrative';
+export type PersonalityType = 'professional' | 'gamer' | 'technical' | 'casual' | 'narrative';
 
 interface PersonalityContextType {
   personality: PersonalityType;
@@ -45,7 +45,7 @@ export function PersonalityProvider({ children }: PersonalityProviderProps) {
 
 // Type guard to validate personality value
 function isValidPersonality(value: string): value is PersonalityType {
-  return ['professional', 'playful', 'technical', 'casual', 'narrative'].includes(value);
+  return ['professional', 'gamer', 'technical', 'casual', 'narrative'].includes(value);
 }
 
 // Create custom hook to use the personality context
