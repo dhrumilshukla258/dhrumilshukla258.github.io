@@ -7,9 +7,9 @@ import styles from '@/styles/Explorer.module.css';
 
 const explorerItems = [
   {
-    name: 'home.cs',
+    name: 'home.c',
     path: '/',
-    icon: '/logos/file_type_csharp2.svg',
+    icon: '/logos/file_type_c.svg',
   },
   {
     name: 'experience.py',
@@ -27,9 +27,9 @@ const explorerItems = [
     icon: '/logos/json_icon.svg',
   },
   {
-    name: 'contact.c',
+    name: 'contact.cs',
     path: '/contact',
-    icon: '/logos/file_type_c.svg',
+    icon: '/logos/file_type_csharp2.svg',
   },
   {
     name: 'github.md',
