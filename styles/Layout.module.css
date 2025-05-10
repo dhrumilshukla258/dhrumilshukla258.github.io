@@ -4,6 +4,8 @@
   display: flex;
   background: var(--main-bg);
   overflow-x: hidden;
+    scrollbar-color: #888 transparent; /* thumb color and transparent track */
+  scrollbar-width: thin;
 }
 
 .content {

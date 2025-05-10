@@ -3,7 +3,8 @@ export interface WorkExp {
   jobtitle: string;
   overview: string;
   description: string[];
-  techStack: string[][];
+  techStack: string[];
+  techLogo: string[];
   startDate?: Date;
   endDate?: Date | null;
   link: string;

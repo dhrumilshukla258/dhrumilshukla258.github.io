@@ -65,3 +65,8 @@
     font-size: 0.7rem;
   }
 }
+
+.keyword {
+  color: #c164e6; /* Example color for keywords like struct, int */
+  font-weight: bold;
+}

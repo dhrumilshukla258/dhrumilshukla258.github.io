@@ -3,7 +3,6 @@
   display: flex;
   flex-direction: column;
   border-radius: 12px;
-  cursor: pointer;
   overflow: hidden;
   position: relative;
   border: 1px solid rgba(255, 255, 255, 0.08);
@@ -14,6 +13,10 @@
 
 .card:hover {
   border-color: var(--accent-color);
+}
+
+.card:hover .background {
+  opacity: 0.2;
 }
 
 .background {
@@ -28,9 +31,6 @@
   transition: opacity 0.3s ease;
 }
 
-.card:hover .background {
-  opacity: 0.2;
-}
 
 .content {
   padding: 1.75rem;
@@ -71,7 +71,7 @@
   /* border: 1px solid rgba(255, 255, 255, 0.1); */
   margin-bottom: 1.25rem;
   flex-wrap: wrap;         /* allows logos to go to the next line if needed */
-  gap: 0.5rem;             /* space between logos */
+  gap: 0.6rem;             /* space between logos */
   align-items: center;
   max-width: 100%;         /* prevent overflow */
   overflow: hidden;        /* prevent spillover if needed */
@@ -184,6 +184,71 @@
   background-size: 100% 88%;
 }
 
+.titlebar {
+  background-color: #333; /* Example taskbar background color */
+  color: #fff; /* Example text color */
+  padding: 10px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* Distribute space around elements */
+}
+
+.windowButtons {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  margin-left: auto;
+}
+
+
+/* Same as Taskbar module buttos */
+.windowButtons * {
+  margin-left: 0.5rem;
+  height: 13px;
+  width: 13px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.minimize {
+  background: #f1fa8c;
+  margin-left: auto;
+}
+
+.maximize {
+  background: #50fa7b;
+}
+
+.close {
+  background: #ff5555;
+}
+
+
+/* PYTHON style role description*/
+.codeBlock {
+  background-color: #1e1e1e;
+  color: #dcdcdc;
+  font-family: Consolas, Monaco, 'Courier New', monospace;
+  font-size: .95em;
+  padding: 0.5rem;
+  border-radius: 0px;
+  white-space: pre-wrap;
+  margin: 0;
+  margin-top: 0;
+  line-height: 1.6;
+  border: 5px solid rgba(255, 255, 255, 0.1);
+  max-height: 80vh; /* Add this line */
+  overflow-y: auto;  /* Add this line */
+  scrollbar-color: #888 transparent; /* thumb color and transparent track */
+  scrollbar-width: thin;
+}
+
+.codeBlock code {
+  white-space: pre-wrap !important; /* Wrap lines inside code */
+  word-break: break-word !important; /* Prevent long words from spilling out */
+
+}
+
 .pythonKeyword {
   color: #569CD6;
   font-weight: bold;
@@ -191,12 +256,12 @@
 
 .pythonClassName {
   color: #4EC9B0; /* Light blue for class names */
-  font-weight: bold;
+
 }
 
 .pythonFunctionName {
   color: #DCDCAA; /* Orange for function names */
-  font-weight: bold;
+
 }
 
 .pythonString {
@@ -205,70 +270,4 @@
 
 .pythonVariable {
   color: #9CDCFE; /* Pink for strings */
-}
-
-.modalOverlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background-color: rgba(0, 0, 0, 0.5);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 999;
-}
-
-.modal {
-  background: var(--article-bg);
-  padding: 1rem;
-  border-radius: 1px;
-  width: 80%;
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
-  position: relative;
-  color: white;
-  max-height: 80vh; /* Add this line */
-  overflow-y: auto;  /* Add this line */
-}
-
-.closeButton {
-  margin-top: .5rem;
-  padding: 0.5rem 1rem;
-  background: var(--accent-color);
-  border: none;
-  color: var(--bg-color);
-  font-weight: bold;
-  border-radius: 6px;
-  cursor: pointer;
-  transition: background 0.3s ease;
-  position: relative; /* Position absolutely within the modal */
-  left: 94.9%;     /* Position from the right */
-}
-
-.closeButton:hover {
-  filter: brightness(0.8);
-}
-
-.techLogos {
-  margin-top: 1rem;
-  display: flex;
-  gap: 0.75rem;
-  align-items: center;
-  flex-wrap: wrap;
-  justify-content: flex-start;
-}
-
-.codeBlock {
-  background-color: #1e1e1e;
-  color: #dcdcdc;
-  font-family: 'Courier New', monospace;
-  font-size: 0.9rem;
-  padding: 0.5rem;
-  border-radius: 10px;
-  overflow-x: auto;
-  white-space: pre-wrap;
-  margin-top: 0;
-  line-height: 1.6;
-  border: 1px solid rgba(255, 255, 255, 0.1);
 }

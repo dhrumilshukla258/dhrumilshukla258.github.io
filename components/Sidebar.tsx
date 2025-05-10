@@ -74,7 +74,7 @@ const Sidebar = () => {
               src={IconPath}
               alt={'Set my Personality to ' + IconPersonality}
               fill
-              className="image-contain"
+              className={styles.bottomicon}
             />
             </div>
           </div>
