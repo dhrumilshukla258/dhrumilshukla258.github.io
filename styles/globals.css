@@ -12,24 +12,34 @@ a {
   text-decoration: none;
 }
 
-@media (max-width: 1000px){
+/* Default: Desktop (1200px and up) */
+html {
+  font-size: 18.67px;
+  transition: font-size 0.3s ease;
+}
+
+/* Medium screens: tablets and small laptops */
+@media screen and (max-width: 992px) {
   html {
     font-size: 16px;
+    transition: font-size 0.3s ease;
   }
 }
 
-@media (max-width: 768px){
+/* Small screens: large phones/small tablets */
+@media screen and (max-width: 768px) {
   html {
     font-size: 14px;
+    transition: font-size 0.3s ease;
   }
 }
 
-@media (max-width: 480px){
+/* Extra small: phones */
+@media screen and (max-width: 480px) {
   html {
     font-size: 12px;
+    transition: font-size 0.3s ease;
   }
 }
 
-html {
-  font-size: 18.67px; /* Increased base font size */
-}
+
