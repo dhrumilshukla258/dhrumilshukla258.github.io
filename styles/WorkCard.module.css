@@ -237,7 +237,7 @@
   margin-top: 0;
   line-height: 1.6;
   border: 5px solid rgba(255, 255, 255, 0.1);
-  max-height: 80vh; /* Add this line */
+  max-height: 60vh; /* Add this line */
   overflow-y: auto;  /* Add this line */
   scrollbar-color: #888 transparent; /* thumb color and transparent track */
   scrollbar-width: thin;
