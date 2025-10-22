@@ -5,7 +5,7 @@ export interface WorkExp {
   description: string[];
   techStack: string[];
   techLogo: string[];
-  startDate?: Date;
+  startDate: Date;
   endDate?: Date | null;
   link: string;
   slug: string;

@@ -23,15 +23,5 @@ export const contactItems = [
       social: 'letterboxd',
       link: 'dhrumilshukla',
       href: 'https://www.letterboxd.com/dhrumilshukla/',
-    },
-    {
-      social: 'steam',
-      link: 'KhronoS@ge',
-      href: 'https://steamcommunity.com/id/khronosage',
-    },
-    {
-      social: 'playstation',
-      link: 'Dexter',
-      href: 'https://psnprofiles.com/zDexter420',
-    },
+    }
   ];

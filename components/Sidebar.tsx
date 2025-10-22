@@ -24,10 +24,8 @@ const sidebarTopItems = [
 
 const sidebarMiddleItems = [
   { IconPath: '/personality/gamer.png', IconPersonality: "gamer" },
-  { IconPath: '/personality/technical.png', IconPersonality: "technical" },
   { IconPath: '/personality/professional.png', IconPersonality: "professional" },
-  { IconPath: '/personality/casual.png', IconPersonality: "casual" },
-  { IconPath: '/personality/narrative.png', IconPersonality: "narrative" },
+  { IconPath: '/personality/technical.png', IconPersonality: "technical" },
 ]
 
 const sidebarBottomItems = [

@@ -2,7 +2,7 @@ import styles from '@/styles/AboutPage.module.css';
 import { usePersonality } from '@/components/PersonalityContext';
 import React, { useState, useEffect } from "react";
 
-const bios = {
+const personalityDataAbout = {
   professional: (
     <div className={styles.aboutContent}>
         <section className={styles.section}>
@@ -46,16 +46,6 @@ const bios = {
       Hey! I&apos;m a systems-focused programmer who enjoys deep-diving into memory management, threading, and engine architecture. From shader pipelines to gameplay loops and profiling tools — I love working across the stack to optimize performance and improve player experience.
     </p>
   ),
-  casual: (
-    <p>
-      Hey! I&apos;m a programmer who just loves to build cool stuff. Whether it&apos;s a game system, an app, or a little tool that scratches a personal itch — I&apos;m all about making things work, look great, and feel fun to use.
-    </p>
-  ),
-  narrative: (
-    <p>
-      Once upon a time, I wrote my first C program and printed “Hello, World.” That tiny step opened a portal into a world of endless possibilities — from building engines and tools to diving into mobile apps and personal projects. The story continues...
-    </p>
-  ),
 };
 
 const AboutPage = () => {
@@ -74,7 +64,7 @@ const AboutPage = () => {
       <h1 className={styles.title}>Dhrumil Shukla</h1>
       <div className={styles.subtitle}>Software Engineer</div>
       <div className={`${showContent ? styles.slideIn : styles.hidden}`}>
-        {bios[personality]}
+        {personalityDataAbout[personality]}
       </div>
     </div>
     </div>
