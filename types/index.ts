@@ -1,26 +1,68 @@
-export interface WorkExp {
-  company: string;
-  jobtitle: string;
+// ─── Work Experience ──────────────────────────────────────────────────────────
+
+export interface WorkProfessional {
   overview: string;
   description: string[];
-  techStack: string[];
-  techLogo: string[];
-  startDate: Date;
-  endDate?: Date | null;
-  link: string;
-  slug: string;
 }
 
-export interface Project {
+export interface WorkTechnical {
+  overview: string;
+  description: string[];
+}
+
+export interface WorkGamer {
+  title: string;       // fun job title shown on the card
+  overview: string;
+  highlights: string[];
+}
+
+export interface WorkExp {
+  slug: string;
+  company: string;
+  jobtitle: string;
+  link: string;
+  startDate: Date;
+  endDate?: Date | null;
+  techStack: string[];
+  techLogo: string[];
+  professional: WorkProfessional;
+  technical: WorkTechnical;
+  gamer: WorkGamer;
+}
+
+// ─── Projects ─────────────────────────────────────────────────────────────────
+
+export interface ProjectProfessional {
   title: string;
   overview: string;
   description: string[];
-  techLogo?: string[];
+}
+
+export interface ProjectTechnical {
+  title: string;
+  overview: string;
+  description: string[];
+  architectureDiagram?: string;
+}
+
+export interface ProjectGamer {
+  title: string;
+  overview: string;
+  highlights: string[];
+}
+
+export interface Project {
+  slug: string;
+  link: string;
   startDate?: Date;
   endDate?: Date | null;
-  link: string;
-  slug: string;
+  techLogo?: string[];
+  professional: ProjectProfessional;
+  technical: ProjectTechnical;
+  gamer: ProjectGamer;
 }
+
+// ─── GitHub ───────────────────────────────────────────────────────────────────
 
 export interface Repo {
   id: number;

@@ -840,3 +840,100 @@
 .mobileAccent {
   display: none;
 }
+
+/* ── Professional secondary CTA ── */
+.secondaryLink {
+  border: 1px solid var(--accent-color);
+  color: var(--accent-color);
+  padding: 0.75rem 1.5rem;
+  border-radius: 6px;
+  font-size: 1rem;
+}
+.secondaryLink:hover {
+  background-color: var(--accent-color);
+  color: var(--bg-color, #1e1e1e);
+  transform: translateY(-3px);
+}
+
+/* ── Technical home ── */
+.techComment {
+  color: #6a9955;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 1rem;
+  margin-top: -0.5rem;
+}
+
+.techCodeBio {
+  background: rgba(0, 0, 0, 0.3);
+  border-left: 3px solid var(--accent-color);
+  padding: 1rem 1.25rem;
+  border-radius: 0 8px 8px 0;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.88rem;
+  line-height: 1.7;
+  color: #6a9955;
+  white-space: pre;
+  overflow-x: auto;
+  max-width: 35rem;
+}
+
+.techLink {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+  font-weight: 500;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.9rem;
+  color: var(--accent-color);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  padding: 0.65rem 1.25rem;
+  border-radius: 6px;
+  transition: all 0.25s ease;
+}
+.techLink:hover {
+  border-color: var(--accent-color);
+  background: rgba(255, 255, 255, 0.05);
+  transform: translateY(-2px);
+}
+
+/* ── Gamer home ── */
+.gamerStatsBar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: -0.75rem;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  color: #c47829;
+}
+.gamerStatSep { color: rgba(255, 255, 255, 0.3); }
+
+.gamerSecondaryLink {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 1rem;
+  border: 1px solid rgba(196, 120, 41, 0.5);
+  color: #c47829;
+  padding: 0.75rem 1.5rem;
+  border-radius: 6px;
+  transition: all 0.25s ease;
+}
+.gamerSecondaryLink:hover {
+  border-color: #c47829;
+  background: rgba(196, 120, 41, 0.12);
+  transform: translateY(-3px);
+}
+
+@media (max-width: 768px) {
+  .techCodeBio {
+    font-size: 0.78rem;
+    white-space: pre-wrap;
+  }
+}

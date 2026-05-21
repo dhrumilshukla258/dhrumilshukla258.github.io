@@ -1,21 +1,76 @@
-# vscode-portfolio
-A VS Code themed developer portfolio website built with Next.js.
+# VS Code Portfolio — Dhrumil Shukla
 
-## Running Development Server
+A personal portfolio built to look and feel like Visual Studio Code, with a personality-switching system that adapts all content and styling to three modes: **Professional**, **Technical**, and **Gamer**.
 
-```bash
-npm run dev
-# or
-yarn dev
+Live at: [dhrumilshukla258.github.io](https://dhrumilshukla258.github.io)
+
+## Features
+
+- **Personality System** — switch between Professional, Technical, and Gamer modes via the settings page. Every page (Home, About, Work, Projects, Contact) adapts its copy, layout, and visual style.
+- **VS Code chrome** — Titlebar, Sidebar (Explorer), Tabsbar, and Bottombar replicate the VS Code UI shell.
+- **Static site** — built with `getStaticProps` throughout; deploys to GitHub Pages as a fully static export.
+
+## Tech Stack
+
+- **Next.js 15** (Pages Router, Static Site Generation)
+- **React 19**
+- **TypeScript 5**
+- **CSS Modules** (theme via CSS custom properties)
+
+## Project Structure
+
+```
+pages/          # Route pages (index, work, projects, about, contact, github, settings)
+components/     # UI shell (Titlebar, Tabsbar, Sidebar, Layout, WorkCard, ProjectCard, ...)
+data/           # Content files
+  workexp.ts    # Work experience entries
+  projects.ts   # Project entries
+  contacts.ts   # Contact links
+styles/         # CSS Modules per component/page
+public/logos/   # SVG icons used in tabs and cards
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Personality System
 
-All components can be found in the `components` folder. To change the content of the portfolio, check out the `pages` folder. To add or remove pages, modify `components/Sidebar.jsx` and `components/Tabsbar.jsx`.
+Each page reads `usePersonality()` from `PersonalityContext` and renders personality-keyed content. Data files use sub-objects:
 
-## Next.js Resources
+```ts
+// data/workexp.ts
+{
+  professional: { overview, description[] },
+  technical:    { overview, description[] },
+  gamer:        { title, overview, highlights[] },
+}
+```
 
-To learn more about Next.js, take a look at the following resources:
+To change the active personality, visit `/settings` in the running app.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Running Locally
+
+```bash
+npm install
+npm run dev
+```
+
+Open [http://localhost:3000](http://localhost:3000).
+
+```bash
+npm run build   # production build
+npm run lint    # ESLint
+npx tsc --noEmit  # type check
+```
+
+## Customizing Content
+
+| What to change | Where |
+|---|---|
+| Work experience | `data/workexp.ts` |
+| Projects | `data/projects.ts` |
+| Contact links | `data/contacts.ts` |
+| Page copy | `pages/*.tsx` (each page has per-personality sections) |
+| Sidebar file tree | `components/Explorer.tsx` |
+| Tab filenames | `components/Tabsbar.tsx` |
+
+## Deployment
+
+Deployed to GitHub Pages from the `gh-pages` branch via `next build` + static export.

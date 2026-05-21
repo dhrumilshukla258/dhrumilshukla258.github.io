@@ -1,273 +1,301 @@
-.card {
-  background: var(--article-bg);
+/* ═══════════════════════════════════════════════════════════════
+   SHARED UTILITIES
+═══════════════════════════════════════════════════════════════ */
+
+.logoWrapper {
   display: flex;
-  flex-direction: column;
-  border-radius: 12px;
-  overflow: hidden;
-  position: relative;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  transition: all 0.25s ease;
-  text-decoration: none;
-  color: inherit;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  align-items: center;
+  margin-bottom: 1rem;
 }
+.logo { width: 24px; height: 24px; object-fit: contain; }
+.logo:hover { transform: scale(1.1); }
 
-.card:hover {
-  border-color: var(--accent-color);
-}
-
-.card:hover .background {
-  opacity: 0.2;
-}
-
-.background {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  z-index: 0;
-  opacity: 0.15;
-  transition: opacity 0.3s ease;
-}
-
-
-.content {
-  padding: 1.75rem;
+/* window chrome */
+.titlebar {
+  background: #2d2d2d;
+  padding: 8px 16px;
   display: flex;
-  flex-direction: column;
+  align-items: center;
   justify-content: space-between;
-  height: 100%;
+  gap: 1rem;
 }
+.windowButtons { display: flex; align-items: center; gap: 0.4rem; flex-shrink: 0; }
+.windowButtons * { height: 13px; width: 13px; border-radius: 50%; cursor: pointer; }
+.minimize { background: #f1fa8c; }
+.maximize { background: #50fa7b; }
+.close    { background: #ff5555; }
 
 .button {
   padding: 0.35rem 0.75rem;
   background: var(--accent-color);
   filter: brightness(0.9);
-  color: var(--bg-color);
+  color: var(--bg-color, #1e1e1e);
   font-size: 0.75rem;
-  font-weight: 500;
+  font-weight: 600;
   border: none;
   border-radius: 6px;
   cursor: pointer;
-  transition: background 0.25s ease, transform 0.1s ease;
-  align-self: flex-end;
+  transition: filter 0.2s;
+  white-space: nowrap;
 }
+.button:hover { filter: brightness(0.75); }
 
-.button:hover {
-  filter: brightness(0.8);
+/* ═══════════════════════════════════════════════════════════════
+   PROFESSIONAL CARD
+═══════════════════════════════════════════════════════════════ */
+
+.proCard {
+  background: var(--article-bg);
+  border: 1px solid rgba(255,255,255,0.07);
+  border-radius: 12px;
+  overflow: hidden;
+  transition: border-color 0.2s;
 }
+.proCard:hover { border-color: var(--accent-color); }
 
-.button:active {
-  transform: translateY(0);
-  opacity: 0.9;
-}
+.proCardInner { padding: 1.75rem; }
 
-.logoWrapper {
-  /* background: rgba(255, 255, 255, 0.05); */
-  /* border-radius: 8px; */
-  display: flex;
-  justify-content: flex-start;
-  /* border: 1px solid rgba(255, 255, 255, 0.1); */
-  margin-bottom: 1.25rem;
-  flex-wrap: wrap;         /* allows logos to go to the next line if needed */
-  gap: 0.6rem;             /* space between logos */
-  align-items: center;
-  max-width: 100%;         /* prevent overflow */
-  overflow: hidden;        /* prevent spillover if needed */
-}
-
-.logo {
-  width: 24px;
-  height: 24px;
-  object-fit: contain;
-}
-
-.logo:hover {
-  transform: scale(1.1);
-  opacity: 1;
-}
-
-.companytitle {
-  font-size: 1.10rem;
-  font-weight: 600;
-  margin-bottom: 0.5rem; /* Slightly reduced margin */
-  color: var(--accent-color);
-}
-
-.jobtitle {
-  font-size: 1.0rem; /* Smaller font size */
-  font-weight: 500; /* Slightly lighter font weight */
-  margin-bottom: 0.75rem; /* Keep or adjust the margin */
-  color: var(--secondary-accent-color); /* Different color variable */
-}
-
-.footerRow {
+.proCardHeader {
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-start;
   gap: 1rem;
-  flex-wrap: wrap; /* Optional: make it responsive */
-  margin-top: auto;
+  margin-bottom: 0.35rem;
 }
 
-.overview {
-  font-size: 0.85rem;
-  line-height: 1.5;
-  color: rgba(255, 255, 255, 0.8);
-  margin-bottom: 1rem;
-  flex: 1;
+.proCompanyName {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--accent-color);
+  margin: 0 0 0.2rem;
+}
+.proJobRole {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--text-color);
+  opacity: 0.8;
   margin: 0;
-  /* Add text wrapping & control width if needed */
-  word-break: break-word;
 }
-
-.link {
-  display: inline-flex;
+.proDatesInline {
+  font-size: 0.8rem;
+  color: var(--text-color);
+  opacity: 0.5;
+  margin: 0.35rem 0 0.85rem;
+  display: flex;
   align-items: center;
   gap: 0.5rem;
-  background: transparent;
+}
+.proDurationPill {
+  background: rgba(255,255,255,0.07);
+  border-radius: 20px;
+  padding: 0.1rem 0.5rem;
+  font-size: 0.75rem;
+}
+.proRule {
+  border: none;
+  border-top: 1px solid rgba(255,255,255,0.08);
+  margin: 0 0 0.85rem;
+}
+.proOverviewText {
+  font-size: 0.88rem;
+  line-height: 1.6;
+  color: var(--text-color);
+  opacity: 0.8;
+  margin: 0 0 1rem;
+}
+.proTagRow { display: flex; flex-wrap: wrap; gap: 0.35rem; margin-bottom: 1.25rem; }
+.proTag {
   border: 1px solid var(--accent-color);
   color: var(--accent-color);
-  padding: 0.5rem 0.9rem;
-  border-radius: 6px;
-  font-size: 0.8rem;
-  font-weight: 500;
-  text-decoration: none;
-  transition: all 0.2s ease;
-  width: fit-content;
-}
-
-.link:hover {
-  background: var(--accent-color);
-  color: var(--bg-color);
-}
-
-.tags {
-  display: flex;
-  flex-wrap: wrap;
-  margin: 0.5rem 0 1rem;
-}
-
-.tags span {
-  margin: 0.5rem 0.5rem 0 0;
-  padding: 0.2rem 0.5rem;
-  border-radius: 20px;
+  border-radius: 4px;
+  padding: 0.15rem 0.5rem;
   font-size: 0.75rem;
-  transition: all 0.2s;
+  font-weight: 500;
+  opacity: 0.8;
 }
+.proCardFooter { display: flex; justify-content: flex-end; }
 
-.cta {
-  display: flex;
-  gap: 1rem;
+/* ── Professional modal ────────────────────────────────────── */
+.proModalTitle {
+  font-size: 0.88rem;
+  font-weight: 500;
+  color: rgba(255,255,255,0.75);
+  font-family: Consolas, Monaco, monospace;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
-
-.underline {
-  padding: 0.2rem 0;
-  font-size: 0.9rem;
-  letter-spacing: 0;
-  cursor: pointer;
-  color: white;
-  text-decoration: none;
-  background-image: linear-gradient(
-    120deg,
-    var(--accent-color) 100%,
-    var(--accent-color) 100%
-  );
-  background-repeat: no-repeat;
-  background-size: 100% 0.2em;
-  background-position: 0 88%;
-  transition: background-size 0.25s ease-in;
-}
-
-.underline:hover {
-  background-size: 100% 88%;
-}
-
-.titlebar {
-  background-color: #333; /* Example taskbar background color */
-  color: #fff; /* Example text color */
-  padding: 10px 20px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between; /* Distribute space around elements */
-}
-
-.windowButtons {
-  flex: 1;
-  display: flex;
-  align-items: center;
-  margin-left: auto;
-}
-
-
-/* Same as Taskbar module buttos */
-.windowButtons * {
-  margin-left: 0.5rem;
-  height: 13px;
-  width: 13px;
-  border-radius: 50%;
-  cursor: pointer;
-}
-
-.minimize {
-  background: #f1fa8c;
-  margin-left: auto;
-}
-
-.maximize {
-  background: #50fa7b;
-}
-
-.close {
-  background: #ff5555;
-}
-
-
-/* PYTHON style role description*/
-.codeBlock {
-  background-color: #1e1e1e;
-  color: #dcdcdc;
-  font-family: Consolas, Monaco, 'Courier New', monospace;
-  font-size: .95em;
-  padding: 0.5rem;
-  border-radius: 0px;
-  white-space: pre-wrap;
-  margin: 0;
-  margin-top: 0;
-  line-height: 1.6;
-  border: 5px solid rgba(255, 255, 255, 0.1);
-  max-height: 60vh; /* Add this line */
-  overflow-y: auto;  /* Add this line */
-  scrollbar-color: #888 transparent; /* thumb color and transparent track */
+.proBody {
+  background: var(--article-bg);
+  padding: 1.75rem 2rem;
+  max-height: 70vh;
+  overflow-y: auto;
+  scrollbar-color: #888 transparent;
   scrollbar-width: thin;
 }
-
-.codeBlock code {
-  white-space: pre-wrap !important; /* Wrap lines inside code */
-  word-break: break-word !important; /* Prevent long words from spilling out */
-
+.proHeader { margin-bottom: 1.25rem; }
+.proCompany { font-size: 1.2rem; font-weight: 700; color: var(--accent-color); margin: 0 0 0.3rem; }
+.proJobTitle { font-size: 0.95rem; font-weight: 500; color: var(--text-color); opacity: 0.85; margin: 0 0 0.35rem; }
+.proDates { font-size: 0.82rem; color: var(--text-color); opacity: 0.5; margin: 0; }
+.proDuration { font-size: 0.82rem; }
+.proDivider { border: none; border-top: 1px solid rgba(255,255,255,0.1); margin: 1.1rem 0; }
+.proSection { margin-bottom: 1.1rem; }
+.proSectionLabel {
+  font-size: 0.68rem; font-weight: 700; text-transform: uppercase;
+  letter-spacing: 0.1em; color: var(--accent-color); opacity: 0.75; margin: 0 0 0.45rem;
 }
-
-.pythonKeyword {
-  color: #569CD6;
-  font-weight: bold;
+.proText { font-size: 0.88rem; line-height: 1.6; color: var(--text-color); opacity: 0.82; margin: 0; }
+.proList { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 0.4rem; }
+.proList li {
+  font-size: 0.85rem; line-height: 1.55; color: var(--text-color); opacity: 0.82;
+  padding-left: 1.1rem; position: relative;
 }
-
-.pythonClassName {
-  color: #4EC9B0; /* Light blue for class names */
-
+.proList li::before { content: '▸'; position: absolute; left: 0; color: var(--accent-color); font-size: 0.72rem; top: 0.15rem; }
+.proTags { display: flex; flex-wrap: wrap; gap: 0.35rem; }
+.proFooter { margin-top: 1.4rem; display: flex; justify-content: flex-end; }
+.proLink {
+  display: inline-flex; align-items: center; gap: 0.35rem;
+  background: var(--accent-color); color: var(--bg-color, #1e1e1e);
+  padding: 0.45rem 1rem; border-radius: 6px;
+  font-size: 0.82rem; font-weight: 600; text-decoration: none; transition: opacity 0.2s;
 }
+.proLink:hover { opacity: 0.82; }
 
-.pythonFunctionName {
-  color: #DCDCAA; /* Orange for function names */
+/* ═══════════════════════════════════════════════════════════════
+   TECHNICAL CARD  (reuses .card styles)
+═══════════════════════════════════════════════════════════════ */
 
+.card {
+  background: var(--article-bg);
+  border-radius: 12px;
+  border: 1px solid rgba(255,255,255,0.08);
+  transition: border-color 0.25s;
 }
+.card:hover { border-color: var(--accent-color); }
+.content { padding: 1.75rem; display: flex; flex-direction: column; height: 100%; }
+.companytitle { font-size: 1.05rem; font-weight: 600; color: var(--accent-color); margin: 0 0 0.3rem; }
+.jobtitle { font-size: 0.9rem; font-weight: 500; color: var(--text-color); opacity: 0.75; margin: 0 0 0.75rem; }
+.overview { font-size: 0.85rem; line-height: 1.5; color: rgba(255,255,255,0.7); margin: 0; flex: 1; }
+.footerRow { display: flex; justify-content: space-between; align-items: center; gap: 1rem; flex-wrap: wrap; margin-top: 1rem; }
 
-.pythonString {
-  color: #CE9178; /* Pink for strings */
+/* technical modal chrome */
+.link {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  background: transparent; border: 1px solid var(--accent-color); color: var(--accent-color);
+  padding: 0.4rem 0.8rem; border-radius: 6px; font-size: 0.78rem; font-weight: 500;
+  text-decoration: none; transition: all 0.2s; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
 }
+.link:hover { background: var(--accent-color); color: var(--bg-color, #1e1e1e); }
 
-.pythonVariable {
-  color: #9CDCFE; /* Pink for strings */
+.codeBlock {
+  background: #1e1e1e;
+  color: #dcdcdc;
+  font-family: Consolas, Monaco, 'Courier New', monospace;
+  font-size: 0.88em;
+  padding: 1rem 1.25rem;
+  margin: 0;
+  line-height: 1.65;
+  border-top: 4px solid rgba(255,255,255,0.06);
+  max-height: 62vh;
+  overflow-y: auto;
+  scrollbar-color: #888 transparent;
+  scrollbar-width: thin;
+  white-space: pre-wrap;
 }
+.codeBlock code { white-space: pre-wrap !important; word-break: break-word !important; }
+
+/* Python syntax tokens */
+.pyKw  { color: #569CD6; font-weight: bold; }
+.pyCls { color: #4EC9B0; }
+.pyFn  { color: #DCDCAA; }
+.pyStr { color: #CE9178; }
+.pyVar { color: #9CDCFE; }
+
+/* ═══════════════════════════════════════════════════════════════
+   GAMER CARD
+═══════════════════════════════════════════════════════════════ */
+
+.gamerCard {
+  background: #0d0d14;
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 12px;
+  overflow: hidden;
+  transition: border-color 0.25s, box-shadow 0.25s;
+}
+.gamerCard:hover {
+  border-color: var(--accent-color);
+  box-shadow: 0 0 18px rgba(var(--accent-rgb, 255,130,108), 0.15);
+}
+.gamerBadge {
+  background: #110a04;
+  border-bottom: 1px solid rgba(196, 120, 41, 0.3);
+  color: #c47829;
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 0.3rem 1rem;
+  text-align: center;
+}
+.gamerBody { padding: 1.25rem 1.5rem; }
+.gamerTitle { font-size: 1rem; font-weight: 700; color: var(--accent-color); margin: 0 0 0.3rem; }
+.gamerDates { font-size: 0.78rem; color: rgba(255,255,255,0.45); margin: 0 0 0.75rem; }
+
+/* XP bar */
+.xpRow { display: flex; align-items: center; gap: 0.6rem; margin-bottom: 0.85rem; }
+.xpLabel { font-size: 0.7rem; font-weight: 700; color: #c47829; letter-spacing: 0.08em; white-space: nowrap; }
+.xpTrack { flex: 1; height: 8px; background: rgba(255,255,255,0.08); border-radius: 4px; overflow: hidden; }
+.xpFill { height: 100%; background: linear-gradient(90deg, #7a4a14, #c47829, #e8874a); border-radius: 4px; transition: width 0.6s ease; }
+.xpValue { font-size: 0.72rem; color: rgba(255,255,255,0.5); white-space: nowrap; }
+
+.gamerOverview { font-size: 0.85rem; line-height: 1.55; color: rgba(255,255,255,0.7); margin: 0 0 1.1rem; }
+.gamerCardFooter { display: flex; justify-content: flex-end; padding-bottom: 0.25rem; }
+.gamerBtn {
+  padding: 0.4rem 0.9rem;
+  background: transparent;
+  border: 1px solid rgba(196, 120, 41, 0.6);
+  color: #c47829;
+  font-size: 0.78rem; font-weight: 600; border-radius: 6px; cursor: pointer;
+  transition: background 0.2s, color 0.2s, border-color 0.2s;
+}
+.gamerBtn:hover { background: rgba(196, 120, 41, 0.15); border-color: #c47829; color: #e8a84a; }
+
+/* Gamer modal */
+.gamerModalBar {
+  background: #0f0f18;
+  border-bottom: 2px solid #c47829;
+  padding: 8px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+.gamerModalLabel { font-size: 0.82rem; font-weight: 700; color: rgba(255,255,255,0.85); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.gamerModalBody {
+  background: #0d0d14;
+  padding: 1.5rem 1.75rem;
+  max-height: 70vh;
+  overflow-y: auto;
+  scrollbar-color: #888 transparent;
+  scrollbar-width: thin;
+}
+.gmCompany { font-size: 1.1rem; font-weight: 700; color: var(--accent-color); margin: 0 0 0.2rem; }
+.gmDates { font-size: 0.8rem; color: rgba(255,255,255,0.45); margin: 0 0 0.1rem; }
+.gmSectionLabel {
+  font-size: 0.68rem; font-weight: 800; text-transform: uppercase;
+  letter-spacing: 0.12em; color: #c47829; margin: 0 0 0.5rem;
+}
+.gmOverview { font-size: 0.88rem; line-height: 1.6; color: rgba(255,255,255,0.8); margin: 0; }
+.gmList { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 0.5rem; }
+.gmList li { font-size: 0.88rem; line-height: 1.5; color: rgba(255,255,255,0.85); padding-left: 0.25rem; }
+.gmFooter { margin-top: 1.5rem; display: flex; justify-content: flex-end; }
+.gamerLink {
+  display: inline-flex; align-items: center; gap: 0.35rem;
+  background: rgba(196, 120, 41, 0.15);
+  border: 1px solid #c47829;
+  color: #c47829; padding: 0.45rem 1.1rem; border-radius: 6px;
+  font-size: 0.82rem; font-weight: 700; text-decoration: none; transition: background 0.2s, color 0.2s;
+}
+.gamerLink:hover { background: #c47829; color: #0d0d14; }

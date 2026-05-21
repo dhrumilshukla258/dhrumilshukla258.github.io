@@ -39,6 +39,39 @@ const explorerItems = [
   },
 ];
 
+const gamerExplorerItems = [
+  {
+    name: 'home.exe',
+    path: '/',
+    icon: '/logos/file_type_bat.svg',
+  },
+  {
+    name: 'career.log',
+    path: '/work',
+    icon: '/logos/file_type_log.svg',
+  },
+  {
+    name: 'builds.dat',
+    path: '/projects',
+    icon: '/logos/file_type_binary.svg',
+  },
+  {
+    name: 'character.cfg',
+    path: '/about',
+    icon: '/logos/file_type_config.svg',
+  },
+  {
+    name: 'contact.msg',
+    path: '/contact',
+    icon: '/logos/file_type_db.svg',
+  },
+  {
+    name: 'source.git',
+    path: '/github',
+    icon: '/logos/file_type_git.svg',
+  },
+];
+
 const Explorer = () => {
   const [portfolioOpen, setPortfolioOpen] = useState(true);
   const { personality } = usePersonality();
@@ -53,22 +86,22 @@ const Explorer = () => {
           <input
             type="checkbox"
             className={styles.checkbox}
-            id="portfolio-checkbox"
+            id="gamer-portfolio-checkbox"
             checked={portfolioOpen}
             onChange={() => setPortfolioOpen(!portfolioOpen)}
           />
-          <label htmlFor="portfolio-checkbox" className={styles.heading}>
+          <label htmlFor="gamer-portfolio-checkbox" className={styles.heading}>
             <VscChevronRight
               className={styles.chevron}
               style={portfolioOpen ? { transform: 'rotate(90deg)' } : {}}
             />
-            Portfolio
+            SAVE DATA
           </label>
           <div
             className={styles.files}
             style={portfolioOpen ? { display: 'block' } : { display: 'none' }}
           >
-            {explorerItems.map((item) => (
+            {gamerExplorerItems.map((item) => (
               <Link href={item.path} key={item.name}>
                 <div className={styles.file}>
                   <Image src={item.icon} alt={item.name} height={18} width={18} />{' '}

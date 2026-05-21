@@ -2,6 +2,12 @@ import Image from 'next/image';
 import { usePersonality } from '@/components/PersonalityContext';
 import styles from '@/styles/Titlebar.module.css';
 
+const personalityLabel: Record<string, string> = {
+  professional: 'Professional',
+  technical: 'Technical',
+  gamer: 'Gamer',
+};
+
 const Titlebar = () => {
   const { personality } = usePersonality();
   return (
@@ -31,7 +37,7 @@ const Titlebar = () => {
           />
         </div>
       <p>
-        Dhrumil Shukla - Visual Studio Code
+        Dhrumil Shukla - Visual Studio Code — {personalityLabel[personality]}
       </p>
       <div className={styles.windowButtons}>
         <span className={styles.minimize}></span>
