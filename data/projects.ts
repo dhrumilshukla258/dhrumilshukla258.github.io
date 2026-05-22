@@ -10,7 +10,7 @@ export const projectPageHeaders = {
     subtitle: '// A collection of shipped code — engines, ML pipelines, automation tools, and full-stack systems.',
   },
   gamer: {
-    title: '🏆 Achievement Board',
+    title: '🏗️ builds.dat',
     subtitle: 'MISSIONS COMPLETED: 9  ·  TECH UNLOCKED: C++, Python, Unity, C#, Java  ·  PLATFORMS: PS5 · Xbox · PC · Android · iOS',
   },
 };

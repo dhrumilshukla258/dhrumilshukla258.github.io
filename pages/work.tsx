@@ -13,7 +13,7 @@ const pageHeaders = {
     subtitle: '# 5+ years of C++ game engineering, ML research, and data pipelines across industry and academia.',
   },
   gamer: {
-    title: '📋 Quest Log',
+    title: '📋 career.log',
     subtitle: 'ACTIVE QUESTS: 1  ·  COMPLETED: 4  ·  TOTAL XP: 5+ years  ·  CURRENT FACTION: Visual Concepts / 2K Games',
   },
 };

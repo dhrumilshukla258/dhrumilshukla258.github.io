@@ -81,7 +81,7 @@ const WorkCard = ({ work }: WorkCardProps) => {
             <p className={styles.gamerOverview}>{g.overview}</p>
             <div className={styles.gamerCardFooter}>
               <button className={styles.gamerBtn} onClick={() => setIsModalOpen(true)}>
-                View Achievements
+                Open career.log
               </button>
             </div>
           </div>

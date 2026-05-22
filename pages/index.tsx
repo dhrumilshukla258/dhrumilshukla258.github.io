@@ -52,10 +52,10 @@ export default function HomePage() {
           </p>
           <div className={styles.actionLinks}>
             <Link href="/projects" className={styles.primaryLink}>
-              🏆 Achievement Board <VscArrowRight />
+              🏗️ builds.dat <VscArrowRight />
             </Link>
             <Link href="/work" className={styles.gamerSecondaryLink}>
-              📋 Quest Log <VscArrowRight />
+              📋 career.log <VscArrowRight />
             </Link>
           </div>
         </div>
