@@ -20,7 +20,7 @@ export const projects: Project[] = [
     slug: 'vscode-portfolio',
     link: 'https://github.com/dhrumilshukla258/dhrumilshukla258.github.io',
     startDate: new Date('2025-03-15'),
-    techLogo: ['/logos/file_type_vscode.svg'],
+    techLogo: ['/logos/file_type_vscode.svg', '/logos/file_type_typescript.svg'],
 
     professional: {
       title: 'VSCode Themed Portfolio Website',
@@ -74,10 +74,87 @@ export const projects: Project[] = [
   },
 
   {
+    slug: 'stalker-m3u-server',
+    link: 'https://github.com/dhrumilshukla258/stalker-m3u-server',
+    startDate: new Date('2026-04-26'),
+    techLogo: ['/logos/file_type_typescript.svg', '/logos/file_type_node.svg', '/logos/sqlite.svg', '/logos/file_type_docker2.svg'],
+
+    professional: {
+      title: 'Stalker M3U Server',
+      overview: 'A Node.js/TypeScript middleware bridging Stalker portals and Xtream Codes sources to any IPTV player, with a full content management layer, Jellyfin integration, and an HLS transcode proxy.',
+      description: [
+        'Built dual provider support for Stalker STB portals and Xtream Codes APIs, switchable from the UI without a restart',
+        'Implemented full Xtream Codes API emulation alongside M3U playlist and XMLTV EPG endpoints',
+        'Built a browser-based Content Manager for renaming, hiding, moving, and reordering content plus virtual categories',
+        'Added Jellyfin/Emby integration via auto-generated .strm files and an FFmpeg-based HLS transcode proxy with full seek, multi-audio, and subtitle support',
+      ],
+    },
+
+    technical: {
+      title: 'Stalker M3U Server',
+      overview: 'Hapi.js/TypeScript middleware with Sequelize/SQLite persistence, incremental cache warming, and an FFmpeg session-managed HLS transcode proxy, shipped as a Docker container.',
+      description: [
+        'Hapi.js server in TypeScript; Sequelize-TypeScript ORM over SQLite for portal profiles, content metadata, and virtual category mappings',
+        'Provider abstraction layer normalizes Stalker STB portal responses and Xtream Codes API responses into one internal content model',
+        'Incremental background cache warming keeps live/VOD/series catalogs fresh and regenerates .strm files on each warm cycle',
+        'FFmpeg-based HLS transcode proxy with session-based process management, timestamp-encoded segment URIs for seeking, and idle process cleanup',
+        'Optional TMDB metadata enrichment, JWT-based API auth, and TLS termination; packaged and deployed via Docker',
+      ],
+      architectureDiagram:
+`  IPTV Player / TiviMate / Jellyfin
+           │
+           ▼  Xtream API · M3U · XMLTV
+  ┌──────────────────────────────────────┐
+  │  Hapi.js Server (TypeScript)         │
+  │  ┌────────────────────────────────┐  │
+  │  │  Provider Abstraction          │  │
+  │  │  ├─ Stalker STB Portal         │  │
+  │  │  └─ Xtream Codes API           │  │
+  │  └──────────────┬─────────────────┘  │
+  │                 ▼                    │
+  │  Cache Warming (incremental)         │
+  │  Content Manager UI ── Sequelize     │
+  │  └─ SQLite (profiles, categories)    │
+  │                                       │
+  │  HLS Transcode Proxy (FFmpeg)        │
+  │  └─ session mgmt · seek · multi-audio│
+  │                                       │
+  │  .strm generator → Jellyfin/Emby     │
+  └──────────────────────────────────────┘
+  Deployed via Docker`,
+    },
+
+    gamer: {
+      title: 'Built a universal translator for IPTV',
+      overview: 'Stalker portals and Xtream Codes speak different languages — built a Node.js middleware that speaks both and re-serves to any player. Bonus boss fight: live HLS transcoding with full seek support.',
+      highlights: [
+        '🔌 Dual provider support — Stalker STB + Xtream Codes, hot-swappable',
+        '🗂️ Browser Content Manager — rename, hide, reorder, no portal access needed',
+        '🎬 Jellyfin/.strm integration with auto duplicate merging',
+        '⚡ FFmpeg HLS transcode proxy — full seek, multi-audio, subtitles',
+        '🐳 Shipped as a Docker container',
+      ],
+    },
+  },
+
+  {
     slug: 'home-lab',
     link: 'https://github.com/dhrumilshukla258',
     startDate: new Date('2023-10-01'),
-    techLogo: ['/logos/file_type_python.svg'],
+    techLogo: [
+      '/logos/proxmox.svg',
+      '/logos/docker.svg',
+      '/logos/linux.svg',
+      '/logos/ubuntu.svg',
+      '/logos/opnsense.svg',
+      '/logos/gnubash.svg',
+      '/logos/file_type_python.svg',
+      '/logos/caddy.svg',
+      '/logos/jellyfin.svg',
+      '/logos/ollama.svg',
+      '/logos/homeassistant.svg',
+      '/logos/openmediavault.svg',
+    ],
 
     professional: {
       title: 'Home Lab',
@@ -95,7 +172,7 @@ export const projects: Project[] = [
       description: [
         'Proxmox VE on repurposed x86 hardware — XFS filesystems on spare HDDs pooled via mergerfs for unified storage mount',
         'Docker Compose stacks: OpenCloud (open cloud), Collabora Office, Jellyfin, Moonlight/Sunshine game streaming, Ollama LLMs',
-        'Tailscale VPN + Nginx reverse proxy for secure remote access; Python/shell scripts for health monitoring and telemetry',
+        'Caddy reverse proxy for secure remote access; Python/shell scripts for health monitoring and telemetry',
       ],
       architectureDiagram:
 `  Hardware: Repurposed Laptop + Spare HDDs
@@ -112,9 +189,8 @@ export const projects: Project[] = [
   │    ├─ Sunshine (Game Streaming)      │
   │    ├─ Ollama LLM (local AI)          │
   │    └─ + other microservices          │
-  │  VM-3: Network / DNS / VPN           │
-  │    ├─ Tailscale                      │
-  │    └─ Nginx Reverse Proxy            │
+  │  VM-3: Network / DNS / Proxy         │
+  │    └─ Caddy Reverse Proxy            │
   └──────────────────────────────────────┘`,
     },
 
@@ -127,7 +203,7 @@ export const projects: Project[] = [
         '🎬 Jellyfin media server — personal Netflix',
         '🤖 Private Ollama LLMs — local AI, no cloud bill',
         '💾 XFS + mergerfs storage pool across spare HDDs',
-        '🔒 Tailscale VPN + Nginx for secure remote access',
+        '🔒 Caddy reverse proxy for secure remote access',
       ],
     },
   },
@@ -137,7 +213,7 @@ export const projects: Project[] = [
     link: 'https://github.com/augdirt/BellyBlaster',
     startDate: new Date('2024-07-01'),
     endDate: new Date('2024-07-31'),
-    techLogo: ['/logos/file_type_csharp2.svg'],
+    techLogo: ['/logos/unity.svg', '/logos/file_type_csharp2.svg', '/logos/visualstudio.svg'],
 
     professional: {
       title: 'Belly Blaster',
@@ -257,7 +333,7 @@ export const projects: Project[] = [
     link: 'https://github.com/dhrumilshukla258/Thesis-Code',
     startDate: new Date('2020-01-01'),
     endDate: new Date('2020-08-31'),
-    techLogo: ['/logos/file_type_python.svg', '/logos/file_type_jupyter.svg'],
+    techLogo: ['/logos/file_type_python.svg', '/logos/file_type_jupyter.svg', '/logos/anaconda.svg', '/logos/opencv.svg'],
 
     professional: {
       title: 'Masters Thesis — Tropical Cyclone Clustering',
@@ -321,7 +397,7 @@ export const projects: Project[] = [
     link: 'https://github.com/dhrumilshukla258/Robotest',
     startDate: new Date('2019-01-01'),
     endDate: new Date('2019-04-30'),
-    techLogo: ['/logos/file_type_cpp3.svg'],
+    techLogo: ['/logos/file_type_cpp3.svg', '/logos/file_type_c.svg', '/logos/opengl.svg', '/logos/file_type_lua.svg', '/logos/visualstudio.svg', '/logos/file_type_cmake.svg'],
 
     professional: {
       title: 'Robotest',
@@ -377,7 +453,7 @@ export const projects: Project[] = [
     link: 'https://github.com/dhrumilshukla258/MinesweeperSolver',
     startDate: new Date('2019-09-01'),
     endDate: new Date('2019-12-31'),
-    techLogo: ['/logos/file_type_cpp3.svg'],
+    techLogo: ['/logos/file_type_cpp3.svg', '/logos/opencv.svg', '/logos/visualstudio.svg', '/logos/file_type_python.svg'],
 
     professional: {
       title: 'MineSweeper Solver',
@@ -436,7 +512,7 @@ export const projects: Project[] = [
     link: 'https://github.com/dhrumilshukla258/ZombieHunter',
     startDate: new Date('2018-09-01'),
     endDate: new Date('2018-12-31'),
-    techLogo: ['/logos/file_type_c.svg'],
+    techLogo: ['/logos/file_type_c.svg', '/logos/file_type_cpp3.svg', '/logos/opengl.svg', '/logos/visualstudio.svg'],
 
     professional: {
       title: 'Zombie Hunter',
@@ -494,7 +570,7 @@ export const projects: Project[] = [
     link: 'https://github.com/dhrumilshukla258',
     startDate: new Date('2017-07-01'),
     endDate: new Date('2018-05-31'),
-    techLogo: ['/logos/file_type_python.svg'],
+    techLogo: ['/logos/file_type_java.svg', '/logos/file_type_angular.svg', '/logos/file_type_php.svg', '/logos/file_type_mysql.svg'],
 
     professional: {
       title: 'School Admission & Management System',
