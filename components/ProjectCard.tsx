@@ -141,7 +141,7 @@ const ProjectCard = ({ project }: ProjectCardProps) => {
               )}
             </div>
             <ul className={styles.descriptionList}>
-              {td.description.map((point, idx) => <li key={idx}>{point}</li>)}
+              {td.description.slice(0, 2).map((point, idx) => <li key={idx}>{point}</li>)}
             </ul>
             <div className={styles.footerRow}>
               <a href={project.link} target="_blank" rel="noopener noreferrer" className={styles.link}>GitHub</a>

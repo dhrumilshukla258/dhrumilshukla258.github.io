@@ -5,10 +5,12 @@
 .layout {
   max-width: 900px;
   width: 100%;
+  box-sizing: border-box;
   margin: 0 auto;
   padding: 2rem 1.5rem 4rem;
   color: var(--text-color);
   align-self: flex-start;
+  min-width: 0;
 }
 
 .pageTitle {
@@ -37,6 +39,7 @@
 .timeline {
   position: relative;
   padding-left: 3.5rem;
+  min-width: 0;
 }
 
 /* the vertical line */
@@ -93,6 +96,8 @@
 .entry {
   position: relative;
   margin-bottom: 1.25rem;
+  min-width: 0;
+  overflow: hidden;
 }
 
 /* dot on the line */
@@ -143,6 +148,9 @@
   overflow: hidden;
   cursor: pointer;
   transition: border-color 0.2s, box-shadow 0.2s;
+  box-sizing: border-box;
+  width: 100%;
+  min-width: 0;
 }
 
 .card:hover {
@@ -247,6 +255,9 @@
   color: #569CD6;
   padding: 0.5rem 1.25rem 0;
   font-family: Consolas, Monaco, monospace;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 /* ═══════════════════════════════════════════════════════════════
@@ -420,9 +431,12 @@
 ═══════════════════════════════════════════════════════════════ */
 
 @media (max-width: 600px) {
-  .timeline { padding-left: 2.5rem; }
-  .timeline::before { left: 0.75rem; }
-  .dot { left: -1.8rem; }
-  .yearMarker { margin-left: -2.5rem; }
-  .yearLabel { width: 1.6rem; font-size: 0.62rem; }
+  .layout { padding: 1.25rem 0.75rem 3rem; }
+  .timeline { padding-left: 2.25rem; }
+  .timeline::before { left: 0.65rem; }
+  .dot { left: -1.65rem; }
+  .yearMarker { margin-left: -2.25rem; }
+  .yearLabel { width: 1.5rem; font-size: 0.6rem; }
+  .cardHeader { padding: 0.85rem 1rem; }
+  .expandBody { padding: 1rem 1rem 1.25rem; }
 }
