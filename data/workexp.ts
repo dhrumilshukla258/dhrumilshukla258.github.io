@@ -8,7 +8,16 @@ export const workexp: WorkExp[] = [
     link: 'https://vcentertainment.com/',
     startDate: new Date('2020-10-05'),
     techStack: ['Proprietary Engine', 'C++-like', 'Unreal Engine', 'Perforce', 'Helix'],
-    techLogo: ['/logos/file_type_cpp3.svg', '/logos/file_type_helix.svg'],
+    techLogo: [
+      '/logos/visualstudio.svg',
+      '/logos/anthropic.svg',
+      '/logos/unrealengine.svg',
+      '/logos/file_type_vscode.svg',
+      '/logos/file_type_helix.svg',
+      '/logos/jira.svg',
+      '/logos/autodesk.svg',
+      '/logos/perforce.svg',
+    ],
 
     professional: {
       overview: 'Shipped NBA 2K (2022–present) and LEGO 2K Drive across PS5, Xbox Series X, PS4, Xbox One, Switch, and PC.',
