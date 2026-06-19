@@ -6,6 +6,7 @@ import Sidebar from '@/components/Sidebar';
 import Explorer from '@/components/Explorer';
 import Bottombar from '@/components/Bottombar';
 import Tabsbar from '@/components/Tabsbar';
+import PersonalityOnboardingModal from '@/components/PersonalityOnboardingModal';
 
 import styles from '@/styles/Layout.module.css';
 
@@ -25,6 +26,7 @@ const Layout = ({ children }: LayoutProps) => {
 
   return (
     <>
+      <PersonalityOnboardingModal />
       <Titlebar />
       <div className={styles.main}>
         <Sidebar />

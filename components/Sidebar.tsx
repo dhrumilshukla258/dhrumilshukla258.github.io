@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { useRouter } from 'next/router';
+import { useState, useEffect } from 'react';
 import { usePersonality, PersonalityType } from '@/components/PersonalityContext';
 import {
   VscHome,
@@ -35,6 +36,32 @@ const sidebarBottomItems = [
 const Sidebar = () => {
   const router = useRouter();
   const { personality: currentPersonality, setPersonality } = usePersonality();
+  const [isFirstVisit, setIsFirstVisit] = useState(false);
+  const [showTooltip, setShowTooltip] = useState(false);
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const seen = localStorage.getItem('hasSeenPersonality');
+      if (!seen) {
+        setIsFirstVisit(true);
+        // Show tooltip after a short delay so the page settles
+        const t = setTimeout(() => setShowTooltip(true), 1200);
+        return () => clearTimeout(t);
+      }
+    }
+  }, []);
+
+  const dismissFirstVisit = () => {
+    localStorage.setItem('hasSeenPersonality', 'true');
+    setIsFirstVisit(false);
+    setShowTooltip(false);
+  };
+
+  const handlePersonalityClick = (p: PersonalityType) => {
+    setPersonality(p);
+    if (isFirstVisit) dismissFirstVisit();
+  };
+
   return (
     <aside className={styles.sidebar}>
       <div className={styles.sidebarTop}>
@@ -60,13 +87,13 @@ const Sidebar = () => {
       </div>
 
       <div className={styles.sidebarMiddle}>
-      <div className={styles.iconsWrapper}>
+      <div className={`${styles.iconsWrapper} ${showTooltip ? styles.tooltipVisible : ''} ${styles.tooltipAnchor}`}>
         {sidebarMiddleItems.map(({ IconPath, IconPersonality }) => (
           <div className= {`${styles.iconContainer} ${
-            currentPersonality === IconPersonality ? styles.active : styles.inactive
+            currentPersonality === IconPersonality ? styles.activeGlow : styles.inactive
           }`}
-          
-          key={IconPath} onClick={() => setPersonality(IconPersonality as PersonalityType)}>
+
+          key={IconPath} onClick={() => handlePersonalityClick(IconPersonality as PersonalityType)}>
             <div className={styles.bottomicon} style={{ position: 'relative', marginTop: '10px'}}>
             <Image
               src={IconPath}
@@ -77,6 +104,10 @@ const Sidebar = () => {
             </div>
           </div>
         ))}
+        <div className={styles.tooltip}>
+          <span>Switch my lens — 3 ways to see me</span>
+          <button className={styles.tooltipDismiss} onClick={dismissFirstVisit}>Got it</button>
+        </div>
       </div>
       </div>
 

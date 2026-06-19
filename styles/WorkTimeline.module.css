@@ -7,7 +7,7 @@
   width: 100%;
   box-sizing: border-box;
   margin: 0 auto;
-  padding: 2rem 1.5rem 4rem;
+  padding: 2rem 1rem 4rem 0;
   color: var(--text-color);
   align-self: flex-start;
   min-width: 0;
@@ -431,7 +431,7 @@
 ═══════════════════════════════════════════════════════════════ */
 
 @media (max-width: 600px) {
-  .layout { padding: 1.25rem 0.75rem 3rem; }
+  .layout { padding: 1.25rem 1rem 3rem 0; }
   .timeline { padding-left: 2.25rem; }
   .timeline::before { left: 0.65rem; }
   .dot { left: -1.65rem; }

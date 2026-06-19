@@ -7,8 +7,11 @@ import styles from '@/styles/WorkTimeline.module.css';
 
 // ── helpers ────────────────────────────────────────────────────────────────────
 
-const fmtDate = (d: Date | null | undefined) =>
-  d ? format(new Date(d), 'MMM yyyy') : 'Present';
+const fmtDate = (d: Date | null | undefined) => {
+  if (!d) return 'Present';
+  const u = new Date(d);
+  return format(new Date(u.getUTCFullYear(), u.getUTCMonth(), u.getUTCDate()), 'MMM yyyy');
+};
 
 const fmtDuration = (start: Date, end: Date | null | undefined) => {
   const { years = 0, months = 0 } = intervalToDuration({ start, end: end ?? new Date() });
