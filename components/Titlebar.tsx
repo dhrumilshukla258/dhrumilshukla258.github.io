@@ -33,7 +33,7 @@ const Titlebar = () => {
       </div>
 
       <div className={`${styles.personalityPill} ${glowing ? styles.pillGlow : ''}`}>
-        {personalities.map(({ type, label }, i) => {
+        {personalities.map(({ type, label }) => {
           const animIndex = ANIM_PERSONALITY_ORDER.indexOf(type);
           return (
             <button

@@ -72,7 +72,7 @@ const PersonalityOnboardingModal = () => {
         <h2 className={styles.heading}>How do you want to see me?</h2>
         <p className={styles.sub}>Pick a lens — you can always switch it from the top bar.</p>
         <div className={styles.cards}>
-          {personalities.map(({ type, label, tagline, icon }, i) => {
+          {personalities.map(({ type, label, tagline, icon }) => {
             // Map to ANIM_PERSONALITY_ORDER index so refs align
             const animIndex = ANIM_PERSONALITY_ORDER.indexOf(type);
             return (
