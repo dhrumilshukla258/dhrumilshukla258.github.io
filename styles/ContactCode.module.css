@@ -7,7 +7,11 @@
   padding: 1.5rem;
   border: 1px solid rgba(255, 255, 255, 0.1);
   position: relative;
-  overflow: hidden;
+  overflow-x: auto;
+  word-break: break-word;
+  overflow-wrap: break-word;
+  max-width: 100%;
+  box-sizing: border-box;
 }
 
 .code::before {

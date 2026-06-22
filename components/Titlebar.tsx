@@ -1,15 +1,18 @@
 import Image from 'next/image';
-import { usePersonality } from '@/components/PersonalityContext';
+import { usePersonality, PersonalityType } from '@/components/PersonalityContext';
+import { usePersonalityAnimation, ANIM_PERSONALITY_ORDER } from '@/components/PersonalityAnimationContext';
 import styles from '@/styles/Titlebar.module.css';
 
-const personalityLabel: Record<string, string> = {
-  professional: 'Professional',
-  technical: 'Technical',
-  gamer: 'Gamer',
-};
+const personalities: { type: PersonalityType; label: string }[] = [
+  { type: 'professional', label: 'Professional' },
+  { type: 'gamer', label: 'Gamer' },
+  { type: 'technical', label: 'Technical' },
+];
 
 const Titlebar = () => {
-  const { personality } = usePersonality();
+  const { personality, setPersonality } = usePersonality();
+  const { pillIconRefs, triggerSwitch, isAnimating, glowing } = usePersonalityAnimation();
+
   return (
     <section className={styles.titlebar}>
       <Image
@@ -28,17 +31,34 @@ const Titlebar = () => {
         <p>Terminal</p>
         <p>Help</p>
       </div>
-      <div style={{ width: '24px', height: '24px', marginRight: '8px', position: 'relative'}}>
-          <Image
-            src={'/personality/' + personality + '.png'}
-            alt="Personality"
-            fill
-            className="image-contain"
-          />
-        </div>
-      <p>
-        Dhrumil Shukla - Visual Studio Code — {personalityLabel[personality]}
-      </p>
+
+      <div className={`${styles.personalityPill} ${glowing ? styles.pillGlow : ''}`}>
+        {personalities.map(({ type, label }, i) => {
+          const animIndex = ANIM_PERSONALITY_ORDER.indexOf(type);
+          return (
+            <button
+              key={type}
+              className={`${styles.pillOption} ${personality === type ? styles.pillActive : ''}`}
+              onClick={() => { if (!isAnimating) { setPersonality(type); triggerSwitch(type); } }}
+            >
+              <span
+                className={`${styles.pillIcon} ${personality === type ? styles.pillIconActive : ''}`}
+                ref={(el) => { pillIconRefs.current[animIndex] = el; }}
+                style={{ opacity: isAnimating ? 0 : 1, transition: 'opacity 0.2s ease' }}
+              >
+                <Image
+                  src={`/personality/${type}.png`}
+                  alt={label}
+                  fill
+                  className="image-contain"
+                />
+              </span>
+              <span className={styles.pillLabel}>{label}</span>
+            </button>
+          );
+        })}
+      </div>
+
       <div className={styles.windowButtons}>
         <span className={styles.minimize}></span>
         <span className={styles.maximize}></span>

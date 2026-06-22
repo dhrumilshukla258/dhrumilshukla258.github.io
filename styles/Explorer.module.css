@@ -54,6 +54,11 @@
   background: var(--explorer-hover-bg);
 }
 
+.fileActive {
+  background: var(--explorer-hover-bg);
+  color: var(--text-color, #fff);
+}
+
 .chevron {
   transition: transform 0.2s;
 }

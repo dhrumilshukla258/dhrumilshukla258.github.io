@@ -13,13 +13,18 @@
   color: var(--text-color);
   font-family: 'JetBrains Mono', monospace;
   flex: 1;
+  min-width: 0;
   height: 85vh;
   overflow-y: auto;
-  scroll-behavior: smooth;
   overflow-x: hidden;
-  display: flex;
-  align-items: center;
+  scroll-behavior: smooth;
   scrollbar-gutter: stable;
+}
+
+.content > * {
+  width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
 }
 
 .content {

@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { useState } from 'react';
+import { useRouter } from 'next/router';
 import { usePersonality } from '@/components/PersonalityContext';
 import { VscChevronRight } from 'react-icons/vsc';
 
@@ -75,6 +76,7 @@ const gamerExplorerItems = [
 const Explorer = () => {
   const [portfolioOpen, setPortfolioOpen] = useState(true);
   const { personality } = usePersonality();
+  const router = useRouter();
   const personalityDataExplorer = {
     professional: (
       <div className={styles.professional}></div>
@@ -103,7 +105,7 @@ const Explorer = () => {
           >
             {gamerExplorerItems.map((item) => (
               <Link href={item.path} key={item.name}>
-                <div className={styles.file}>
+                <div className={`${styles.file} ${router.pathname === item.path ? styles.fileActive : ''}`}>
                   <Image src={item.icon} alt={item.name} height={18} width={18} />{' '}
                   <p>{item.name}</p>
                 </div>
@@ -137,7 +139,7 @@ const Explorer = () => {
           >
             {explorerItems.map((item) => (
               <Link href={item.path} key={item.name}>
-                <div className={styles.file}>
+                <div className={`${styles.file} ${router.pathname === item.path ? styles.fileActive : ''}`}>
                   <Image src={item.icon} alt={item.name} height={18} width={18} />{' '}
                   <p>{item.name}</p>
                 </div>

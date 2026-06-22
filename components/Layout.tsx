@@ -7,6 +7,7 @@ import Explorer from '@/components/Explorer';
 import Bottombar from '@/components/Bottombar';
 import Tabsbar from '@/components/Tabsbar';
 import PersonalityOnboardingModal from '@/components/PersonalityOnboardingModal';
+import { PersonalityAnimationProvider } from '@/components/PersonalityAnimationContext';
 
 import styles from '@/styles/Layout.module.css';
 
@@ -25,7 +26,7 @@ const Layout = ({ children }: LayoutProps) => {
   }, [router.pathname]);
 
   return (
-    <>
+    <PersonalityAnimationProvider>
       <PersonalityOnboardingModal />
       <Titlebar />
       <div className={styles.main}>
@@ -39,7 +40,7 @@ const Layout = ({ children }: LayoutProps) => {
         </div>
       </div>
       <Bottombar />
-    </>
+    </PersonalityAnimationProvider>
   );
 };
 

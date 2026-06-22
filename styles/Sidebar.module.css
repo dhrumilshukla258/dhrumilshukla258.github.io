@@ -31,15 +31,10 @@
   margin: 0 auto;
 }
 
-/*
 .iconsWrapper {
   display: flex;
   flex-direction: column;
-  // Calculate position to center the middle icon
-  top: 50%;
-  transform: translateY(-50%);
 }
-*/
 
 .bottomicon {
   height: 58px;

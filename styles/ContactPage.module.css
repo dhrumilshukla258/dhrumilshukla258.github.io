@@ -1,17 +1,22 @@
 .layout {
   max-width: 900px;
+  width: 100%;
   margin: 0 auto;
-  height: 100%;
+  box-sizing: border-box;
 }
 
 .container {
   display: flex;
   justify-content: center;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .container > * {
   flex: 1;
+  min-width: 0;
   max-width: 650px;
+  overflow: hidden;
 }
 
 .container h1 {
@@ -119,15 +124,17 @@
   border-radius: 10px;
   text-decoration: none;
   transition: border-color 0.2s;
+  min-width: 0;
+  overflow: hidden;
 }
 .proContactItem:hover { border-color: var(--accent-color); }
 
 .proContactLabel {
   font-size: 0.75rem; font-weight: 700; text-transform: uppercase;
-  letter-spacing: 0.1em; color: var(--accent-color); min-width: 90px;
+  letter-spacing: 0.1em; color: var(--accent-color); min-width: 90px; flex-shrink: 0;
 }
-.proContactValue { flex: 1; font-size: 0.9rem; color: rgba(255, 255, 255, 0.7); }
-.proContactArrow { color: var(--accent-color); opacity: 0.5; font-size: 1rem; }
+.proContactValue { flex: 1; min-width: 0; font-size: 0.9rem; color: rgba(255, 255, 255, 0.7); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.proContactArrow { color: var(--accent-color); opacity: 0.5; font-size: 1rem; flex-shrink: 0; }
 
 /* ── Gamer contact ── */
 .gamerContactTitle {
@@ -159,10 +166,12 @@
   text-decoration: none;
   font-family: monospace;
   transition: border-color 0.2s, background 0.2s;
+  min-width: 0;
+  overflow: hidden;
 }
 .gamerMenuItem:hover { border-color: #c47829; background: rgba(196, 120, 41, 0.08); }
 
-.gamerMenuNum { font-size: 0.75rem; font-weight: 800; color: #c47829; opacity: 0.6; min-width: 28px; }
-.gamerMenuLabel { font-size: 0.8rem; font-weight: 800; letter-spacing: 0.1em; color: #c47829; min-width: 90px; }
-.gamerMenuValue { flex: 1; font-size: 0.85rem; color: rgba(255, 255, 255, 0.65); }
-.gamerMenuArrow { color: #c47829; opacity: 0.5; }
+.gamerMenuNum { font-size: 0.75rem; font-weight: 800; color: #c47829; opacity: 0.6; min-width: 28px; flex-shrink: 0; }
+.gamerMenuLabel { font-size: 0.8rem; font-weight: 800; letter-spacing: 0.1em; color: #c47829; min-width: 90px; flex-shrink: 0; }
+.gamerMenuValue { flex: 1; min-width: 0; font-size: 0.85rem; color: rgba(255, 255, 255, 0.65); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.gamerMenuArrow { color: #c47829; opacity: 0.5; flex-shrink: 0; }
