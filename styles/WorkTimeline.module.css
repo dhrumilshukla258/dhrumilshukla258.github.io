@@ -89,6 +89,55 @@
   margin-left: 0.35rem;
 }
 
+/* ── Professional year badge — notary stamp ── */
+.yearBadgePro {
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  color: var(--accent-color);
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+  padding: 2px 8px;
+  text-align: center;
+  flex-shrink: 0;
+}
+
+/* ── Gamer year badge — season flag ── */
+.yearBadgeGamer {
+  font-family: monospace;
+  font-size: 0.65rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  color: #c47829;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  flex-shrink: 0;
+}
+.yearBadgeGamerFlag {
+  color: #c47829;
+  font-size: 0.55rem;
+  opacity: 0.7;
+}
+
+/* ── Technical year badge — comment hash ── */
+.yearBadgeTech {
+  font-family: 'JetBrains Mono', 'SF Mono', monospace;
+  font-size: 0.68rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.22);
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  flex-shrink: 0;
+}
+.yearBadgeTechHash {
+  color: #569cd6;
+  font-weight: 700;
+  opacity: 0.8;
+}
+
 /* ═══════════════════════════════════════════════════════════════
    ENTRY ROW
 ═══════════════════════════════════════════════════════════════ */

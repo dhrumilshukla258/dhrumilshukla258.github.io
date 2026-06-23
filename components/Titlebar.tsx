@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import { usePersonality, PersonalityType } from '@/components/PersonalityContext';
 import { usePersonalityAnimation, ANIM_PERSONALITY_ORDER } from '@/components/PersonalityAnimationContext';
+import { usePageTransition } from '@/components/PageTransition';
 import styles from '@/styles/Titlebar.module.css';
 
 const personalities: { type: PersonalityType; label: string }[] = [
@@ -11,7 +12,8 @@ const personalities: { type: PersonalityType; label: string }[] = [
 
 const Titlebar = () => {
   const { personality, setPersonality } = usePersonality();
-  const { pillIconRefs, triggerSwitch, isAnimating, glowing } = usePersonalityAnimation();
+  const { pillIconRefs, triggerSameClick, shaking } = usePersonalityAnimation();
+  const { trigger: triggerTransition, isActive: isTransitioning } = usePageTransition();
 
   return (
     <section className={styles.titlebar}>
@@ -32,19 +34,22 @@ const Titlebar = () => {
         <p>Help</p>
       </div>
 
-      <div className={`${styles.personalityPill} ${glowing ? styles.pillGlow : ''}`}>
+      <div className={`${styles.personalityPill} ${shaking ? styles.pillShake : ''}`}>
         {personalities.map(({ type, label }) => {
           const animIndex = ANIM_PERSONALITY_ORDER.indexOf(type);
           return (
             <button
               key={type}
               className={`${styles.pillOption} ${personality === type ? styles.pillActive : ''}`}
-              onClick={() => { if (!isAnimating) { setPersonality(type); triggerSwitch(type); } }}
+              onClick={() => {
+                if (isTransitioning) return;
+                if (personality === type) { triggerSameClick(); return; }
+                triggerTransition(type, () => setPersonality(type));
+              }}
             >
               <span
                 className={`${styles.pillIcon} ${personality === type ? styles.pillIconActive : ''}`}
                 ref={(el) => { pillIconRefs.current[animIndex] = el; }}
-                style={{ opacity: isAnimating ? 0 : 1, transition: 'opacity 0.2s ease' }}
               >
                 <Image
                   src={`/personality/${type}.png`}

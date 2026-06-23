@@ -7,6 +7,7 @@ import Explorer from '@/components/Explorer';
 import Bottombar from '@/components/Bottombar';
 import Tabsbar from '@/components/Tabsbar';
 import PersonalityOnboardingModal from '@/components/PersonalityOnboardingModal';
+import { PageTransitionProvider } from '@/components/PageTransition';
 import { PersonalityAnimationProvider } from '@/components/PersonalityAnimationContext';
 
 import styles from '@/styles/Layout.module.css';
@@ -26,9 +27,10 @@ const Layout = ({ children }: LayoutProps) => {
   }, [router.pathname]);
 
   return (
+    <PageTransitionProvider>
     <PersonalityAnimationProvider>
       <PersonalityOnboardingModal />
-      <Titlebar />
+<Titlebar />
       <div className={styles.main}>
         <Sidebar />
         <Explorer />
@@ -41,6 +43,7 @@ const Layout = ({ children }: LayoutProps) => {
       </div>
       <Bottombar />
     </PersonalityAnimationProvider>
+    </PageTransitionProvider>
   );
 };
 

@@ -35,9 +35,11 @@ function buildYearGroups(entries: WorkExp[]) {
     (a, b) => new Date(b.startDate).getTime() - new Date(a.startDate).getTime()
   );
 
+  const currentYear = new Date().getFullYear();
   const map = new Map<number, WorkExp[]>();
   for (const e of sorted) {
-    const y = utcYear(e.startDate);
+    // active jobs (no endDate) appear under the current year
+    const y = !e.endDate ? currentYear : utcYear(e.startDate);
     if (!map.has(y)) map.set(y, []);
     map.get(y)!.push(e);
   }
@@ -258,8 +260,22 @@ const WorkPage = () => {
       <div className={styles.timeline}>
         {yearGroups.map(([year, entries]) => (
           <React.Fragment key={year}>
-            <div className={styles.yearMarker}>
-              <span className={styles.yearLabel}>{year}</span>
+            <div className={`${styles.yearMarker} ${styles[`yearMarker_${personality}`]}`}>
+              {personality === 'professional' && (
+                <span className={styles.yearBadgePro}>{year}</span>
+              )}
+              {personality === 'gamer' && (
+                <span className={styles.yearBadgeGamer}>
+                  <span className={styles.yearBadgeGamerFlag}>▶</span>
+                  {`SEASON '${String(year).slice(2)}`}
+                </span>
+              )}
+              {personality === 'technical' && (
+                <span className={styles.yearBadgeTech}>
+                  <span className={styles.yearBadgeTechHash}>#</span>
+                  {year}
+                </span>
+              )}
               <span className={styles.yearTick} />
             </div>
             {entries.map(work => (
