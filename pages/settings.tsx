@@ -5,7 +5,21 @@ import styles from '@/styles/SettingsPage.module.css';
 const SettingsPage = () => {
   return (
     <div className={styles.layout}>
+      <h1 className={styles.pageTitle}>Color Theme</h1>
+      <p className={styles.pageSubtitle}>Choose a theme — your selection is saved per personality.</p>
       <div className={styles.container}>
+        <ThemeInfo
+          name="Professional"
+          icon="/themes/github-dark.png"
+          publisher="Resume style"
+          theme="professional"
+        />
+        <ThemeInfo
+          name="VS Code Dark+"
+          icon="/themes/night-owl.png"
+          publisher="Microsoft"
+          theme="vscode"
+        />
         <ThemeInfo
           name="GitHub Dark"
           icon="/themes/github-dark.png"

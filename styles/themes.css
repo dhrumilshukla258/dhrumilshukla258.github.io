@@ -191,6 +191,58 @@
   --article-bg: #031d33;
 }
 
+/* Professional — warm dark parchment, resume-inspired */
+[data-theme='professional'] {
+  --main-bg: #1e1b16;
+  --bg-text: #252118;
+  --text-color: #e8dfc8;
+  --accent-color: #c4a35a;
+  --titlebar-bg: #161310;
+  --sidebar-bg: #1a1710;
+  --sidebar-hover-bg: #252018;
+  --explorer-bg: #1a1710;
+  --explorer-hover-bg: #252018;
+  --explorer-border: #33291a;
+  --tabs-bg: #161310;
+  --tab-bg: #1a1710;
+  --tab-active-bg: #1e1b16;
+  --tab-border: #33291a;
+  --bottombar-bg: #161310;
+  --bottombar-border: #33291a;
+  --button-bg: #c4a35a;
+  --button-text: #1e1b16;
+  --bottombar-hover-bg: #2a2418;
+  --scrollbar-track-bg: #1a1710;
+  --scrollbar-thumb-bg: #3d3020;
+  --article-bg: #211e17;
+}
+
+/* VS Code Dark+ */
+[data-theme='vscode'] {
+  --main-bg: #1e1e1e;
+  --bg-text: #252526;
+  --text-color: #d4d4d4;
+  --accent-color: #569cd6;
+  --titlebar-bg: #323233;
+  --sidebar-bg: #252526;
+  --sidebar-hover-bg: #2a2d2e;
+  --explorer-bg: #252526;
+  --explorer-hover-bg: #2a2d2e;
+  --explorer-border: #454545;
+  --tabs-bg: #2d2d2d;
+  --tab-bg: #2d2d2d;
+  --tab-active-bg: #1e1e1e;
+  --tab-border: #252526;
+  --bottombar-bg: #007acc;
+  --bottombar-border: #007acc;
+  --button-bg: #0e639c;
+  --button-text: #ffffff;
+  --bottombar-hover-bg: #1177bb;
+  --scrollbar-track-bg: #1e1e1e;
+  --scrollbar-thumb-bg: #424242;
+  --article-bg: #252526;
+}
+
 /* Unity Engine Dark Inspired */
 [data-theme='unity'] {
   --main-bg: #3C3C3C;          /* Primary dark grey panel background */

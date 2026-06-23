@@ -8,6 +8,23 @@
   height: calc(100vh - 30px - 25px);
 }
 
+/* Visible only on small screens (gamer/technical personalities) */
+.sidebarSmallOnly {
+  background: var(--sidebar-bg);
+  display: none;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 4.5vw;
+  min-width: 40px;
+  height: calc(100vh - 30px - 25px);
+}
+
+@media screen and (max-width: 600px) {
+  .sidebarSmallOnly {
+    display: flex;
+  }
+}
+
 .iconContainer {
   cursor: pointer;
   width: 100%;

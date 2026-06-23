@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import styles from '@/styles/ThemeInfo.module.css';
+import { saveThemeForPersonality } from '@/components/PersonalityContext';
 
 interface ThemeInfoProps {
   icon: string;
@@ -11,7 +12,7 @@ interface ThemeInfoProps {
 const ThemeInfo = ({ icon, name, publisher, theme }: ThemeInfoProps) => {
   const setTheme = (theme: string) => {
     document.documentElement.setAttribute('data-theme', theme);
-    localStorage.setItem('theme', theme);
+    saveThemeForPersonality(theme);
   };
 
   return (

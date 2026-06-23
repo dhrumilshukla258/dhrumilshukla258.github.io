@@ -64,9 +64,7 @@
   border-radius: 20px;
   padding: 2px;
   gap: 2px;
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
+  flex-shrink: 0;
 }
 
 .pillOption {
@@ -216,9 +214,7 @@
 }
 
 @media screen and (max-width: 480px) {
-  .personalityPill {
-    position: static;
-    transform: none;
-    margin: 0 auto;
+  .pillOption {
+    padding: 3px 4px;
   }
 }

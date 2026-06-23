@@ -1,4 +1,6 @@
-@import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500&display=swap');
 
 *,
 *::before,
@@ -42,4 +44,107 @@ html {
   }
 }
 
+/*
+ * Personality fonts — all use the same base font-size so switching
+ * personalities doesn't cause a layout shift. Only font-family,
+ * weight, and spacing differ.
+ */
+
+/* ── Professional: Merriweather serif, resume-like ── */
+html[data-personality='professional'] div,
+html[data-personality='professional'] body,
+html[data-personality='professional'] main {
+  font-family: 'Merriweather', Georgia, serif !important;
+}
+html[data-personality='professional'] p,
+html[data-personality='professional'] a,
+html[data-personality='professional'] li,
+html[data-personality='professional'] button,
+html[data-personality='professional'] label {
+  font-family: 'Merriweather', Georgia, serif !important;
+  font-size: 0.88rem;
+  font-weight: 300;
+  line-height: 1.75;
+  letter-spacing: 0.01em;
+}
+html[data-personality='professional'] span {
+  font-family: 'Merriweather', Georgia, serif !important;
+  font-size: inherit;
+  font-weight: inherit;
+}
+html[data-personality='professional'] h1,
+html[data-personality='professional'] h2,
+html[data-personality='professional'] h3,
+html[data-personality='professional'] h4,
+html[data-personality='professional'] h5,
+html[data-personality='professional'] h6 {
+  font-family: 'Merriweather', Georgia, serif !important;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+/* ── Gamer: Orbitron sci-fi, uppercase headings ── */
+/* font-family on div is needed to override module CSS; font-size only on non-nesting elements */
+html[data-personality='gamer'] div,
+html[data-personality='gamer'] body,
+html[data-personality='gamer'] main {
+  font-family: 'Orbitron', sans-serif !important;
+}
+html[data-personality='gamer'] p,
+html[data-personality='gamer'] a,
+html[data-personality='gamer'] li,
+html[data-personality='gamer'] button,
+html[data-personality='gamer'] label {
+  font-family: 'Orbitron', sans-serif !important;
+  font-size: 0.82rem;
+  letter-spacing: 0.03em;
+  line-height: 1.6;
+}
+html[data-personality='gamer'] span {
+  font-family: 'Orbitron', sans-serif !important;
+  font-size: inherit;
+}
+html[data-personality='gamer'] h1,
+html[data-personality='gamer'] h2,
+html[data-personality='gamer'] h3,
+html[data-personality='gamer'] h4,
+html[data-personality='gamer'] h5,
+html[data-personality='gamer'] h6 {
+  font-family: 'Orbitron', sans-serif !important;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+/* ── Technical: JetBrains Mono, code-editor style ── */
+html[data-personality='technical'] div,
+html[data-personality='technical'] body,
+html[data-personality='technical'] main {
+  font-family: 'JetBrains Mono', Consolas, 'Courier New', monospace !important;
+}
+html[data-personality='technical'] p,
+html[data-personality='technical'] a,
+html[data-personality='technical'] li,
+html[data-personality='technical'] button,
+html[data-personality='technical'] label {
+  font-family: 'JetBrains Mono', Consolas, 'Courier New', monospace !important;
+  font-size: 0.88rem;
+  line-height: 1.65;
+  letter-spacing: -0.01em;
+}
+html[data-personality='technical'] span {
+  font-family: 'JetBrains Mono', Consolas, 'Courier New', monospace !important;
+  font-size: inherit;
+}
+html[data-personality='technical'] h1,
+html[data-personality='technical'] h2,
+html[data-personality='technical'] h3,
+html[data-personality='technical'] h4,
+html[data-personality='technical'] h5,
+html[data-personality='technical'] h6 {
+  font-family: 'JetBrains Mono', Consolas, 'Courier New', monospace !important;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  color: var(--accent-color);
+}
 

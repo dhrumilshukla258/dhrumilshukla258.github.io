@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { useRouter } from 'next/router';
+import { usePersonality } from '@/components/PersonalityContext';
 import {
   VscHome,
   VscBriefcase,
@@ -26,9 +27,16 @@ const sidebarBottomItems = [
 
 const Sidebar = () => {
   const router = useRouter();
+  const { personality } = usePersonality();
+
+  // gamer/technical: hidden on large screens, visible on small screens (via CSS class)
+  const sidebarClass =
+    personality === 'professional'
+      ? styles.sidebar
+      : styles.sidebarSmallOnly;
 
   return (
-    <aside className={styles.sidebar}>
+    <aside className={sidebarClass}>
       <div className={styles.sidebarTop}>
         {sidebarTopItems.map(({ Icon, path }) => (
           <Link href={path} key={path}>

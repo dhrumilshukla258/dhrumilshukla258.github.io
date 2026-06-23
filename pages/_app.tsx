@@ -10,10 +10,19 @@ import '@/styles/themes.css';
 
 function MyApp({ Component, pageProps }: AppProps) {
   useEffect(() => {
-    const theme = localStorage.getItem('theme');
-    if (theme) {
-      document.documentElement.setAttribute('data-theme', theme);
-    }
+    // Apply per-personality theme on first load
+    const personality = localStorage.getItem('personality') || 'professional';
+    const personalityDefaults: Record<string, string> = {
+      professional: 'github-dark',
+      gamer: 'unreal',
+      technical: 'dracula',
+    };
+    const theme =
+      localStorage.getItem(`theme_${personality}`) ||
+      personalityDefaults[personality] ||
+      'github-dark';
+    document.documentElement.setAttribute('data-theme', theme);
+    document.documentElement.setAttribute('data-personality', personality);
   }, []);
 
   return (

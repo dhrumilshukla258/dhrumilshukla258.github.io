@@ -12,8 +12,7 @@ interface TransCtx {
 const Ctx = createContext<TransCtx>({ trigger: () => {}, isActive: false });
 export function usePageTransition() { return useContext(Ctx); }
 
-const DURATION = 2200;
-const MID      = 0.48;
+const MID = 0.48;
 
 const easeInOut = (t: number) => t < 0.5 ? 2*t*t : -1+(4-2*t)*t;
 const easeOut   = (t: number) => 1 - Math.pow(1 - t, 3);
@@ -131,7 +130,8 @@ function drawGamer(
   cx: number, ground: number,
   walkT: number,
   jump: number,     // 0–1 jump height factor
-  celebrate: boolean
+  celebrate: boolean,
+  throwT = 0        // 0-1: arm raises up to shoot/throw
 ) {
   const G = ground - jump * 60;
 
@@ -168,9 +168,12 @@ function drawGamer(
   ctx.fillStyle = '#e67e22'; ctx.fillRect(-5, 0, 10, 32);
   ctx.fillStyle = SKIN; ctx.beginPath(); ctx.arc(0, 32, 6, 0, Math.PI*2); ctx.fill();
   ctx.restore();
-  // right arm
+  // right arm — raises toward hoop when throwing
+  const throwArmAngle = throwT > 0
+    ? (throwT < 0.55 ? 15 - (throwT / 0.55) * 100 : -85 + ((throwT - 0.55) / 0.45) * 100)
+    : armBob + 15;
   ctx.save(); ctx.translate(cx + 20, G - 72);
-  ctx.rotate((armBob + 15) * Math.PI / 180);
+  ctx.rotate(throwArmAngle * Math.PI / 180);
   ctx.fillStyle = '#e67e22'; ctx.fillRect(-5, 0, 10, 32);
   ctx.fillStyle = SKIN; ctx.beginPath(); ctx.arc(0, 32, 6, 0, Math.PI*2); ctx.fill();
   ctx.restore();
@@ -538,6 +541,8 @@ function BoardroomEffect({ onMid, onDone }: { onMid: () => void; onDone: () => v
       ctx.beginPath(); ctx.moveTo(x + 11, y + 26); ctx.lineTo(x + 11, y + 30); ctx.stroke();
     }
 
+    const DUR = 3400;
+
     // Zoom toolbar at bottom
     function drawToolbar() {
       const tbH = 48; const tbY = H * 0.88;
@@ -600,7 +605,7 @@ function BoardroomEffect({ onMid, onDone }: { onMid: () => void; onDone: () => v
     let raf: number;
 
     const tick = (now: number) => {
-      const t = Math.min((now - start) / DURATION, 1);
+      const t = Math.min((now - start) / DUR, 1);
       if (t >= MID && !fired) { fired = true; onMid(); }
 
       // spawn chat messages at their trigger times
@@ -806,12 +811,13 @@ function NewspaperEffect({ onMid, onDone }: { onMid: () => void; onDone: () => v
       ctx.setLineDash([]);
     }
 
+    const DUR = 1800;
     let fired = false;
     const start = performance.now();
     let raf: number;
 
     const tick = (now: number) => {
-      const t = Math.min((now - start) / DURATION, 1);
+      const t = Math.min((now - start) / DUR, 1);
       if (t >= MID && !fired) { fired = true; onMid(); }
 
       ctx.clearRect(0, 0, W, H);
@@ -1020,12 +1026,13 @@ function TypewriterEffect({ onMid, onDone }: { onMid: () => void; onDone: () => 
       ctx.strokeStyle = '#555'; ctx.lineWidth = 0.5; ctx.strokeRect(TWX - TW * 0.25, y + 108, TW * 0.5, 10);
     }
 
+    const DUR = 2800;
     let fired = false;
     const start = performance.now();
     let raf: number;
 
     const tick = (now: number) => {
-      const t = Math.min((now - start) / DURATION, 1);
+      const t = Math.min((now - start) / DUR, 1);
       if (t >= MID && !fired) { fired = true; onMid(); }
 
       ctx.clearRect(0, 0, W, H);
@@ -1338,13 +1345,14 @@ function OvercookedEffect({ onMid, onDone }: { onMid: () => void; onDone: () => 
       }
     }
 
+    const DUR = 2600;
     let confettiSpawned = false;
     let fired = false;
     const start = performance.now();
     let raf: number;
 
     const tick = (now: number) => {
-      const t = Math.min((now - start) / DURATION, 1);
+      const t = Math.min((now - start) / DUR, 1);
       if (t >= MID && !fired) { fired = true; onMid(); }
       if (t >= MID && !confettiSpawned) { confettiSpawned = true; spawnConfetti(); }
 
@@ -1594,13 +1602,14 @@ function BasketballEffect({ onMid, onDone }: { onMid: () => void; onDone: () => 
       }
     }
 
+    const DUR = 1600;
     let confettiSpawned = false;
     let fired = false;
     const start = performance.now();
     let raf: number;
 
     const tick = (now: number) => {
-      const t = Math.min((now - start) / DURATION, 1);
+      const t = Math.min((now - start) / DUR, 1);
       if (t >= MID && !fired) { fired = true; onMid(); }
       if (t >= MID && !confettiSpawned) { confettiSpawned = true; spawnConfetti(); }
 
@@ -1690,9 +1699,10 @@ function BasketballEffect({ onMid, onDone }: { onMid: () => void; onDone: () => 
       const avIn  = easeOut(clamp(remap(t, 0, 0.14), 0, 1));
       const avOut = clamp(remap(t, 0.86, 0.98), 0, 1);
       const avA   = avOut > 0 ? 1 - avOut : avIn;
-      const jump  = t > MID + 0.08 ? Math.abs(Math.sin(remap(t, MID + 0.08, 0.82) * Math.PI * 1.5)) * 0.6 : 0;
+      const jump      = t > MID + 0.08 ? Math.abs(Math.sin(remap(t, MID + 0.08, 0.82) * Math.PI * 1.5)) * 0.6 : 0;
+      const throwAnim = t > 0.22 && t < 0.56 ? clamp(remap(t, 0.22, 0.56), 0, 1) : 0;
       ctx.save(); ctx.globalAlpha = Math.max(avA, 0) * bgA;
-      drawGamer(ctx, avX, GROUND, t * 5, jump, t > MID + 0.08);
+      drawGamer(ctx, avX, GROUND, t * 5, jump, t > MID + 0.08, throwAnim);
       ctx.restore();
 
       if (t < 1) { raf = requestAnimationFrame(tick); }
@@ -1722,11 +1732,22 @@ function PlatformerEffect({ onMid, onDone }: { onMid: () => void; onDone: () => 
 
     const GROUND  = H * 0.76;
     const BLOCK   = Math.max(Math.floor(Math.min(W * 0.045, 36)), 20); // tile size
-    const QBLK1_X = W * 0.30;
-    const QBLK2_X = W * 0.52;
-    const PIPE_X  = W * 0.48;
+    const QBLK1_X = W * 0.22;
+    const QBLK2_X = W * 0.38;  // both blocks are BEFORE the pipe
+    const PIPE_X  = W * 0.56;
     const POLE_X  = W * 0.82;
     const POLE_TOP = H * 0.20;
+
+    // phase times (normalised 0-1)
+    const T_BLK1     = 0.12;  // arrive under blk1
+    const T_BLK1E    = 0.26;  // blk1 jump lands
+    const T_BLK2     = 0.34;  // arrive under blk2
+    const T_BLK2E    = 0.46;  // blk2 jump lands
+    const T_PIPE_END = 0.62;  // pipe jump lands
+    const T_POLE     = 0.74;  // arrive at flag pole
+    const T_CEL      = 0.86;  // celebrate end → run into castle
+    const BLK1_HIT   = (T_BLK1 + T_BLK1E) / 2;  // ~0.19, peak of jump 1
+    const BLK2_HIT   = (T_BLK2 + T_BLK2E) / 2;  // ~0.40, peak of jump 2
 
     // pixel cloud: stack of rectangles
     function drawCloud(cx2: number, cy2: number, scale: number) {
@@ -1833,6 +1854,7 @@ function PlatformerEffect({ onMid, onDone }: { onMid: () => void; onDone: () => 
       }
     }
 
+    const DUR = 3200;
     let fwSpawned = false;
     let fired = false;
     const start = performance.now();
@@ -1840,7 +1862,7 @@ function PlatformerEffect({ onMid, onDone }: { onMid: () => void; onDone: () => 
     let coinsCollected = 0;
 
     const tick = (now: number) => {
-      const t = Math.min((now - start) / DURATION, 1);
+      const t = Math.min((now - start) / DUR, 1);
       if (t >= MID && !fired) {
         fired = true; onMid();
         spawnFirework(POLE_X, H * 0.35, '#ffdd00');
@@ -1881,13 +1903,13 @@ function PlatformerEffect({ onMid, onDone }: { onMid: () => void; onDone: () => 
       ctx.save(); ctx.globalAlpha = bgA;
       drawGroundRow();
 
-      // ? blocks — first gets hit when character passes under it (t ≈ 0.24)
-      const blk1Hit = t > 0.22;
-      const blk1HitBob = blk1Hit ? Math.max(0, Math.sin(remap(t, 0.22, 0.30) * Math.PI) * BLOCK * 0.6) : 0;
+      // ? blocks — hit when player jumps up and head touches from below
+      const blk1Hit = t >= BLK1_HIT;
+      const blk1HitBob = blk1Hit ? Math.max(0, Math.sin(clamp(remap(t, BLK1_HIT, BLK1_HIT + 0.10), 0, 1) * Math.PI) * BLOCK * 0.85) : 0;
       drawQBlock(QBLK1_X, blk1HitBob, blk1Hit);
 
-      const blk2Hit = t > 0.38;
-      const blk2HitBob = blk2Hit ? Math.max(0, Math.sin(remap(t, 0.38, 0.46) * Math.PI) * BLOCK * 0.6) : 0;
+      const blk2Hit = t >= BLK2_HIT;
+      const blk2HitBob = blk2Hit ? Math.max(0, Math.sin(clamp(remap(t, BLK2_HIT, BLK2_HIT + 0.10), 0, 1) * Math.PI) * BLOCK * 0.85) : 0;
       drawQBlock(QBLK2_X, blk2HitBob, blk2Hit);
 
       // pipe
@@ -1898,51 +1920,63 @@ function PlatformerEffect({ onMid, onDone }: { onMid: () => void; onDone: () => 
       drawFlagPole(flagSlide);
       ctx.restore();
 
-      // coins popping from ? blocks
-      const coin1T = clamp(remap(t, 0.22, 0.46), 0, 1);
-      const coin2T = clamp(remap(t, 0.38, 0.62), 0, 1);
+      // coins popping from ? blocks (triggered at hit peak)
+      const coin1T = blk1Hit ? clamp(remap(t, BLK1_HIT, BLK1_HIT + 0.30), 0, 1) : 0;
+      const coin2T = blk2Hit ? clamp(remap(t, BLK2_HIT, BLK2_HIT + 0.30), 0, 1) : 0;
       if (coin1T > 0) { if (coin1T > 0.05 && coinsCollected < 1) coinsCollected = 1; ctx.save(); ctx.globalAlpha = bgA; drawCoin(QBLK1_X, coin1T); ctx.restore(); }
       if (coin2T > 0) { if (coin2T > 0.05 && coinsCollected < 2) coinsCollected = 2; ctx.save(); ctx.globalAlpha = bgA; drawCoin(QBLK2_X, coin2T); ctx.restore(); }
 
       // ── Character movement ──
-      // 0→0.12: run in from left
-      // 0.12→0.40: run to just before pipe
-      // 0.40→0.52: big jump arc over pipe (peak at 0.46)
-      // 0.52→MID: run to flag pole
-      // MID→0.78: celebrate at pole
-      // 0.78→0.94: run off right into castle
+      // 0 → T_BLK1:     run in to under blk1
+      // T_BLK1 → T_BLK1E: jump up, head hits blk1 at peak (BLK1_HIT)
+      // T_BLK1E → T_BLK2: run to under blk2
+      // T_BLK2 → T_BLK2E: jump up, head hits blk2 at peak (BLK2_HIT)
+      // T_BLK2E → T_PIPE_END: big arc jump over pipe (MID = 0.48 is mid-air)
+      // T_PIPE_END → T_POLE: run to flag pole
+      // T_POLE → T_CEL:  celebrate at pole
+      // T_CEL → 1.0:    run into castle
       let charX: number, charY: number;
-      const jumpT = clamp(remap(t, 0.40, 0.54), 0, 1);
-      const jumpHeight = Math.sin(jumpT * Math.PI) * BLOCK * 4.5;
+      let jumpFrac = 0;
 
-      if (t < 0.40) {
-        charX = -60 + easeOut(clamp(remap(t, 0, 0.12), 0, 1)) * (PIPE_X - BLOCK * 1.8 + 60);
-        charX = Math.min(charX, PIPE_X - BLOCK * 1.8);
+      if (t < T_BLK1) {
+        charX = -60 + easeOut(clamp(remap(t, 0, T_BLK1), 0, 1)) * (QBLK1_X + 60);
         charY = GROUND;
-      } else if (t < 0.54) {
-        charX = PIPE_X - BLOCK * 1.8 + jumpT * (BLOCK * 4.5);
-        charY = GROUND - jumpHeight;
-      } else if (t < MID) {
-        charX = (PIPE_X + BLOCK * 2.7) + easeOut(clamp(remap(t, 0.54, MID), 0, 1)) * (POLE_X - (PIPE_X + BLOCK * 2.7) - 10);
+      } else if (t < T_BLK1E) {
+        charX = QBLK1_X;
+        const jt = remap(t, T_BLK1, T_BLK1E);
+        const jh = Math.sin(jt * Math.PI) * BLOCK * 2.8;
+        charY = GROUND - jh;
+        jumpFrac = jh / (BLOCK * 2.8);
+      } else if (t < T_BLK2) {
+        charX = QBLK1_X + easeOut(clamp(remap(t, T_BLK1E, T_BLK2), 0, 1)) * (QBLK2_X - QBLK1_X);
         charY = GROUND;
-      } else if (t < 0.78) {
+      } else if (t < T_BLK2E) {
+        charX = QBLK2_X;
+        const jt = remap(t, T_BLK2, T_BLK2E);
+        const jh = Math.sin(jt * Math.PI) * BLOCK * 2.8;
+        charY = GROUND - jh;
+        jumpFrac = jh / (BLOCK * 2.8);
+      } else if (t < T_PIPE_END) {
+        const jt = clamp(remap(t, T_BLK2E, T_PIPE_END), 0, 1);
+        charX = QBLK2_X + BLOCK + jt * (PIPE_X + BLOCK * 1.5 - QBLK2_X - BLOCK);
+        const jh = Math.sin(jt * Math.PI) * BLOCK * 5;
+        charY = GROUND - jh;
+        jumpFrac = jh / (BLOCK * 5);
+      } else if (t < T_POLE) {
+        charX = PIPE_X + BLOCK * 1.5 + easeOut(clamp(remap(t, T_PIPE_END, T_POLE), 0, 1)) * (POLE_X - PIPE_X - BLOCK * 1.5 - 12);
+        charY = GROUND;
+      } else if (t < T_CEL) {
         charX = POLE_X - 12;
         charY = GROUND;
       } else {
-        charX = POLE_X + easeInOut(clamp(remap(t, 0.78, 0.94), 0, 1)) * (W + 80 - POLE_X);
+        charX = POLE_X + easeInOut(clamp(remap(t, T_CEL, 0.98), 0, 1)) * (W + 80 - POLE_X);
         charY = GROUND;
       }
 
-      // hit-block jump: tiny hop when near QBLK1 or QBLK2
-      const nearBlk1 = t > 0.20 && t < 0.26;
-      const nearBlk2 = t > 0.36 && t < 0.42;
-      const blockBop = (nearBlk1 || nearBlk2) ? Math.max(0, Math.sin(remap(t, nearBlk1 ? 0.20 : 0.36, nearBlk1 ? 0.26 : 0.42) * Math.PI) * BLOCK * 1.2) : 0;
-      charY -= blockBop;
-
-      const celebrate = t >= MID && t < 0.78;
-      const celebJump = celebrate ? Math.abs(Math.sin(remap(t, MID, 0.78) * Math.PI * 3)) * 0.8 : 0;
+      const celebrate = t >= T_POLE && t < T_CEL;
+      const celebJump = celebrate ? Math.abs(Math.sin(remap(t, T_POLE, T_CEL) * Math.PI * 3)) * 0.8 : 0;
       ctx.save(); ctx.globalAlpha = bgA;
-      drawGamer(ctx, charX, charY, t * 9, jumpT > 0 && jumpT < 1 ? jumpHeight / (BLOCK * 4.5) : celebJump, celebrate);
+      drawGamer(ctx, charX, charY, t * 9, jumpFrac > 0 ? jumpFrac : celebJump, celebrate);
       ctx.restore();
 
       // ── Fireworks ──
@@ -2031,13 +2065,14 @@ function GlitchEffect({ onMid, onDone }: { onMid: () => void; onDone: () => void
       seed: Math.sin(i * 3.7),
     }));
 
+    const DUR = 1500;
     const GROUND = H * 0.82;
     let fired = false;
     const start = performance.now();
     let raf: number;
 
     const tick = (now: number) => {
-      const t = Math.min((now - start) / DURATION, 1);
+      const t = Math.min((now - start) / DUR, 1);
       if (t >= MID && !fired) { fired = true; onMid(); }
 
       ctx.clearRect(0, 0, W, H);
@@ -2069,7 +2104,7 @@ function GlitchEffect({ onMid, onDone }: { onMid: () => void; onDone: () => void
         const rainA = rainT < 0.12 ? rainT / 0.12 : rainT > 0.82 ? 1 - remap(rainT, 0.82, 1) : 1;
         ctx.save(); ctx.font = `${FONT}px monospace`;
         drops.forEach((drop, col) => {
-          const steps = Math.floor(rainT * DURATION / 42);
+          const steps = Math.floor(rainT * DUR / 42);
           for (let row = 0; row < steps; row++) {
             const charY = drop.y + row * FONT * drop.speed;
             if (charY < 0 || charY > H) continue;
@@ -2354,12 +2389,13 @@ function TeamBuildEffect({ onMid, onDone }: { onMid: () => void; onDone: () => v
       }
     }
 
+    const DUR = 3000;
     let fired = false;
     const start = performance.now();
     let raf: number;
 
     const tick = (now: number) => {
-      const t = Math.min((now - start) / DURATION, 1);
+      const t = Math.min((now - start) / DUR, 1);
       if (t >= MID && !fired) { fired = true; onMid(); }
 
       ctx.clearRect(0, 0, W, H);
@@ -2515,13 +2551,14 @@ function SSHEffect({ onMid, onDone }: { onMid: () => void; onDone: () => void })
       { t: 0.72, prompt: 'dhrumil@portfolio  ~  $', text: ' _', color: '#00ff88' },
     ];
 
+    const DUR = 2400;
     const GROUND = H * 0.82;
     let fired = false;
     const start = performance.now();
     let raf: number;
 
     const tick = (now: number) => {
-      const t = Math.min((now - start) / DURATION, 1);
+      const t = Math.min((now - start) / DUR, 1);
       if (t >= MID && !fired) { fired = true; onMid(); }
 
       ctx.clearRect(0, 0, W, H);

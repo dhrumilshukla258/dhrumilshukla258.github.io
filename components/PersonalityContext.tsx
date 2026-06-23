@@ -2,39 +2,54 @@ import { createContext, useContext, useState, useEffect, ReactNode } from 'react
 
 export type PersonalityType = 'professional' | 'gamer' | 'technical';
 
+// Default theme per personality
+const PERSONALITY_DEFAULTS: Record<PersonalityType, string> = {
+  professional: 'github-dark',
+  gamer: 'unreal',
+  technical: 'dracula',
+};
+
 interface PersonalityContextType {
   personality: PersonalityType;
   setPersonality: (personality: PersonalityType) => void;
 }
 
-// Create context with a default value
 const PersonalityContext = createContext<PersonalityContextType | undefined>(undefined);
 
 interface PersonalityProviderProps {
   children: ReactNode;
 }
 
-// Create provider component
-export function PersonalityProvider({ children }: PersonalityProviderProps) {
-  // Get initial value from localStorage if available
-  const [personality, setPersonality] = useState<PersonalityType>('professional'); // Default value
+function getPersonalityThemeKey(p: PersonalityType) {
+  return `theme_${p}`;
+}
 
-  // Load saved personality from localStorage when component mounts
+function applyPersonality(p: PersonalityType) {
+  // Apply per-personality theme
+  const savedTheme = localStorage.getItem(getPersonalityThemeKey(p));
+  const theme = savedTheme || PERSONALITY_DEFAULTS[p];
+  document.documentElement.setAttribute('data-theme', theme);
+  document.documentElement.setAttribute('data-personality', p);
+}
+
+export function PersonalityProvider({ children }: PersonalityProviderProps) {
+  const [personality, setPersonalityState] = useState<PersonalityType>('professional');
+
+  // Load saved personality on mount
   useEffect(() => {
     if (typeof window !== 'undefined') {
-      const savedPersonality = localStorage.getItem('personality') as PersonalityType | null;
-      if (savedPersonality && isValidPersonality(savedPersonality)) {
-        setPersonality(savedPersonality);
-      }
+      const saved = localStorage.getItem('personality') as PersonalityType | null;
+      const p = saved && isValidPersonality(saved) ? saved : 'professional';
+      setPersonalityState(p);
+      applyPersonality(p);
     }
   }, []);
 
-  // Save to localStorage whenever personality changes
-  useEffect(() => {
-    if (typeof window !== 'undefined') {
-      localStorage.setItem('personality', personality);
-    }
-  }, [personality]);
+  const setPersonality = (p: PersonalityType) => {
+    setPersonalityState(p);
+    localStorage.setItem('personality', p);
+    applyPersonality(p);
+  };
 
   return (
     <PersonalityContext.Provider value={{ personality, setPersonality }}>
@@ -43,16 +58,23 @@ export function PersonalityProvider({ children }: PersonalityProviderProps) {
   );
 }
 
-// Type guard to validate personality value
 function isValidPersonality(value: string): value is PersonalityType {
   return ['professional', 'gamer', 'technical'].includes(value);
 }
 
-// Create custom hook to use the personality context
 export function usePersonality(): PersonalityContextType {
   const context = useContext(PersonalityContext);
   if (context === undefined) {
     throw new Error('usePersonality must be used within a PersonalityProvider');
   }
   return context;
+}
+
+// Call this when changing theme so it's saved under the current personality
+export function saveThemeForPersonality(theme: string) {
+  const saved = localStorage.getItem('personality') as PersonalityType | null;
+  const p = saved && isValidPersonality(saved) ? saved : 'professional';
+  localStorage.setItem(getPersonalityThemeKey(p), theme);
+  // Legacy key for _app.tsx initial load
+  localStorage.setItem('theme', theme);
 }

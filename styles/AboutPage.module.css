@@ -13,6 +13,8 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  width: 100%;
+  min-width: 0;
 }
 
 .title {
@@ -31,6 +33,8 @@
 
 .aboutContent {
   width: 100%;
+  min-width: 0;
+  max-width: 100%;
 }
 
 .section {
@@ -90,19 +94,22 @@
 }
 
 .bioContent {
-  transition: all 0.5s ease-in-out;
+  transition: opacity 0.3s ease-in-out;
   opacity: 0;
-  transform: translateX(2rem);
+  width: 100%;
+  min-width: 0;
 }
 
 .slideIn {
   opacity: 1;
-  transform: translateX(0);
+  width: 100%;
+  min-width: 0;
 }
 
 .hidden {
   opacity: 0;
-  transform: translateX(2rem);
+  width: 100%;
+  min-width: 0;
 }
 
 .selectorDropdown {
@@ -213,9 +220,12 @@
   font-size: 0.88rem;
   line-height: 1.7;
   color: #6a9955;
-  white-space: pre;
+  white-space: pre-wrap;
+  word-break: break-word;
   overflow-x: auto;
+  width: 100%;
   max-width: 100%;
+  box-sizing: border-box;
 }
 
 .techEduBlock {
