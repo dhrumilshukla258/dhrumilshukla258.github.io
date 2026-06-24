@@ -8,6 +8,8 @@
   align-items: center;
   justify-content: space-between;
   font-size: 0.8rem;
+  overflow: hidden;
+  min-width: 0;
 }
 
 .bottomBar a {

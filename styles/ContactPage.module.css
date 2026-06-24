@@ -85,6 +85,10 @@
     font-size: 1rem;
     margin-bottom: 2rem;
   }
+
+  .gamerMenuValue {
+    display: none;
+  }
 }
 
 /* ── Professional contact ── */
@@ -146,6 +150,8 @@
   text-align: center;
   padding-top: 3rem;
   margin-bottom: 0.5rem;
+  overflow-wrap: break-word;
+  word-break: break-word;
 }
 
 .gamerMenuList {
