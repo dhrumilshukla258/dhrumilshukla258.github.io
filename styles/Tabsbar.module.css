@@ -1,10 +1,16 @@
 .tabs {
   display: flex;
-  /* flex-wrap: wrap; */
   background: var(--tabs-bg);
   overflow-x: auto;
-    scrollbar-color: #888 transparent; /* thumb color and transparent track */
+  scrollbar-color: #888 transparent;
   scrollbar-width: thin;
+  min-height: 35px;
+  flex-shrink: 0;
+}
+
+/* Keep the bar visible when empty — shows a subtle border */
+.tabsEmpty {
+  border-bottom: 1px solid var(--tab-border, #333);
 }
 
 @media screen and (max-width: 900px) {

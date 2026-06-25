@@ -1,4 +1,5 @@
 import Head from 'next/head';
+import { owner } from '@/data/owner';
 
 interface CustomHeadProps {
   title: string;
@@ -10,27 +11,13 @@ const CustomHead = ({ title }: CustomHeadProps) => {
       <title>{title}</title>
       <meta
         name="description"
-        content="Dhrumil Shulka is an avid Software Engineer building game and softwares you'd love to use"
+        content={owner.tagline}
       />
-      <meta
-        name="keywords"
-        content="dhrumil,             shukla,               dhrumil shukla,  
-                 software,            engineer,             software engineer,
-                 game,                developer,            game developer
-                 programmer,          data,                 data engineer
-                 portfolio,           developer portfolio,  ide-portfolio,
-                 dhrumil engineer,    dhrumil developer,    dhrumil portfolio,
-                 shukla engineer,     shukla developer,     shukla portfolio,
-                 unity-portfolio,     unreal-portfolio,     vscode-portfolio,
-                 unreal,              unreal,               digipen,
-                 visual concepts,     nba,                  nba 2k,
-                 lego 2k drive,       lego 2k               2k,
-                 take-two,            taketwo"
-      />
-      <meta property="og:title" content="Dhrumil Shukla's Portfolio" />
+      <meta name="keywords" content={owner.keywords.join(', ')} />
+      <meta property="og:title" content={`${owner.name}'s Portfolio`} />
       <meta
         property="og:description"
-        content="A software engineer building games that you'd like to use."
+        content={owner.description}
       />
     </Head>
   );
@@ -39,5 +26,5 @@ const CustomHead = ({ title }: CustomHeadProps) => {
 export default CustomHead;
 
 CustomHead.defaultProps = {
-  title: 'Dhrumil Shukla',
+  title: owner.name,
 };

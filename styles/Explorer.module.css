@@ -14,8 +14,6 @@
 /* Gamer/Technical: Explorer always shown on large, hidden on small (Sidebar takes over) */
 .explorerSmallOnly {
   background: var(--explorer-bg);
-  width: 18vw;
-  min-width: 140px;
   color: var(--text-color);
   font-family: 'Source Sans Pro', sans-serif;
   border-right: 1px solid var(--explorer-border);
@@ -23,6 +21,32 @@
   display: flex;
   flex-direction: column;
   height: calc(100vh - 30px - 25px);
+  position: relative;
+  /* width is controlled inline via state */
+}
+
+.collapsed {
+  width: 4px !important;
+  min-width: 4px !important;
+  overflow: hidden;
+  border-right: 1px solid var(--explorer-border);
+}
+
+.dragHandle {
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  cursor: col-resize;
+  background: transparent;
+  transition: background 0.15s;
+  z-index: 10;
+}
+
+.dragHandle:hover {
+  background: var(--accent-color, #569cd6);
+  opacity: 0.5;
 }
 
 @media screen and (max-width: 600px) {
@@ -94,15 +118,13 @@
 }
 
 @media screen and (min-width: 2000px) {
-  .explorer,
-  .explorerSmallOnly {
+  .explorer {
     width: 10vw;
   }
 }
 
 @media screen and (max-width: 900px) {
-  .explorer,
-  .explorerSmallOnly {
+  .explorer {
     width: 20vw;
   }
 }

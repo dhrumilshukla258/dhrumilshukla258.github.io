@@ -1,0 +1,224 @@
+/* ── Homelab Dashboard ─────────────────────────────────────────────────────── */
+
+.desktop {
+  position: fixed;
+  inset: 0;
+  background: #010409;
+  color: #c9d1d9;
+  font-family: 'JetBrains Mono', 'Fira Code', monospace;
+  font-size: 12px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* ── Header bar ────────────────────────────────────────────────────────────── */
+
+.header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 16px;
+  background: #0d1117;
+  border-bottom: 1px solid #21262d;
+  flex-shrink: 0;
+}
+.hostname     { color: #3fb950; font-weight: bold; }
+.headerSep    { color: #30363d; }
+.uptimeLabel  { color: #8b949e; }
+.uptimeLabel strong { color: #58a6ff; }
+.osLabel      { color: #8b949e; }
+.headerSpacer { flex: 1; }
+
+.restoreBtn {
+  background: none;
+  border: 1px solid #21262d;
+  color: #8b949e;
+  font-family: inherit;
+  font-size: 11px;
+  cursor: pointer;
+  padding: 3px 10px;
+  border-radius: 4px;
+  transition: all 0.15s;
+}
+.restoreBtn:hover { border-color: #58a6ff; color: #58a6ff; }
+
+/* ── Main 3-column grid ────────────────────────────────────────────────────── */
+
+.grid {
+  flex: 1;
+  display: grid;
+  grid-template-columns: 240px 260px 1fr;
+  gap: 8px;
+  padding: 8px;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.col {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-height: 0;
+}
+
+/* ── Panel ─────────────────────────────────────────────────────────────────── */
+
+.panel {
+  background: #0d1117;
+  border: 1px solid #21262d;
+  border-radius: 6px;
+  padding: 10px 12px;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+.panelGrow { flex: 1; overflow: hidden; display: flex; flex-direction: column; }
+
+.panelTitle {
+  font-size: 11px;
+  color: #3fb950;
+  margin-bottom: 8px;
+  letter-spacing: 0.03em;
+}
+
+/* ── Neofetch ──────────────────────────────────────────────────────────────── */
+
+.neofetchRow { display: flex; gap: 0; margin-bottom: 3px; }
+.nfKey { color: #58a6ff; width: 68px; flex-shrink: 0; font-weight: bold; font-size: 11px; }
+.nfVal { color: #c9d1d9; font-size: 11px; }
+
+/* ── Services ──────────────────────────────────────────────────────────────── */
+
+.serviceList { display: flex; flex-direction: column; gap: 3px; overflow-y: auto; flex: 1; }
+
+.serviceRow {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 2px 0;
+  border-bottom: 1px solid #161b22;
+}
+.statusDot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; }
+.dotGreen  { background: #3fb950; box-shadow: 0 0 4px #3fb950; }
+.dotYellow { background: #d29922; box-shadow: 0 0 4px #d29922; }
+
+.serviceName   { flex: 1; font-size: 11px; color: #c9d1d9; }
+.servicePid    { width: 50px; font-size: 10px; color: #30363d; }
+.serviceStatus { width: 60px; font-size: 10px; font-weight: bold; }
+.statusGreen   { color: #3fb950; }
+.statusYellow  { color: #d29922; }
+
+/* ── Metrics ───────────────────────────────────────────────────────────────── */
+
+.metricHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 6px;
+}
+.metricVal { font-size: 18px; font-weight: bold; }
+
+.sparkCanvas { display: block; width: 100%; }
+
+/* ── Docker containers ─────────────────────────────────────────────────────── */
+
+.containerTable { display: flex; flex-direction: column; gap: 0; overflow-y: auto; flex: 1; }
+
+.containerHeader {
+  display: grid;
+  grid-template-columns: 1fr 50px 60px 70px;
+  gap: 4px;
+  font-size: 9px;
+  color: #58a6ff;
+  letter-spacing: 0.06em;
+  padding: 2px 0;
+  border-bottom: 1px solid #21262d;
+  margin-bottom: 4px;
+  font-weight: bold;
+}
+.containerRow {
+  display: grid;
+  grid-template-columns: 1fr 50px 60px 70px;
+  gap: 4px;
+  font-size: 10px;
+  padding: 3px 0;
+  border-bottom: 1px solid #161b22;
+  color: #8b949e;
+}
+.cName   { color: #c9d1d9; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.cCpu    { color: #58a6ff; }
+.cMem    { color: #d2a8ff; }
+.cStatus { color: #3fb950; }
+
+/* ── Snake terminal ────────────────────────────────────────────────────────── */
+
+.snakePanel {
+  flex: 1 !important;
+  display: flex !important;
+  flex-direction: column;
+  gap: 0;
+  overflow: hidden;
+  padding: 10px !important;
+}
+
+.termPrompt {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-bottom: 4px;
+}
+.promptUser   { color: #3fb950; font-weight: bold; }
+.promptSep    { color: #30363d; }
+.promptPath   { color: #58a6ff; }
+.promptDollar { color: #c9d1d9; margin: 0 4px; }
+.promptCmd    { color: #c9d1d9; }
+
+.termOutput {
+  font-size: 10px;
+  color: #6e7681;
+  margin-bottom: 8px;
+}
+
+.snakeCanvas { display: block; width: 100%; height: auto; }
+
+.termOver {
+  position: absolute;
+  inset: 0;
+  background: rgba(1,4,9,0.92);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 20px;
+  gap: 12px;
+}
+.termOverText {
+  color: #f85149;
+  font-size: 12px;
+  margin: 0;
+  line-height: 1.7;
+}
+.termBtns { display: flex; gap: 8px; }
+.termBtn {
+  background: none;
+  border: 1px solid #21262d;
+  color: #58a6ff;
+  font-family: inherit;
+  font-size: 12px;
+  cursor: pointer;
+  padding: 4px 12px;
+  border-radius: 4px;
+  transition: all 0.15s;
+}
+.termBtn:hover { background: #161b22; border-color: #58a6ff; }
+
+.termFooter {
+  display: flex;
+  gap: 16px;
+  margin-top: 8px;
+  font-size: 10px;
+  color: #6e7681;
+  align-items: center;
+}
+.snakeScore { }
+.snakeHint  { margin-left: auto; }

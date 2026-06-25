@@ -3,6 +3,7 @@ import { format, intervalToDuration } from 'date-fns';
 import { workexp } from '@/data/workexp';
 import { WorkExp } from '@/types';
 import { usePersonality } from '@/components/PersonalityContext';
+import { workPageHeaders } from '@/data/owner';
 import styles from '@/styles/WorkTimeline.module.css';
 
 // ── helpers ────────────────────────────────────────────────────────────────────
@@ -49,20 +50,7 @@ function buildYearGroups(entries: WorkExp[]) {
 
 // ── personality page headers ───────────────────────────────────────────────────
 
-const pageHeaders = {
-  professional: {
-    title: 'Work Experience',
-    subtitle: 'A record of my professional journey across game development, research, and data science.',
-  },
-  technical: {
-    title: 'experience.py',
-    subtitle: '# 5+ years of C++ game engineering, ML research, and data pipelines across industry and academia.',
-  },
-  gamer: {
-    title: '📋 career.log',
-    subtitle: 'ACTIVE QUESTS: 1  ·  COMPLETED: 4  ·  TOTAL XP: 5+ years  ·  CURRENT FACTION: Visual Concepts / 2K Games',
-  },
-};
+const pageHeaders = workPageHeaders;
 
 // ── single timeline entry ──────────────────────────────────────────────────────
 

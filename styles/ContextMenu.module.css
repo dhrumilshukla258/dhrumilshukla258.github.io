@@ -1,0 +1,16 @@
+.wrapper {
+  position: fixed;
+  z-index: 800;
+}
+
+/* Override the DropdownMenu's relative positioning so it
+   sits at the fixed coordinates instead of below a parent */
+.wrapper > div {
+  position: static;
+  animation: ctxIn 0.1s ease;
+}
+
+@keyframes ctxIn {
+  from { opacity: 0; transform: scale(0.95); transform-origin: top left; }
+  to   { opacity: 1; transform: scale(1); }
+}

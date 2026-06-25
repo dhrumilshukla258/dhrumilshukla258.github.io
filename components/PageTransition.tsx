@@ -3,6 +3,7 @@ import {
   useCallback, useEffect, ReactNode,
 } from 'react';
 import { PersonalityType } from './PersonalityContext';
+import { owner } from '@/data/owner';
 import styles from '@/styles/PageTransition.module.css';
 
 interface TransCtx {
@@ -408,7 +409,7 @@ function BoardroomEffect({ onMid, onDone }: { onMid: () => void; onDone: () => v
         ctx.fillStyle = '#1a3a5c'; ctx.beginPath();
         ctx.roundRect(SLIDE_X + SLIDE_W * 0.3, SLIDE_Y + SLIDE_H * 0.68, SLIDE_W * 0.4, 28, 4); ctx.fill();
         ctx.font = `bold ${subFS * 0.9}px sans-serif`; ctx.fillStyle = '#4ec9ff';
-        ctx.fillText('Dhrumil Shukla — Presenting', SLIDE_X + SLIDE_W * 0.5, SLIDE_Y + SLIDE_H * 0.68 + 18);
+        ctx.fillText(`${owner.name} — Presenting`, SLIDE_X + SLIDE_W * 0.5, SLIDE_Y + SLIDE_H * 0.68 + 18);
 
       } else if (slide === 1) {
         // Bar chart slide
@@ -916,10 +917,10 @@ function TypewriterEffect({ onMid, onDone }: { onMid: () => void; onDone: () => 
     const TWY = GROUND - 60; // typewriter top y
 
     const PAPER_LINES = [
-      'NAME    : Dhrumil Shukla',
+      `NAME    : ${owner.name}`,
       'MODE    : PROFESSIONAL',
       'STATUS  : Active',
-      'ROLE    : Software Engineer',
+      `ROLE    : ${owner.title}`,
       'CREDS   : Verified ✓',
       '────────────────────────',
       'Loading portfolio...',
@@ -2381,7 +2382,7 @@ function TeamBuildEffect({ onMid, onDone }: { onMid: () => void; onDone: () => v
         // HUD overlay
         ctx.fillStyle = 'rgba(0,0,0,0.6)'; ctx.fillRect(SCREEN_X, CY, SCREEN_W, 18);
         ctx.font = '9px monospace'; ctx.textAlign = 'center'; ctx.fillStyle = '#fff';
-        ctx.fillText('NBA 2K  ·  Q3  12:44  |  LAL 67 - 71 BOS', cx, CY + 12);
+        ctx.fillText(`${owner.shipped[0]}  ·  Q3  12:44  |  LAL 67 - 71 BOS`, cx, CY + 12);
         // green glow "LIVE"
         ctx.fillStyle = '#28c840'; ctx.beginPath(); ctx.arc(SCREEN_X + 12, CY + 9, 4, 0, Math.PI * 2); ctx.fill();
         ctx.font = '8px monospace'; ctx.textAlign = 'left'; ctx.fillStyle = '#28c840';
@@ -2537,18 +2538,18 @@ function SSHEffect({ onMid, onDone }: { onMid: () => void; onDone: () => void })
     const H = canvas.height = window.innerHeight;
 
     const CMDS = [
-      { t: 0.06, prompt: '~  $', text: ' ssh dhrumil@portfolio.dev', color: '#fff' },
+      { t: 0.06, prompt: '~  $', text: ` ssh ${owner.github}@portfolio.dev`, color: '#fff' },
       { t: 0.16, prompt: '',     text: 'The authenticity of host \'portfolio.dev\' can\'t be established.', color: '#aaa' },
       { t: 0.22, prompt: '',     text: 'RSA key fingerprint is SHA256:dS3kp9Xq2mR...', color: '#888' },
       { t: 0.27, prompt: '',     text: 'Are you sure you want to continue? (yes/no): yes', color: '#aaa' },
       { t: 0.34, prompt: '',     text: 'Warning: Permanently added \'portfolio.dev\' to known hosts.', color: '#888' },
-      { t: 0.39, prompt: '',     text: 'dhrumil@portfolio.dev\'s password: ••••••••••', color: '#aaa' },
+      { t: 0.39, prompt: '',     text: `${owner.github}@portfolio.dev's password: ••••••••••`, color: '#aaa' },
       { t: MID,  prompt: '',     text: 'Last login: Today  — personality switch requested', color: '#666' },
       { t: 0.54, prompt: '',     text: '──────────────────────────────────────────', color: '#1a3a2a' },
       { t: 0.57, prompt: '',     text: '  Welcome to Portfolio v3.0  [ TECHNICAL ]', color: '#00ff88' },
       { t: 0.62, prompt: '',     text: '  Stack: React · Next.js · TypeScript · Go', color: '#00cc66' },
       { t: 0.67, prompt: '',     text: '──────────────────────────────────────────', color: '#1a3a2a' },
-      { t: 0.72, prompt: 'dhrumil@portfolio  ~  $', text: ' _', color: '#00ff88' },
+      { t: 0.72, prompt: `${owner.github}@portfolio  ~  $`, text: ' _', color: '#00ff88' },
     ];
 
     const DUR = 2400;
@@ -2588,7 +2589,7 @@ function SSHEffect({ onMid, onDone }: { onMid: () => void; onDone: () => void })
         ctx.beginPath(); ctx.arc(winX + (x as number), winY + 15, 6, 0, Math.PI * 2); ctx.fill();
       });
       ctx.font = '12px monospace'; ctx.textAlign = 'center'; ctx.fillStyle = '#00aa55';
-      ctx.fillText('dhrumil@portfolio — ssh', winX + winW / 2, winY + 19);
+      ctx.fillText(`${owner.github}@portfolio — ssh`, winX + winW / 2, winY + 19);
       ctx.restore();
 
       // terminal lines

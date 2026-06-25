@@ -1,0 +1,577 @@
+/* ── Unreal Engine 5 Editor aesthetic ──────────────────────────────────────── */
+
+/* ── Root shell ───────────────────────────────────────────────────────────── */
+
+.ue {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  background: #1a1a1a;
+  color: #c8c8c8;
+  font-family: 'Segoe UI', system-ui, sans-serif;
+  font-size: 12px;
+  overflow: hidden;
+  user-select: none;
+}
+
+/* ── Menu bar ─────────────────────────────────────────────────────────────── */
+
+.ueMenu {
+  display: flex;
+  align-items: center;
+  height: 26px;
+  background: #111;
+  border-bottom: 1px solid #141414;
+  padding: 0 4px;
+  gap: 0;
+  flex-shrink: 0;
+}
+
+.ueLogo {
+  font-size: 16px;
+  color: #e8860c;
+  padding: 0 10px;
+  letter-spacing: -1px;
+}
+
+.ueMenuItem {
+  padding: 0 10px;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  cursor: default;
+  font-size: 12px;
+  color: #c8c8c8;
+  transition: background 0.1s;
+}
+.ueMenuItem:hover { background: #3a3a3a; }
+
+.ueSpacer { flex: 1; }
+
+.ueBackBtn {
+  background: #2d2d2d;
+  border: 1px solid #555;
+  color: #c8c8c8;
+  padding: 3px 10px;
+  font-size: 11px;
+  cursor: pointer;
+  font-family: 'Segoe UI', system-ui, sans-serif;
+  border-radius: 2px;
+  transition: background 0.15s, border-color 0.15s;
+}
+.ueBackBtn:hover { background: #3a3a3a; border-color: #e8860c; color: #e8860c; }
+
+/* ── Toolbar ──────────────────────────────────────────────────────────────── */
+
+.ueToolbar {
+  display: flex;
+  align-items: center;
+  height: 36px;
+  background: #1e1e1e;
+  border-bottom: 1px solid #141414;
+  padding: 0 8px;
+  gap: 4px;
+  flex-shrink: 0;
+}
+
+.ueToolLeft { display: flex; gap: 2px; }
+
+.ueTool {
+  background: #2d2d2d;
+  border: 1px solid #3a3a3a;
+  color: #c8c8c8;
+  padding: 3px 10px;
+  font-size: 11px;
+  cursor: pointer;
+  font-family: 'Segoe UI', system-ui, sans-serif;
+  border-radius: 2px;
+}
+.ueTool:hover { background: #3a3a3a; }
+
+.uePlayGroup {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+}
+
+.uePlayBtn {
+  background: #2d2d2d;
+  border: 1px solid #3a3a3a;
+  color: #c8c8c8;
+  padding: 4px 16px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: 'Segoe UI', system-ui, sans-serif;
+  border-radius: 3px;
+  transition: background 0.15s, border-color 0.15s, color 0.15s;
+}
+.uePlayBtn:hover  { background: #3a3a3a; border-color: #e8860c; }
+.uePlayActive     { background: #3b1a00 !important; border-color: #e8860c !important; color: #e8860c !important; }
+
+.ueToolRight { display: flex; gap: 8px; align-items: center; }
+
+.ueStat {
+  font-size: 11px;
+  color: #888;
+  padding: 2px 6px;
+  background: #252525;
+  border: 1px solid #333;
+  border-radius: 2px;
+}
+
+/* ── Main layout ──────────────────────────────────────────────────────────── */
+
+.ueLayout {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+  gap: 1px;
+  background: #141414;
+}
+
+.ueCenter {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background: #1a1a1a;
+  gap: 1px;
+}
+
+.ueRight {
+  width: 280px;
+  min-width: 240px;
+  display: flex;
+  flex-direction: column;
+  background: #252525;
+  overflow: hidden;
+  gap: 1px;
+}
+
+/* ── Viewport tabs ────────────────────────────────────────────────────────── */
+
+.ueViewTabs {
+  display: flex;
+  align-items: center;
+  height: 28px;
+  background: #252525;
+  border-bottom: 1px solid #141414;
+  padding: 0 4px;
+  gap: 2px;
+  flex-shrink: 0;
+}
+
+.ueViewTab {
+  background: none;
+  border: none;
+  border-bottom: 2px solid transparent;
+  color: #888;
+  padding: 0 12px;
+  height: 100%;
+  font-size: 12px;
+  cursor: pointer;
+  font-family: 'Segoe UI', system-ui, sans-serif;
+  transition: color 0.15s;
+}
+.ueViewTab:hover { color: #c8c8c8; }
+.ueViewTabActive { color: #c8c8c8 !important; border-bottom-color: #e8860c; }
+
+.ueGizmo {
+  padding: 2px 8px;
+  font-size: 11px;
+  color: #888;
+  cursor: default;
+}
+.ueGizmo:hover { color: #c8c8c8; }
+
+/* ── Viewport area ────────────────────────────────────────────────────────── */
+
+.ueViewport {
+  flex: 1;
+  overflow: hidden;
+  position: relative;
+  background: #000;
+  min-height: 0;
+}
+
+.viewport {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+}
+
+/* ── Game / Snake view ────────────────────────────────────────────────────── */
+
+.ueGame {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: #0a0a0a;
+  position: relative;
+}
+
+.ueGameHud {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  padding: 4px 8px;
+  background: #2d2d2d;
+  border-bottom: 1px solid #141414;
+  font-size: 11px;
+  font-family: 'Consolas', 'Courier New', monospace;
+  color: #888;
+  flex-shrink: 0;
+}
+
+.ueSnakeCanvas {
+  display: block;
+  border: 1px solid #333;
+}
+
+.ueCrash {
+  position: absolute;
+  inset: 0;
+  background: rgba(26, 0, 0, 0.93);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  text-align: center;
+  padding: 20px;
+}
+
+.ueCrashTitle {
+  font-size: 18px;
+  font-weight: bold;
+  color: #f44444;
+}
+
+.ueCrashSub {
+  font-size: 11px;
+  font-family: 'Consolas', 'Courier New', monospace;
+  color: #888;
+}
+
+.ueRecompile {
+  background: none;
+  border: 1px solid #e8860c;
+  color: #e8860c;
+  padding: 2px 10px;
+  font-size: 11px;
+  cursor: pointer;
+  border-radius: 2px;
+  font-family: 'Segoe UI', system-ui, sans-serif;
+}
+
+.ueRecompileBtn {
+  background: #3b1a00;
+  border: 1px solid #e8860c;
+  color: #e8860c;
+  padding: 6px 20px;
+  font-size: 12px;
+  cursor: pointer;
+  border-radius: 3px;
+  font-family: 'Segoe UI', system-ui, sans-serif;
+  margin-top: 8px;
+}
+.ueRecompileBtn:hover { background: #5a2a00; }
+
+.ueGameHint {
+  position: absolute;
+  bottom: 4px;
+  left: 0; right: 0;
+  text-align: center;
+  font-size: 10px;
+  color: #555;
+  pointer-events: none;
+}
+
+/* ── Output Log ───────────────────────────────────────────────────────────── */
+
+.ueOutputLog {
+  height: 130px;
+  min-height: 100px;
+  background: #252525;
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+}
+
+.ueOutputHeader {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  height: 26px;
+  background: #3a3a3a;
+  border-bottom: 1px solid #141414;
+  padding: 0 8px;
+  flex-shrink: 0;
+}
+
+.uePanelTitle {
+  font-size: 12px;
+  font-weight: 600;
+  color: #c8c8c8;
+}
+
+.ueLogFilters {
+  display: flex;
+  gap: 2px;
+  margin-left: auto;
+}
+
+.ueLogFilter {
+  background: none;
+  border: 1px solid transparent;
+  color: #888;
+  padding: 1px 8px;
+  font-size: 11px;
+  cursor: pointer;
+  font-family: 'Segoe UI', system-ui, sans-serif;
+  border-radius: 2px;
+}
+.ueLogFilter:hover { background: #2d2d2d; }
+.ueLogFilterActive { background: #2d2d2d !important; border-color: #e8860c !important; color: #e8860c !important; }
+
+.ueLogClear {
+  background: none;
+  border: none;
+  color: #888;
+  padding: 1px 8px;
+  font-size: 11px;
+  cursor: pointer;
+  font-family: 'Segoe UI', system-ui, sans-serif;
+}
+.ueLogClear:hover { color: #c8c8c8; }
+
+.ueLogBody {
+  flex: 1;
+  overflow-y: auto;
+  padding: 2px 0;
+  font-family: 'Consolas', 'Courier New', monospace;
+  font-size: 11px;
+  scrollbar-width: thin;
+  scrollbar-color: #3a3a3a transparent;
+}
+
+.ueLogLine {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 1px 8px;
+  line-height: 1.5;
+  color: #888;
+}
+.ueLogLine:hover { background: #2d2d2d; }
+
+.ueLogIcon { flex-shrink: 0; font-size: 10px; width: 14px; }
+
+.uelog_info { color: #aaa; }
+.uelog_warn { color: #c8a02a; background: rgba(200, 160, 42, 0.06); }
+.uelog_err  { color: #c84444; background: rgba(200, 68, 68, 0.08); }
+
+.ueLogEmpty { padding: 8px; color: #888; }
+
+/* ── Content Browser ──────────────────────────────────────────────────────── */
+
+.ueContentBrowser {
+  height: 110px;
+  min-height: 90px;
+  background: #252525;
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+}
+
+.ueCbPath {
+  font-size: 11px;
+  color: #888;
+  font-family: 'Consolas', 'Courier New', monospace;
+  margin-left: auto;
+}
+
+.ueCbGrid {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  gap: 6px;
+  padding: 6px 8px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  flex: 1;
+  scrollbar-width: thin;
+  scrollbar-color: #3a3a3a transparent;
+}
+
+.ueCbItem {
+  flex-shrink: 0;
+  width: 70px;
+  background: #2d2d2d;
+  border: 1px solid #333;
+  border-radius: 3px;
+  padding: 6px 4px 4px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  cursor: default;
+  transition: border-color 0.15s;
+}
+.ueCbItem:hover { border-color: #e8860c; }
+
+.ueCbIcon  { font-size: 22px; }
+.ueCbLabel { font-size: 10px; text-align: center; color: #c8c8c8; word-break: break-word; }
+.ueCbType  { font-size: 9px; color: #888; }
+
+/* ── Outliner ─────────────────────────────────────────────────────────────── */
+
+.ueOutliner {
+  height: 240px;
+  min-height: 160px;
+  display: flex;
+  flex-direction: column;
+  background: #252525;
+  flex-shrink: 0;
+}
+
+.ueOutlinerList {
+  flex: 1;
+  overflow-y: auto;
+  padding: 2px 0;
+  scrollbar-width: thin;
+  scrollbar-color: #3a3a3a transparent;
+}
+
+.ueActor {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  width: 100%;
+  padding: 3px 8px;
+  background: none;
+  border: none;
+  color: #c8c8c8;
+  font-size: 11px;
+  font-family: 'Segoe UI', system-ui, sans-serif;
+  text-align: left;
+  cursor: pointer;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  transition: background 0.1s;
+}
+.ueActor:hover   { background: #2d2d2d; }
+.ueActorSelected { background: #164163 !important; color: #fff; }
+
+.ueActorIcon  { flex-shrink: 0; font-size: 13px; }
+.ueActorLabel { overflow: hidden; text-overflow: ellipsis; }
+
+/* ── Details ──────────────────────────────────────────────────────────────── */
+
+.ueDetails {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background: #252525;
+}
+
+.ueDetailsName {
+  padding: 6px 8px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #c8c8c8;
+  border-bottom: 1px solid #141414;
+  background: #2d2d2d;
+  flex-shrink: 0;
+}
+
+.ueDetailsSections {
+  flex: 1;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: #3a3a3a transparent;
+}
+
+.ueSection {
+  border-bottom: 1px solid #141414;
+}
+
+.ueSectionHeader {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  width: 100%;
+  padding: 5px 8px;
+  background: #3a3a3a;
+  border: none;
+  color: #c8c8c8;
+  font-size: 12px;
+  font-weight: 600;
+  font-family: 'Segoe UI', system-ui, sans-serif;
+  text-align: left;
+  cursor: pointer;
+}
+.ueSectionHeader:hover { background: #424242; }
+
+.ueSectionBody { padding: 2px 0; }
+
+.ueField {
+  display: flex;
+  align-items: center;
+  padding: 3px 8px 3px 16px;
+  gap: 6px;
+  font-size: 11px;
+  min-height: 22px;
+}
+.ueField:hover { background: #2d2d2d; }
+
+.ueFieldKey {
+  width: 90px;
+  flex-shrink: 0;
+  color: #888;
+  font-size: 11px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.ueFieldVal {
+  flex: 1;
+  color: #c8c8c8;
+  font-size: 11px;
+  font-family: 'Consolas', 'Courier New', monospace;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  background: #252525;
+  border: 1px solid #333;
+  padding: 1px 4px;
+  border-radius: 2px;
+}
+
+.ueOpenPortfolio {
+  margin: 10px 8px 12px;
+  width: calc(100% - 16px);
+  padding: 8px;
+  background: #e8860c;
+  border: none;
+  color: #fff;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  font-family: 'Segoe UI', system-ui, sans-serif;
+  border-radius: 3px;
+  transition: background 0.15s;
+  flex-shrink: 0;
+}
+.ueOpenPortfolio:hover { background: #c47209; }

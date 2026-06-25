@@ -1,0 +1,131 @@
+/* ── Shared styles for all three world games ──────────────────────────────── */
+
+.gameRoot {
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+  background: #000;
+}
+
+.gameCanvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+/* ── HUD top bar ──────────────────────────────────────────────────────────── */
+
+.hudTop {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 14px;
+  background: linear-gradient(to bottom, rgba(0,0,0,0.65), transparent);
+  pointer-events: none;
+  z-index: 10;
+}
+
+.worldName {
+  font-size: 14px;
+  font-weight: 700;
+  color: #fff;
+  text-shadow: 0 1px 6px rgba(0,0,0,0.8);
+  letter-spacing: 0.04em;
+}
+
+.returnBtn {
+  pointer-events: all;
+  background: rgba(0,0,0,0.55);
+  border: 1px solid rgba(255,255,255,0.3);
+  color: #fff;
+  padding: 5px 12px;
+  font-size: 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  backdrop-filter: blur(4px);
+  transition: background 0.15s, border-color 0.15s;
+}
+.returnBtn:hover { background: rgba(0,0,0,0.8); border-color: rgba(255,255,255,0.6); }
+
+/* ── Zone prompt (center bottom) ─────────────────────────────────────────── */
+
+.zonePrompt {
+  position: absolute;
+  bottom: 90px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0,0,0,0.82);
+  border: 1px solid rgba(255,255,255,0.25);
+  border-radius: 8px;
+  padding: 12px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  z-index: 10;
+  backdrop-filter: blur(6px);
+  min-width: 200px;
+  text-align: center;
+  animation: fadeUp 0.2s ease;
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateX(-50%) translateY(8px); }
+  to   { opacity: 1; transform: translateX(-50%) translateY(0);   }
+}
+
+.zoneLabel {
+  font-size: 15px;
+  font-weight: 700;
+  color: #fff;
+}
+
+.zoneHint {
+  font-size: 11px;
+  color: rgba(255,255,255,0.55);
+}
+
+.zoneHint kbd {
+  background: rgba(255,255,255,0.15);
+  border: 1px solid rgba(255,255,255,0.3);
+  border-radius: 3px;
+  padding: 0 4px;
+  font-size: 10px;
+  font-family: monospace;
+}
+
+.enterBtn {
+  background: rgba(255,255,255,0.15);
+  border: 1px solid rgba(255,255,255,0.4);
+  color: #fff;
+  padding: 5px 18px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.enterBtn:hover { background: rgba(255,255,255,0.28); }
+
+/* ── Controls hint (bottom center) ───────────────────────────────────────── */
+
+.controlsHint {
+  position: absolute;
+  bottom: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 11px;
+  color: rgba(255,255,255,0.35);
+  pointer-events: none;
+  z-index: 10;
+  white-space: nowrap;
+}
+
+/* Hide controls hint on mobile (dpad takes over) */
+@media (max-width: 768px) {
+  .controlsHint { display: none; }
+}

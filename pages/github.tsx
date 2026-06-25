@@ -6,6 +6,7 @@ import { VscRepo, VscPerson } from 'react-icons/vsc';
 import RepoCard from '@/components/RepoCard';
 import { Repo, User } from '@/types';
 
+import { owner } from '@/data/owner';
 import styles from '@/styles/GithubPage.module.css';
 
 const GithubPage = () => {
@@ -14,7 +15,7 @@ const GithubPage = () => {
 
   useEffect(() => {
     async function fetchGitHubData() {
-      const username = "dhrumilshukla258";
+      const username = owner.github;
       if (!username) return;
 
       try {
@@ -83,7 +84,7 @@ const GithubPage = () => {
         </div>
         <div className={styles.contributions}>
           <GitHubCalendar
-            username={"dhrumilshukla258"}
+            username={owner.github}
             hideColorLegend
             hideMonthLabels
             colorScheme="dark"

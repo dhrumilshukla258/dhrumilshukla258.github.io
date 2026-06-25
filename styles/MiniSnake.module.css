@@ -1,0 +1,121 @@
+.window {
+  border: 1px solid;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 32px 100px rgba(0, 0, 0, 0.8);
+}
+
+.titlebar {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.4rem 0.75rem;
+  font-size: 0.72rem;
+  font-family: monospace;
+  user-select: none;
+}
+
+.title  { flex: 1; opacity: 0.85; }
+
+.scores {
+  display: flex;
+  gap: 1rem;
+  opacity: 0.7;
+}
+
+.closeBtn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: inherit;
+  opacity: 0.5;
+  font-size: 0.8rem;
+  padding: 0 2px;
+  line-height: 1;
+  transition: opacity 0.15s;
+}
+.closeBtn:hover { opacity: 1; }
+
+.canvasWrap {
+  position: relative;
+  display: block;
+  line-height: 0;
+}
+
+.canvas { display: block; }
+
+.gameOver {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  font-family: monospace;
+  animation: fadeIn 0.2s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+.overTitle {
+  font-size: 1.1rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  margin: 0;
+}
+
+.overScore {
+  font-size: 0.85rem;
+  opacity: 0.7;
+  margin: 0;
+}
+
+.newRecord {
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  margin: 0;
+  animation: pulse 0.8s ease infinite alternate;
+}
+
+@keyframes pulse {
+  from { opacity: 0.6; }
+  to   { opacity: 1; }
+}
+
+.restartBtn {
+  margin-top: 0.5rem;
+  background: transparent;
+  border: 1px solid;
+  border-radius: 4px;
+  padding: 0.4rem 1.2rem;
+  font-family: monospace;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  cursor: pointer;
+  transition: opacity 0.15s;
+}
+.restartBtn:hover { opacity: 0.75; }
+
+.exitBtn {
+  background: none;
+  border: none;
+  font-family: monospace;
+  font-size: 0.72rem;
+  cursor: pointer;
+  transition: opacity 0.15s;
+  padding: 0.2rem;
+}
+.exitBtn:hover { opacity: 1; }
+
+.hint {
+  text-align: center;
+  font-size: 0.65rem;
+  font-family: monospace;
+  padding: 0.35rem;
+}

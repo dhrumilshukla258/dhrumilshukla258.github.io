@@ -9,7 +9,7 @@
   font-family: 'Source Sans Pro', sans-serif;
   font-size: 0.85rem;
   border-bottom: 1px solid #191d20;
-  overflow: hidden;
+  overflow: visible;
   min-width: 0;
 }
 
@@ -26,8 +26,24 @@
 }
 
 .items > * {
+  padding: 0;
+  cursor: pointer;
+}
+
+.menuWrapper {
+  position: relative;
+}
+
+.menuLabel {
   padding: 0 0.5rem;
   cursor: pointer;
+  line-height: 30px;
+  border-radius: 3px;
+}
+
+.menuLabel:hover,
+.menuActive {
+  background: rgba(255, 255, 255, 0.1);
 }
 
 .windowButtons {

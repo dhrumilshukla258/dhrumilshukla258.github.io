@@ -1,12 +1,12 @@
 import { createContext, useContext, useState, useEffect, ReactNode } from 'react';
+import { defaultTheme } from '@/data/owner';
 
 export type PersonalityType = 'professional' | 'gamer' | 'technical';
 
-// Default theme per personality
 const PERSONALITY_DEFAULTS: Record<PersonalityType, string> = {
-  professional: 'github-dark',
-  gamer: 'unreal',
-  technical: 'dracula',
+  professional: defaultTheme.professional ?? 'github-dark',
+  gamer:        defaultTheme.gamer        ?? 'unreal',
+  technical:    defaultTheme.technical    ?? 'github-dark',
 };
 
 interface PersonalityContextType {

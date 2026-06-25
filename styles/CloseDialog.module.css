@@ -1,0 +1,173 @@
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(3px);
+  animation: fadeIn 0.12s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+.dialog {
+  min-width: 320px;
+  max-width: 420px;
+  border-radius: 8px;
+  padding: 1.75rem 1.75rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  animation: pop 0.15s ease;
+  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.8);
+}
+
+@keyframes pop {
+  from { transform: scale(0.92); opacity: 0; }
+  to   { transform: scale(1); opacity: 1; }
+}
+
+/* ── Professional ── */
+.professional .dialog {
+  background: var(--article-bg, #1c1917);
+  border: 1px solid rgba(255,255,255,0.08);
+}
+
+.professional .title {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--accent-color);
+  font-family: inherit;
+  margin: 0;
+}
+
+.professional .body {
+  font-size: 0.82rem;
+  color: rgba(255,255,255,0.55);
+  font-family: inherit;
+  white-space: pre-wrap;
+  margin: 0;
+  line-height: 1.55;
+}
+
+/* ── Gamer ── */
+.gamer .dialog {
+  background: #0d0d14;
+  border: 2px solid rgba(196, 120, 41, 0.35);
+}
+
+.gamer .icon {
+  font-size: 2rem;
+  text-align: center;
+}
+
+.gamer .title {
+  font-size: 1.15rem;
+  font-weight: 900;
+  color: #c47829;
+  letter-spacing: 0.08em;
+  font-family: monospace;
+  text-align: center;
+  margin: 0;
+}
+
+.gamer .body {
+  font-size: 0.78rem;
+  color: rgba(255,255,255,0.5);
+  font-family: monospace;
+  white-space: pre-wrap;
+  text-align: center;
+  margin: 0;
+  line-height: 1.65;
+}
+
+/* ── Technical ── */
+.technical .dialog {
+  background: #0d1117;
+  border: 1px solid #21262d;
+}
+
+.technical .title {
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: #f87171;
+  font-family: 'JetBrains Mono', monospace;
+  margin: 0;
+}
+
+.technical .body {
+  font-size: 0.78rem;
+  color: rgba(255,255,255,0.45);
+  font-family: 'JetBrains Mono', monospace;
+  white-space: pre-wrap;
+  margin: 0;
+  line-height: 1.7;
+}
+
+/* ── Shared actions ── */
+.icon {
+  font-size: 1.5rem;
+}
+
+.title { margin: 0; }
+.body  { margin: 0; }
+
+.actions {
+  display: flex;
+  gap: 0.6rem;
+  margin-top: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.btn {
+  flex: 1;
+  padding: 0.55rem 1rem;
+  border-radius: 5px;
+  font-family: inherit;
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+  border: 1px solid transparent;
+  transition: opacity 0.15s;
+  letter-spacing: 0.02em;
+}
+
+.btnDanger {
+  background: #c0392b;
+  color: #fff;
+  border-color: #922b21;
+}
+.btnDanger:hover { opacity: 0.85; }
+
+.btnCancel {
+  background: transparent;
+  color: rgba(255,255,255,0.55);
+  border-color: rgba(255,255,255,0.12);
+}
+.btnCancel:hover { opacity: 0.75; }
+
+/* gamer overrides */
+.gamer .btnDanger {
+  background: rgba(196, 120, 41, 0.2);
+  color: #c47829;
+  border-color: rgba(196, 120, 41, 0.5);
+  letter-spacing: 0.1em;
+}
+
+/* technical overrides */
+.technical .btnDanger {
+  background: rgba(248, 113, 113, 0.12);
+  color: #f87171;
+  border-color: rgba(248, 113, 113, 0.3);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 1.1rem;
+  font-weight: 900;
+}
+.technical .btnCancel {
+  font-family: 'JetBrains Mono', monospace;
+}

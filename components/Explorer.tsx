@@ -1,69 +1,139 @@
 import Link from 'next/link';
 import Image from 'next/image';
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { useRouter } from 'next/router';
 import { usePersonality } from '@/components/PersonalityContext';
+import { useMenu } from '@/components/MenuContext';
 import { VscChevronRight, VscSettings } from 'react-icons/vsc';
+import { pages } from '@/data/pages';
 
 import styles from '@/styles/Explorer.module.css';
 
-const professionalItems = [
-  { name: 'home.c',        path: '/',        icon: '/logos/file_type_c.svg' },
-  { name: 'experience.py', path: '/work',    icon: '/logos/file_type_python.svg' },
-  { name: 'projects.cpp',  path: '/projects',icon: '/logos/file_type_cpp3.svg' },
-  { name: 'about.json',    path: '/about',   icon: '/logos/json_icon.svg' },
-  { name: 'contact.cs',    path: '/contact', icon: '/logos/file_type_csharp2.svg' },
-  { name: 'github.md',     path: '/github',  icon: '/logos/markdown_icon.svg' },
-];
+const LABELS: Record<string, string> = { professional: 'Portfolio', gamer: 'SAVE DATA', technical: 'Portfolio' };
 
-const gamerItems = [
-  { name: 'home.exe',      path: '/',        icon: '/logos/file_type_bat.svg' },
-  { name: 'career.log',    path: '/work',    icon: '/logos/file_type_log.svg' },
-  { name: 'builds.dat',    path: '/projects',icon: '/logos/file_type_binary.svg' },
-  { name: 'character.cfg', path: '/about',   icon: '/logos/file_type_config.svg' },
-  { name: 'contact.msg',   path: '/contact', icon: '/logos/file_type_db.svg' },
-  { name: 'source.git',    path: '/github',  icon: '/logos/file_type_git.svg' },
-];
-
-const technicalItems = professionalItems;
+const MIN_WIDTH = 120;
+const MAX_WIDTH = 500;
+const COLLAPSE_THRESHOLD = 80;
+const DEFAULT_WIDTH = 220;
 
 interface ExplorerPanelProps {
-  title: string;
-  label: string;
-  items: typeof professionalItems;
   className: string;
 }
 
-function ExplorerPanel({ title, label, items, className }: ExplorerPanelProps) {
+function ExplorerPanel({ className }: ExplorerPanelProps) {
   const [open, setOpen] = useState(true);
+  const [width, setWidth] = useState(DEFAULT_WIDTH);
+  const [collapsed, setCollapsed] = useState(false);
+  const dragState = useRef<{ startX: number; startW: number } | null>(null);
   const router = useRouter();
+  const { personality } = usePersonality();
+  const { showContextMenu, addToast } = useMenu();
+
+  const onDragStart = (e: React.MouseEvent) => {
+    e.preventDefault();
+    dragState.current = { startX: e.clientX, startW: collapsed ? 0 : width };
+    const onMove = (ev: MouseEvent) => {
+      if (!dragState.current) return;
+      const next = dragState.current.startW + (ev.clientX - dragState.current.startX);
+      if (next < COLLAPSE_THRESHOLD) {
+        setCollapsed(true);
+      } else {
+        setCollapsed(false);
+        setWidth(Math.min(MAX_WIDTH, Math.max(MIN_WIDTH, next)));
+      }
+    };
+    const onUp = () => {
+      dragState.current = null;
+      window.removeEventListener('mousemove', onMove);
+      window.removeEventListener('mouseup', onUp);
+      document.body.style.cursor = '';
+      document.body.style.userSelect = '';
+    };
+    document.body.style.cursor = 'col-resize';
+    document.body.style.userSelect = 'none';
+    window.addEventListener('mousemove', onMove);
+    window.addEventListener('mouseup', onUp);
+  };
+
+  const fileContextMenu = (page: typeof pages[0]) => [
+    {
+      label: 'Open',
+      action: () => router.push(page.path),
+    },
+    {
+      label: 'Open to the Side',
+      action: () => { router.push(page.path); addToast('Split view not available in browser 😄', 'info'); },
+    },
+    { separator: true as const },
+    {
+      label: 'Copy Path',
+      action: () => {
+        const url = window.location.origin + page.path;
+        navigator.clipboard.writeText(url).then(() => addToast(`Copied: ${url}`, 'success'));
+      },
+    },
+    {
+      label: 'Copy Relative Path',
+      action: () => {
+        navigator.clipboard.writeText(page.path).then(() => addToast(`Copied: ${page.path}`, 'success'));
+      },
+    },
+    { separator: true as const },
+    {
+      label: 'Rename',
+      action: () => addToast(`"${page[personality].name}" is read-only — this is a portfolio 😄`, 'info'),
+    },
+    {
+      label: 'Delete',
+      action: () => addToast(`Nice try. "${page[personality].name}" cannot be deleted.`, 'error'),
+    },
+  ];
+
+  if (collapsed) {
+    return (
+      <div
+        className={`${className} ${styles.collapsed}`}
+        style={{ width: 4 }}
+      >
+        <div className={styles.dragHandle} onMouseDown={onDragStart} title="Drag to expand" />
+      </div>
+    );
+  }
+
   return (
-    <div className={className}>
-      <p className={styles.title}>{title}</p>
+    <div className={className} style={{ width }}>
+      <div className={styles.dragHandle} onMouseDown={onDragStart} title="Drag to resize" />
+      <p className={styles.title}>Explorer</p>
       <div>
         <input
           type="checkbox"
           className={styles.checkbox}
-          id={`explorer-checkbox-${label}`}
+          id="explorer-checkbox"
           checked={open}
           onChange={() => setOpen(!open)}
         />
-        <label htmlFor={`explorer-checkbox-${label}`} className={styles.heading}>
+        <label htmlFor="explorer-checkbox" className={styles.heading}>
           <VscChevronRight
             className={styles.chevron}
             style={open ? { transform: 'rotate(90deg)' } : {}}
           />
-          {label}
+          {LABELS[personality]}
         </label>
         <div className={styles.files} style={open ? { display: 'block' } : { display: 'none' }}>
-          {items.map((item) => (
-            <Link href={item.path} key={item.name}>
-              <div className={`${styles.file} ${router.pathname === item.path ? styles.fileActive : ''}`}>
-                <Image src={item.icon} alt={item.name} height={18} width={18} />
-                <p>{item.name}</p>
-              </div>
-            </Link>
-          ))}
+          {pages.map((page) => {
+            const { name, icon } = page[personality];
+            return (
+              <Link href={page.path} key={page.path}>
+                <div
+                  className={`${styles.file} ${router.pathname === page.path ? styles.fileActive : ''}`}
+                  onContextMenu={e => showContextMenu(e, fileContextMenu(page))}
+                >
+                  <Image src={icon} alt={name} height={18} width={18} />
+                  <p>{name}</p>
+                </div>
+              </Link>
+            );
+          })}
         </div>
       </div>
       <div className={styles.settingsLink}>
@@ -80,31 +150,8 @@ function ExplorerPanel({ title, label, items, className }: ExplorerPanelProps) {
 
 const Explorer = () => {
   const { personality } = usePersonality();
-
-  if (personality === 'professional') {
-    return null;
-  }
-
-  if (personality === 'gamer') {
-    return (
-      <ExplorerPanel
-        title="Explorer"
-        label="SAVE DATA"
-        items={gamerItems}
-        className={styles.explorerSmallOnly}
-      />
-    );
-  }
-
-  // technical
-  return (
-    <ExplorerPanel
-      title="Explorer"
-      label="Portfolio"
-      items={technicalItems}
-      className={styles.explorerSmallOnly}
-    />
-  );
+  if (personality === 'professional') return null;
+  return <ExplorerPanel className={styles.explorerSmallOnly} />;
 };
 
 export default Explorer;

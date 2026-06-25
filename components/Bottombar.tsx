@@ -7,6 +7,7 @@ import {
 } from 'react-icons/vsc';
 import { SiNextdotjs } from 'react-icons/si';
 
+import { REPO_URL } from '@/data/owner';
 import styles from '@/styles/Bottombar.module.css';
 
 const Bottombar = () => {
@@ -14,7 +15,7 @@ const Bottombar = () => {
     <footer className={styles.bottomBar}>
       <div className={styles.container}>
         <a
-          href="https://github.com/dhrumilshukla258/dhrumilshukla258.github.io"
+          href={REPO_URL}
           target="_blank"
           rel="noreferrer noopener"
           className={styles.section}

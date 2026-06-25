@@ -3,6 +3,7 @@ import type { AppProps } from 'next/app';
 
 import Layout from '@/components/Layout';
 import Head from '@/components/Head';
+import { owner, defaultTheme } from '@/data/owner';
 
 import { PersonalityProvider } from '@/components/PersonalityContext';
 import '@/styles/globals.css';
@@ -10,16 +11,10 @@ import '@/styles/themes.css';
 
 function MyApp({ Component, pageProps }: AppProps) {
   useEffect(() => {
-    // Apply per-personality theme on first load
     const personality = localStorage.getItem('personality') || 'professional';
-    const personalityDefaults: Record<string, string> = {
-      professional: 'github-dark',
-      gamer: 'unreal',
-      technical: 'dracula',
-    };
     const theme =
       localStorage.getItem(`theme_${personality}`) ||
-      personalityDefaults[personality] ||
+      defaultTheme[personality] ||
       'github-dark';
     document.documentElement.setAttribute('data-theme', theme);
     document.documentElement.setAttribute('data-personality', personality);
@@ -29,7 +24,7 @@ function MyApp({ Component, pageProps }: AppProps) {
     <>
     <Head>
       <meta name="viewport" content="width=device-width, initial-scale=1.0"></meta>
-      <title>{`Dhrumil Shukla | ${pageProps.title}`}</title>  
+      <title>{`${owner.name} | ${pageProps.title}`}</title>
     </Head>
     <PersonalityProvider>
       <Layout>

@@ -2,28 +2,10 @@ import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import { usePersonality, PersonalityType } from '@/components/PersonalityContext';
 import { usePageTransition } from '@/components/PageTransition';
+import { personalityCards } from '@/data/about';
 import styles from '@/styles/PersonalityOnboardingModal.module.css';
 
-const personalities: { type: PersonalityType; label: string; tagline: string; icon: string }[] = [
-  {
-    type: 'professional',
-    label: 'Professional',
-    tagline: "Clean, formal, résumé-ready. See my experience through a recruiter's lens.",
-    icon: '/personality/professional.png',
-  },
-  {
-    type: 'gamer',
-    label: 'Gamer',
-    tagline: 'XP, achievements, and side quests. See my story the way I actually live it.',
-    icon: '/personality/gamer.png',
-  },
-  {
-    type: 'technical',
-    label: 'Technical',
-    tagline: 'Raw specs, stack decisions, and implementation depth — for engineers.',
-    icon: '/personality/technical.png',
-  },
-];
+const personalities: { type: PersonalityType; label: string; tagline: string; icon: string }[] = personalityCards;
 
 const PersonalityOnboardingModal = () => {
   const { setPersonality } = usePersonality();
@@ -63,7 +45,7 @@ const PersonalityOnboardingModal = () => {
           {personalities.map(({ type, label, tagline, icon }) => (
             <button key={type} className={styles.card} onClick={() => pick(type)}>
               <div className={styles.iconWrap}>
-                <Image src={icon} alt={label} fill className={styles.icon} />
+                <Image src={icon} alt={label} fill sizes="80px" className={styles.icon} />
               </div>
               <div className={styles.cardText}>
                 <span className={styles.cardLabel}>{label}</span>

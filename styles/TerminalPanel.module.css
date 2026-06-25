@@ -1,0 +1,219 @@
+.panel {
+  background: var(--titlebar-bg, #1e1e1e);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+  font-family: 'JetBrains Mono', 'Courier New', monospace;
+  font-size: 13px;
+  /* height is set inline via state */
+}
+
+.dragHandle {
+  height: 4px;
+  cursor: row-resize;
+  flex-shrink: 0;
+  background: transparent;
+  transition: background 0.15s;
+}
+
+.dragHandle:hover {
+  background: var(--accent-color, #569cd6);
+  opacity: 0.6;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 0 8px;
+  height: 35px;
+  flex-shrink: 0;
+}
+
+.tabs {
+  display: flex;
+  gap: 8px;
+}
+
+.activeTab {
+  font-size: 11px;
+  color: var(--text-color, #ccc);
+  letter-spacing: 0.08em;
+  padding: 4px 8px;
+  border-bottom: 2px solid var(--accent-color, #569cd6);
+  font-family: 'Source Sans Pro', sans-serif;
+  font-weight: 600;
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.actionBtn {
+  background: none;
+  border: none;
+  color: rgba(255, 255, 255, 0.5);
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 3px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+}
+
+.actionBtn:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.output {
+  flex: 1;
+  overflow-y: auto;
+  padding: 8px 12px;
+  cursor: text;
+}
+
+.output::-webkit-scrollbar { width: 6px; }
+.output::-webkit-scrollbar-track { background: transparent; }
+.output::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.15); border-radius: 3px; }
+
+.line {
+  line-height: 1.5;
+}
+
+.lineText {
+  font-family: 'JetBrains Mono', 'Courier New', monospace;
+  font-size: 13px;
+  white-space: pre-wrap;
+  word-break: break-word;
+  margin: 0;
+}
+
+.input .lineText {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.output .lineText {
+  color: var(--text-color, #d4d4d4);
+}
+
+.error .lineText {
+  color: #f87171;
+}
+
+.promptRow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 2px;
+}
+
+.prompt {
+  color: var(--accent-color, #4ec9b0);
+  user-select: none;
+  flex-shrink: 0;
+}
+
+.inputField {
+  flex: 1;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: var(--text-color, #d4d4d4);
+  font-family: 'JetBrains Mono', 'Courier New', monospace;
+  font-size: 13px;
+  caret-color: var(--accent-color, #569cd6);
+}
+
+/* ── Professional: warm parchment terminal ── */
+.professional {
+  background: #161310;
+  border-top-color: #33291a;
+}
+.professional .activeTab {
+  border-bottom-color: #c4a35a;
+  color: #c4a35a;
+}
+.professional .prompt {
+  color: #c4a35a;
+}
+.professional .inputField {
+  color: #e8dfc8;
+  font-family: 'JetBrains Mono', monospace;
+  caret-color: #c4a35a;
+}
+.professional .lineText {
+  color: #c8bfa8;
+}
+.professional .error .lineText {
+  color: #e07070;
+}
+.professional .input .lineText {
+  color: #8a7a60;
+}
+
+/* ── Gamer: dark neon orange ── */
+.gamer {
+  background: #0a0a10;
+  border-top-color: rgba(196, 120, 41, 0.3);
+}
+.gamer .activeTab {
+  border-bottom-color: #c47829;
+  color: #c47829;
+  font-family: 'Orbitron', monospace;
+  letter-spacing: 0.1em;
+}
+.gamer .prompt {
+  color: #c47829;
+}
+.gamer .inputField {
+  color: #e0c070;
+  font-family: 'Orbitron', monospace;
+  font-size: 12px;
+  caret-color: #c47829;
+}
+.gamer .lineText {
+  color: rgba(200, 160, 80, 0.9);
+  font-family: 'Orbitron', monospace;
+  font-size: 11px;
+}
+.gamer .error .lineText {
+  color: #ff6b35;
+}
+.gamer .input .lineText {
+  color: rgba(196, 120, 41, 0.5);
+}
+.gamer .dragHandle:hover {
+  background: #c47829;
+}
+
+/* ── Technical: classic green-on-dark ── */
+.technical {
+  background: #0d1117;
+  border-top-color: rgba(86, 156, 214, 0.2);
+}
+.technical .activeTab {
+  border-bottom-color: #4ec9b0;
+  color: #4ec9b0;
+}
+.technical .prompt {
+  color: #4ec9b0;
+}
+.technical .inputField {
+  color: #d4d4d4;
+  caret-color: #4ec9b0;
+}
+.technical .lineText {
+  color: #9cdcfe;
+}
+.technical .error .lineText {
+  color: #f44747;
+}
+.technical .input .lineText {
+  color: #6a9955;
+}

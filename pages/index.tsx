@@ -1,31 +1,28 @@
 import Link from 'next/link';
 import { VscArrowRight } from 'react-icons/vsc';
 import { usePersonality } from '@/components/PersonalityContext';
+import { owner, homeLinks } from '@/data/owner';
 import styles from '@/styles/HomePage.module.css';
 
 export default function HomePage() {
   const { personality } = usePersonality();
+  const links = homeLinks[personality as keyof typeof homeLinks] ?? homeLinks.professional;
 
   const renderHero = () => {
     if (personality === 'technical') {
       return (
         <div className={styles.infoSection}>
           <h1 className={styles.developerName}>
-            Dhrumil <span className={styles.accentText}>Shukla</span>
+            {owner.name.split(' ')[0]} <span className={styles.accentText}>{owner.name.split(' ').slice(1).join(' ')}</span>
           </h1>
-          <div className={styles.techComment}>{'// software_engineer.cpp'}</div>
-          <pre className={styles.techCodeBio}>{`/* Visual Concepts Entertainment — C++ Game Engineer
- * Shipped: NBA 2K Series · LEGO 2K Drive
- * Focus:   Gameplay Systems · UI/HUD · Shaders · Profiling
- * Stack:   C++ · Python · TypeScript · Perforce · Git
- * Status:  ACTIVE  [Oct 2020 → present]
- */`}</pre>
+          <div className={styles.techComment}>{`// ${owner.title.toLowerCase().replace(/ /g, '_')}.cpp`}</div>
+          <pre className={styles.techCodeBio}>{owner.bio.technical}</pre>
           <div className={styles.actionLinks}>
-            <Link href="/projects" className={styles.primaryLink}>
-              {'./projects.cpp'} <VscArrowRight />
+            <Link href={links[0].href} className={styles.primaryLink}>
+              {links[0].label} <VscArrowRight />
             </Link>
-            <Link href="/work" className={styles.techLink}>
-              {'./experience.py'} <VscArrowRight />
+            <Link href={links[1].href} className={styles.techLink}>
+              {links[1].label} <VscArrowRight />
             </Link>
           </div>
         </div>
@@ -36,26 +33,22 @@ export default function HomePage() {
       return (
         <div className={styles.infoSection}>
           <h1 className={styles.developerName}>
-            Dhrumil <span className={styles.accentText}>Shukla</span>
+            {owner.name.split(' ')[0]} <span className={styles.accentText}>{owner.name.split(' ').slice(1).join(' ')}</span>
           </h1>
           <div className={styles.gamerStatsBar}>
-            <span>CLASS: Software Engineer</span>
+            <span>CLASS: {owner.title}</span>
             <span className={styles.gamerStatSep}>·</span>
-            <span>LVL: 5+</span>
+            <span>LVL: {owner.yearsExperience}</span>
             <span className={styles.gamerStatSep}>·</span>
-            <span>FACTION: 2K Games</span>
+            <span>FACTION: {owner.faction}</span>
           </div>
-          <p className={styles.bio}>
-            Quest-hardened game dev who shipped NBA 2K Series and LEGO 2K Drive. Specializes in
-            gameplay systems, UI/HUD, and performance sorcery. Currently on the main storyline at
-            Visual Concepts — no plans to abandon this questline anytime soon.
-          </p>
+          <p className={styles.bio}>{owner.bio.gamer}</p>
           <div className={styles.actionLinks}>
-            <Link href="/projects" className={styles.primaryLink}>
-              🏗️ builds.dat <VscArrowRight />
+            <Link href={links[0].href} className={styles.primaryLink}>
+              {links[0].label} <VscArrowRight />
             </Link>
-            <Link href="/work" className={styles.gamerSecondaryLink}>
-              📋 career.log <VscArrowRight />
+            <Link href={links[1].href} className={styles.gamerSecondaryLink}>
+              {links[1].label} <VscArrowRight />
             </Link>
           </div>
         </div>
@@ -65,20 +58,16 @@ export default function HomePage() {
     return (
       <div className={styles.infoSection}>
         <h1 className={styles.developerName}>
-          Dhrumil <span className={styles.accentText}>Shukla</span>
+          {owner.name.split(' ')[0]} <span className={styles.accentText}>{owner.name.split(' ').slice(1).join(' ')}</span>
         </h1>
-        <div className={styles.developerRole}>Software Engineer</div>
-        <p className={styles.bio}>
-          Software Engineer at Visual Concepts / 2K Games with 5+ years building gameplay systems,
-          UI/HUD, and tools for the NBA 2K series. Passionate about clean code, team collaboration,
-          and shipping great player experiences.
-        </p>
+        <div className={styles.developerRole}>{owner.title}</div>
+        <p className={styles.bio}>{owner.bio.professional}</p>
         <div className={styles.actionLinks}>
-          <Link href="/projects" className={styles.primaryLink}>
-            View Projects <VscArrowRight />
+          <Link href={links[0].href} className={styles.primaryLink}>
+            {links[0].label} <VscArrowRight />
           </Link>
-          <Link href="/work" className={styles.secondaryLink}>
-            Work Experience <VscArrowRight />
+          <Link href={links[1].href} className={styles.secondaryLink}>
+            {links[1].label} <VscArrowRight />
           </Link>
         </div>
       </div>
@@ -112,7 +101,5 @@ export default function HomePage() {
 }
 
 export async function getStaticProps() {
-  return {
-    props: { title: 'Home' },
-  };
+  return { props: { title: 'Home' } };
 }

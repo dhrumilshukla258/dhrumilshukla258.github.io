@@ -1,4 +1,5 @@
 import ContactCode from '@/components/ContactCode';
+import { ContactForm } from '@/components/ContactForm';
 import { contactItems } from '@/data/contacts';
 import { usePersonality } from '@/components/PersonalityContext';
 import styles from '@/styles/ContactPage.module.css';
@@ -29,6 +30,7 @@ const ContactPage = () => {
             </a>
           ))}
         </div>
+        <ContactForm />
       </div>
     );
   }
@@ -56,6 +58,7 @@ const ContactPage = () => {
             ))}
           </div>
         </div>
+        <ContactForm />
       </div>
     );
   }
@@ -70,6 +73,9 @@ const ContactPage = () => {
         <div className={styles.contactContainer}>
           <ContactCode />
         </div>
+      </div>
+      <div className={styles.container}>
+        <ContactForm />
       </div>
     </div>
   );

@@ -1,11 +1,88 @@
 @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600&display=swap');
 
+/* ── VSCode window surface — slides down on minimize ────────────────────────── */
+.vscodeSurface {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  transition: transform 0.45s cubic-bezier(0.4, 0, 0.2, 1),
+              opacity  0.45s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.minimized {
+  transform: translateY(105%);
+  opacity: 0.6;
+  pointer-events: none;
+}
+
 .main {
   display: flex;
+  flex: 1;
+  min-height: 0;          /* allow flex children to shrink below content size */
+  overflow: hidden;
   background: var(--main-bg);
-  overflow-x: hidden;
-    scrollbar-color: #888 transparent; /* thumb color and transparent track */
+  scrollbar-color: #888 transparent;
   scrollbar-width: thin;
+}
+
+.editorColumn {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-width: 0;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.editorArea {
+  position: relative;
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.zenWrapper {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  background: var(--main-bg);
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  overflow-y: auto;
+}
+
+.zenExit {
+  position: fixed;
+  top: 12px;
+  right: 16px;
+  z-index: 100;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 6px;
+  color: rgba(255, 255, 255, 0.4);
+  font-size: 12px;
+  font-family: 'Source Sans Pro', sans-serif;
+  padding: 5px 12px;
+  cursor: pointer;
+  opacity: 0.35;
+  transition: opacity 0.2s ease, color 0.2s ease, background 0.2s ease;
+}
+
+.zenExit:hover {
+  background: rgba(255, 255, 255, 0.12);
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.zenContent {
+  max-width: 800px;
+  min-height: 100vh;
+  padding: 3rem 2rem !important;
 }
 
 .content {
@@ -14,7 +91,7 @@
   font-family: 'JetBrains Mono', monospace;
   flex: 1;
   min-width: 0;
-  height: 85vh;
+  min-height: 0;
   overflow-y: auto;
   overflow-x: hidden;
   scroll-behavior: smooth;
@@ -25,11 +102,6 @@
   width: 100%;
   min-width: 0;
   box-sizing: border-box;
-}
-
-.content {
-  scrollbar-width: 10px;
-  scrollbar-color: var(--accent-color);
 }
 
 .content::-webkit-scrollbar {

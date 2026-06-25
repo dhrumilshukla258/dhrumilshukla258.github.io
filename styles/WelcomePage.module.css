@@ -1,0 +1,262 @@
+/* ── VSCode-style welcome screen ─────────────────────────────────────────── */
+
+.root {
+  display: grid;
+  grid-template-columns: 340px 1fr;
+  gap: 0;
+  height: 100%;
+  overflow: hidden;
+  color: var(--text-color, #ccc);
+  font-family: 'Segoe UI', system-ui, sans-serif;
+  font-size: 13px;
+  background: var(--bg-color, #1e1e1e);
+}
+
+/* ── Left panel ─────────────────────────────────────────────────────────── */
+
+.left {
+  padding: 40px 32px;
+  border-right: 1px solid var(--sidebar-border, #333);
+  overflow-y: auto;
+  background: var(--bg-color, #1e1e1e);
+}
+
+.logoRow {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 28px;
+}
+
+.logoIcon {
+  color: #007acc;
+  flex-shrink: 0;
+}
+
+.logoText {
+  font-size: 15px;
+  font-weight: 300;
+  letter-spacing: 0.04em;
+  color: var(--text-color, #ccc);
+  opacity: 0.6;
+}
+
+.headline {
+  font-size: 22px;
+  font-weight: 400;
+  color: #fff;
+  margin: 0 0 6px;
+  line-height: 1.2;
+  letter-spacing: 0.01em;
+}
+
+.sub {
+  font-size: 12px;
+  color: rgba(255,255,255,0.35);
+  margin: 0 0 32px;
+}
+
+/* ── Right panel ─────────────────────────────────────────────────────────── */
+
+.right {
+  padding: 40px 40px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+/* ── Shared section ───────────────────────────────────────────────────────── */
+
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.sectionLabel {
+  font-size: 9px;
+  letter-spacing: 0.18em;
+  font-weight: 700;
+  color: rgba(255,255,255,0.25);
+  text-transform: uppercase;
+  margin-bottom: 2px;
+}
+
+/* ── Link list (start / recent) ───────────────────────────────────────────── */
+
+.linkList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.actionLink {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 5px 6px;
+  border-radius: 4px;
+  color: #4fc1ff;
+  text-decoration: none;
+  transition: background 0.1s;
+  font-size: 12.5px;
+  white-space: nowrap;
+}
+
+.actionLink:hover { background: rgba(255,255,255,0.06); color: #6dd5ff; }
+
+.linkIcon {
+  flex-shrink: 0;
+  opacity: 0.7;
+}
+
+.linkMuted { color: rgba(255,255,255,0.4); font-size: 11px; }
+
+.recentLink {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 4px 6px;
+  border-radius: 4px;
+  text-decoration: none;
+  transition: background 0.1s;
+  min-width: 0;
+}
+.recentLink:hover { background: rgba(255,255,255,0.06); }
+
+.fileIcon { flex-shrink: 0; opacity: 0.8; }
+
+.fileName {
+  color: #e0e0e0;
+  font-size: 12px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  flex: 0 0 auto;
+}
+
+.filePath {
+  color: rgba(255,255,255,0.28);
+  font-size: 11px;
+  font-family: monospace;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  flex: 1;
+  min-width: 0;
+}
+
+/* ── About card ──────────────────────────────────────────────────────────── */
+
+.card {
+  background: rgba(255,255,255,0.035);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 6px;
+  padding: 18px 20px;
+}
+
+.cardTitle {
+  font-size: 16px;
+  font-weight: 600;
+  color: #fff;
+  margin-bottom: 2px;
+}
+
+.cardRole {
+  font-size: 11px;
+  color: #007acc;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+
+.cardBio {
+  font-size: 12px;
+  color: rgba(255,255,255,0.55);
+  line-height: 1.65;
+  margin: 0 0 14px;
+}
+
+.tagRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.tag {
+  background: rgba(0,122,204,0.15);
+  border: 1px solid rgba(0,122,204,0.3);
+  color: #4fc1ff;
+  padding: 2px 8px;
+  border-radius: 3px;
+  font-size: 10.5px;
+  font-family: monospace;
+}
+
+/* ── Shipped list ────────────────────────────────────────────────────────── */
+
+.shipList {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.shipItem {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: rgba(255,255,255,0.65);
+  font-size: 12.5px;
+}
+
+.shipDot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #007acc;
+  flex-shrink: 0;
+}
+
+/* ── Quick open grid ─────────────────────────────────────────────────────── */
+
+.quickGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 8px;
+}
+
+.quickCard {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 12px;
+  background: rgba(255,255,255,0.035);
+  border: 1px solid rgba(255,255,255,0.07);
+  border-radius: 5px;
+  text-decoration: none;
+  color: rgba(255,255,255,0.7);
+  font-size: 12px;
+  transition: background 0.12s, border-color 0.12s;
+}
+
+.quickCard:hover {
+  background: rgba(0,122,204,0.12);
+  border-color: rgba(0,122,204,0.4);
+  color: #fff;
+}
+
+.quickIcon { color: #007acc; flex-shrink: 0; font-size: 14px; }
+.quickLabel { flex: 1; }
+.quickArrow { opacity: 0.3; font-size: 11px; }
+
+/* ── Responsive ──────────────────────────────────────────────────────────── */
+
+@media (max-width: 720px) {
+  .root { grid-template-columns: 1fr; }
+  .right { display: none; }
+  .left  { border-right: none; }
+}
