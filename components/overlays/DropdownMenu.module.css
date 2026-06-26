@@ -1,0 +1,111 @@
+.menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 500;
+  background: var(--titlebar-bg, #252526);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+  min-width: 220px;
+  padding: 4px 0;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+  animation: menuFadeIn 0.1s ease;
+}
+
+@keyframes menuFadeIn {
+  from { opacity: 0; transform: translateY(-4px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.separator {
+  height: 1px;
+  background: rgba(255, 255, 255, 0.1);
+  margin: 4px 0;
+}
+
+.linkWrapper {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+}
+
+.item {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 5px 12px 5px 20px;
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.85);
+  cursor: pointer;
+  user-select: none;
+  white-space: nowrap;
+  font-family: 'Source Sans Pro', sans-serif;
+  gap: 24px;
+}
+
+.item:hover:not(.disabled) {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+
+.label {
+  flex: 1;
+}
+
+.right {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  flex-shrink: 0;
+}
+
+.shortcut {
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.45);
+  font-family: 'JetBrains Mono', monospace;
+}
+
+.chevron {
+  font-size: 16px;
+  color: rgba(255, 255, 255, 0.5);
+  line-height: 1;
+}
+
+.hasSubmenu {
+  padding-right: 8px;
+}
+
+.submenu {
+  position: absolute;
+  top: -4px;
+  left: 100%;
+  z-index: 501;
+  background: var(--titlebar-bg, #252526);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+  min-width: 180px;
+  padding: 4px 0;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+}
+
+
+@keyframes glitchItemIn {
+  0%   { opacity: 0; transform: translateX(-6px); letter-spacing: 0.15em; color: var(--accent-color, #007acc); }
+  30%  { opacity: 1; transform: translateX(3px);  letter-spacing: 0.08em; color: #ff3b3b; }
+  55%  { transform: translateX(-2px); color: #fff; letter-spacing: 0.04em; }
+  80%  { transform: translateX(1px);  color: var(--accent-color, #007acc); letter-spacing: 0.02em; }
+  100% { transform: translateX(0);    color: inherit; letter-spacing: normal; }
+}
+
+.glitchItem {
+  animation: glitchItemIn 0.55s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.glitchItem .label {
+  font-family: monospace;
+}

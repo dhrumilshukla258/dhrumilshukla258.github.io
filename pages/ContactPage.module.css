@@ -1,0 +1,167 @@
+.layout {
+  max-width: 1100px;
+  width: 100%;
+  margin: 0 auto;
+  box-sizing: border-box;
+}
+
+.container {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.container h1 {
+  margin-bottom: 2rem;
+  font-size: 1.5rem;
+}
+
+.flex {
+  display: flex;
+  gap: 1rem;
+}
+
+.pageTitle {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--accent-color);
+  margin-bottom: 1rem;
+  letter-spacing: -0.03em;
+  line-height: 1.2;
+  padding-top: 1rem;
+}
+
+.pageSubtitle {
+  font-size: 1rem;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.7);
+  margin-bottom: 2.5rem;
+  line-height: 1.6;
+}
+
+@media screen and (max-width: 1200px) {
+  .container {
+    display: block;
+    padding: 2rem 1rem;
+  }
+
+  .container > div:first-child {
+    border-right: none;
+    margin-bottom: 2rem;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .flex {
+    display: block;
+  }
+
+  .form input {
+    font-size: 0.85rem;
+  }
+
+  .container {
+    padding: 1.5rem 0.75rem;
+  }
+
+  .pageTitle {
+    font-size: 1.75rem;
+  }
+
+  .pageSubtitle {
+    font-size: 1rem;
+    margin-bottom: 2rem;
+  }
+
+  .gamerMenuValue {
+    display: none;
+  }
+}
+
+/* ── Professional contact ── */
+.pageTitleLeft {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--accent-color);
+  margin-bottom: 1rem;
+  letter-spacing: -0.03em;
+  line-height: 1.2;
+  padding-top: 1rem;
+}
+
+.pageSubtitleLeft {
+  font-size: 1rem;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.7);
+  margin-bottom: 2.5rem;
+  max-width: 500px;
+  line-height: 1.6;
+}
+
+.proContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.proContactItem {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem 1.25rem;
+  background: var(--article-bg);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 10px;
+  text-decoration: none;
+  transition: border-color 0.2s;
+  min-width: 0;
+  overflow: hidden;
+}
+.proContactItem:hover { border-color: var(--accent-color); }
+
+.proContactLabel {
+  font-size: 0.75rem; font-weight: 700; text-transform: uppercase;
+  letter-spacing: 0.1em; color: var(--accent-color); min-width: 90px; flex-shrink: 0;
+}
+.proContactValue { flex: 1; min-width: 0; font-size: 0.9rem; color: rgba(255, 255, 255, 0.7); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.proContactArrow { color: var(--accent-color); opacity: 0.5; font-size: 1rem; flex-shrink: 0; }
+
+/* ── Gamer contact ── */
+.gamerContactTitle {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: #c47829;
+  font-family: monospace;
+  letter-spacing: 0.05em;
+  padding-top: 1rem;
+  margin-bottom: 0.5rem;
+  overflow-wrap: break-word;
+  word-break: break-word;
+}
+
+.gamerMenuList {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  width: 100%;
+}
+
+.gamerMenuItem {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.9rem 1.25rem;
+  background: #0d0d14;
+  border: 1px solid rgba(196, 120, 41, 0.2);
+  border-radius: 8px;
+  text-decoration: none;
+  font-family: monospace;
+  transition: border-color 0.2s, background 0.2s;
+  min-width: 0;
+  overflow: hidden;
+}
+.gamerMenuItem:hover { border-color: #c47829; background: rgba(196, 120, 41, 0.08); }
+
+.gamerMenuNum { font-size: 0.75rem; font-weight: 800; color: #c47829; opacity: 0.6; min-width: 28px; flex-shrink: 0; }
+.gamerMenuLabel { font-size: 0.8rem; font-weight: 800; letter-spacing: 0.1em; color: #c47829; min-width: 90px; flex-shrink: 0; }
+.gamerMenuValue { flex: 1; min-width: 0; font-size: 0.85rem; color: rgba(255, 255, 255, 0.65); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.gamerMenuArrow { color: #c47829; opacity: 0.5; flex-shrink: 0; }

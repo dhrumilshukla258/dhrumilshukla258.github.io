@@ -1,8 +1,8 @@
-import Link from 'next/link';
+﻿import Link from 'next/link';
 import { VscArrowRight } from 'react-icons/vsc';
-import { usePersonality } from '@/components/PersonalityContext';
+import { usePersonality } from '@/components/context/PersonalityContext';
 import { owner, homeLinks } from '@/data/owner';
-import styles from '@/styles/HomePage.module.css';
+import styles from './HomePage.module.css';
 
 export default function HomePage() {
   const { personality } = usePersonality();

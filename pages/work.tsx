@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
+﻿import React, { useState } from 'react';
 import { format, intervalToDuration } from 'date-fns';
 import { workexp } from '@/data/workexp';
 import { WorkExp } from '@/types';
-import { usePersonality } from '@/components/PersonalityContext';
+import { usePersonality } from '@/components/context/PersonalityContext';
 import { workPageHeaders } from '@/data/owner';
-import styles from '@/styles/WorkTimeline.module.css';
+import styles from './WorkTimeline.module.css';
 
 // ── helpers ────────────────────────────────────────────────────────────────────
 
@@ -39,8 +39,8 @@ function buildYearGroups(entries: WorkExp[]) {
   const currentYear = new Date().getFullYear();
   const map = new Map<number, WorkExp[]>();
   for (const e of sorted) {
-    // active jobs (no endDate) appear under the current year
-    const y = !e.endDate ? currentYear : utcYear(e.startDate);
+    // active jobs → current year; finished jobs → end year
+    const y = !e.endDate ? currentYear : utcYear(e.endDate);
     if (!map.has(y)) map.set(y, []);
     map.get(y)!.push(e);
   }

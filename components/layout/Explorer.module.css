@@ -1,0 +1,195 @@
+.explorer {
+  background: var(--explorer-bg);
+  width: 18vw;
+  min-width: 140px;
+  color: var(--text-color);
+  font-family: 'Source Sans Pro', sans-serif;
+  border-right: 1px solid var(--explorer-border);
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  height: calc(100vh - 30px - 25px);
+  overflow-x: hidden;
+}
+
+/* Gamer/Technical: Explorer always shown on large, hidden on small (Sidebar takes over) */
+.explorerSmallOnly {
+  background: var(--explorer-bg);
+  color: var(--text-color);
+  font-family: 'Source Sans Pro', sans-serif;
+  border-right: 1px solid var(--explorer-border);
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  height: calc(100vh - 30px - 25px);
+  position: relative;
+  overflow-x: hidden;
+  /* width is controlled inline via state */
+}
+
+.collapsed {
+  width: 4px !important;
+  min-width: 4px !important;
+  overflow: hidden;
+  border-right: 1px solid var(--explorer-border);
+}
+
+.dragHandle {
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  cursor: col-resize;
+  background: transparent;
+  transition: background 0.15s;
+  z-index: 10;
+}
+
+.dragHandle:hover {
+  background: var(--accent-color, #569cd6);
+  opacity: 0.5;
+}
+
+@media screen and (max-width: 600px) {
+  .explorerSmallOnly {
+    display: none;
+  }
+}
+
+.title {
+  padding: 0.5rem 0.75rem;
+  font-weight: 300;
+  text-transform: uppercase;
+  font-size: 0.9rem;
+  letter-spacing: 1px;
+  margin-bottom: 0.75rem;
+  color: var(--text-color);
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.heading {
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 0.8rem;
+  letter-spacing: 1px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  padding: 0 0.5rem;
+  color: var(--text-color);
+}
+
+.checkbox {
+  position: absolute;
+  opacity: 0;
+  z-index: -1;
+}
+
+.files {
+  padding: 0.5rem 0;
+  cursor: pointer;
+}
+
+.file {
+  padding: 0.2rem 1rem;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 0.875rem;
+  color: var(--text-color);
+  text-decoration: none;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  min-width: 0;
+}
+
+.file span {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  min-width: 0;
+}
+
+.file:hover {
+  background: var(--explorer-hover-bg);
+}
+
+.fileActive {
+  background: var(--explorer-hover-bg);
+  color: var(--text-color);
+}
+
+.chevron {
+  transition: transform 0.2s;
+}
+
+.bottomLinks {
+  margin-top: auto;
+  border-top: 1px solid var(--explorer-border);
+  padding-top: 0.25rem;
+}
+
+
+@keyframes eggSlideIn {
+  0%   { opacity: 0; transform: translateY(10px); }
+  60%  { opacity: 1; transform: translateY(-2px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes glitchColor {
+  0%   { color: var(--accent-color, #007acc); text-shadow: 0 0 8px var(--accent-color, #007acc); }
+  20%  { color: #ff3b3b; text-shadow: 0 0 12px #ff3b3b; }
+  40%  { color: #fff; text-shadow: 0 0 6px #fff; }
+  60%  { color: var(--accent-color, #007acc); text-shadow: 0 0 14px var(--accent-color, #007acc); }
+  80%  { color: #ff3b3b; text-shadow: 0 0 8px #ff3b3b; }
+  100% { color: var(--text-color, #ccc); text-shadow: none; }
+}
+
+@keyframes glitchRowGlow {
+  0%   { background: transparent; box-shadow: none; }
+  15%  { background: color-mix(in srgb, var(--accent-color, #007acc) 18%, transparent); box-shadow: inset 0 0 0 1px var(--accent-color, #007acc); }
+  50%  { background: color-mix(in srgb, #ff3b3b 12%, transparent); box-shadow: inset 0 0 0 1px #ff3b3b; }
+  85%  { background: color-mix(in srgb, var(--accent-color, #007acc) 10%, transparent); box-shadow: inset 0 0 0 1px var(--accent-color, #007acc); }
+  100% { background: transparent; box-shadow: none; }
+}
+
+.easterEggEntry {
+  animation: eggSlideIn 0.35s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.glitching {
+  animation: glitchRowGlow 0.82s ease-out forwards;
+}
+
+.glitching .glitchText {
+  animation: glitchColor 0.82s ease-out forwards;
+}
+
+.glitchText {
+  font-family: monospace;
+  letter-spacing: 0.02em;
+}
+
+
+@media screen and (min-width: 2000px) {
+  .explorer {
+    width: 10vw;
+  }
+}
+
+@media screen and (max-width: 900px) {
+  .explorer {
+    width: 20vw;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .explorer {
+    display: none;
+  }
+  /* On small screens for professional, Sidebar handles nav */
+}

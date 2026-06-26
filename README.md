@@ -9,40 +9,53 @@ Live at: [dhrumilshukla258.github.io](https://dhrumilshukla258.github.io)
 ## Features
 
 - **Personality System** — switch between Professional, Technical, and Gamer modes. Every page adapts its copy, layout, filenames, terminal prompt, and visual style.
-- **VS Code chrome** — Titlebar with 7 working menus, Explorer sidebar, Tabsbar, Bottombar, and Status bar replicate the VS Code UI shell.
+- **VS Code chrome** — Titlebar with working menus, Explorer sidebar, Tabsbar, Bottombar, and Status bar replicating the VS Code UI shell.
 - **Command Palette** (`Ctrl+Shift+P`) — fuzzy-search navigation, theme switching, and view toggles.
-- **Interactive Terminal** (`Ctrl+\``) — personality-aware shell with `ls`, `cd`, `cat`, `neofetch`, `theme`, and more. Drag to resize.
+- **Interactive Terminal** (`Ctrl+\``) — personality-aware shell with `ls`, `cd`, `cat`, `neofetch`, `theme`, `start game`, `glitch`, and more. Drag to resize.
 - **Find in Page** (`Ctrl+F`) — real browser text search with a VS Code-style panel.
 - **Right-click context menus** — on the editor area, Explorer files, and tabs.
 - **10 color themes** — switchable per personality; default per personality is data-driven.
+- **Per-personality sidebar toggle** — toggling sidebar in one personality doesn't affect others.
 - **Contact form** — Formspree-powered with client-side validation and spam prevention.
-- **Zen Mode** (`Ctrl+K Z`) — distraction-free view with a translucent exit button.
+- **Zen Mode** (`Ctrl+K Z`) — distraction-free view.
 - **Fully data-driven** — add a page, update personal info, or change themes entirely from the `data/` folder.
-- **Mini-games** — each personality hides a playable game. Minimize VSCode to reveal it (see below).
+- **Mini-games** — minimize VSCode to reveal a personality-specific game.
 - **Static site** — deploys to GitHub Pages as a fully static export.
+
+---
+
+## Easter Egg — Welcome Page
+
+Close all open tabs to discover a hidden welcome screen. When found:
+
+- A personality-matched file entry (`welcome.save` / `welcome.sh`) glitch-animates into the Explorer bottom
+- The character for your active personality walks along the Titlebar, opens the **View** menu, and walks down to click **⚡ Glitch Page** — teaching you the new feature
+- The welcome page itself glitch-reveals all its text on load
+- **⚡ Glitch Page** is unlocked in `View` menu and via the `glitch` terminal command — scrambles any page's text with a left-to-right char reveal
 
 ---
 
 ## Mini-Games
 
-Clicking the minimize button in the Titlebar slides VSCode down to reveal a personality-specific desktop with a playable game. Click **Restore** (or the window) to slide VSCode back up.
+Click the minimize button in the Titlebar (or type `start game` in the terminal) to slide VSCode down and reveal a playable game. Click **Restore** to slide back up.
 
-| Personality | Game | Description |
-|---|---|---|
-| **Professional** | Snake (`snake.py`) | Classic Snake styled as a VSCode Python file. WASD or arrow keys; snake wraps edges. |
-| **Technical** | Snake (`./snake --wrap`) | Same Snake engine embedded in a fake terminal session; segfault game-over screen. |
-| **Gamer** | 3-D Open World | Three.js city with a VSCode building. Walk around, enter zones, and interact. Mobile D-pad supported. |
+| Personality | Game |
+|---|---|
+| **Professional** | MiniSnake — classic Snake with personality-themed colors and copy |
+| **Gamer** | The Main Questline — Three.js open-world RPG city (FACTION HQ) |
+| **Technical** | The Main Questline — same Three.js world |
 
-A compact **MiniSnake** variant also runs directly on the minimized desktop for Professional and Technical personalities, personality-themed with matching colors and copy.
+Inside The Main Questline, a portal in the center of the map opens MiniSnake as an overlay.
 
 ---
 
 ## Tech Stack
 
-- **Next.js 15** (Pages Router, Static Site Generation)
+- **Next.js 16** (Pages Router, Static Site Generation)
 - **React 19**
 - **TypeScript 5**
-- **CSS Modules** (theming via CSS custom properties on `data-theme` / `data-personality`)
+- **Three.js 0.184** — open-world game
+- **CSS Modules** co-located with each component (theming via CSS custom properties on `data-theme` / `data-personality`)
 - **Formspree** (`@formspree/react`) for contact form submissions
 
 ---
@@ -50,37 +63,66 @@ A compact **MiniSnake** variant also runs directly on the minimized desktop for 
 ## Project Structure
 
 ```
-pages/          # Route pages (index, work, projects, about, contact, github, settings)
-components/     # UI shell and interactive features
-  Layout.tsx          # Root layout — wires all panels together
-  Titlebar.tsx        # 7-menu menu bar + personality switcher
-  Explorer.tsx        # Sidebar file tree
-  Tabsbar.tsx         # Open-file tabs
-  Bottombar.tsx       # Status bar
-  CommandPalette.tsx  # Ctrl+Shift+P palette
-  TerminalPanel.tsx   # Interactive terminal panel
-  FindPanel.tsx       # Ctrl+F find bar
-  ContextMenu.tsx     # Right-click menus
-  Toast.tsx           # Notification toasts
-  ContactForm.tsx     # Per-personality contact form
-  MenuContext.tsx     # Global UI state (terminal, zen mode, sidebar, toasts, zoom…)
-  PersonalityContext.tsx  # Active personality + theme initialization
-  MinimizedDesktop.tsx    # OS desktop shown behind VSCode when minimized
-  GamerDesktop.tsx        # Gamer personality desktop surface
-  GamerGame.tsx           # Three.js open-world city game (Gamer mode)
-  ProfessionalDesktop.tsx # Professional personality desktop surface
-  ProfessionalGame.tsx    # Snake game styled as snake.py (Professional mode)
-  TechnicalDesktop.tsx    # Technical personality desktop surface
-  MiniSnake.tsx           # Compact Snake variant on the minimized desktop
-  GameDpad.tsx            # On-screen D-pad for mobile gamer controls
-data/           # ← Edit here to update content everywhere
-  owner.ts      # Personal info, themes list, default theme per personality
-  pages.ts      # Page routes, per-personality filenames/icons, GitHub file paths
-  workexp.ts    # Work experience entries
-  projects.ts   # Project entries
-  contacts.ts   # Contact links
-styles/         # CSS Modules per component/page
-public/logos/   # SVG icons used in tabs and explorer
+pages/               # Next.js routes — each file is a page
+  *.module.css       # Page styles co-located here
+
+components/
+  animations/        # Page transition canvas effects + avatars
+    effects/
+      gamer/         # overcooking.tsx · basketball.tsx · platformer.tsx
+      professional/  # boardroom.tsx · newspaper.tsx · typewriter.tsx
+      technical/     # glitch.tsx · team-build.tsx · ssh.tsx
+  cards/             # ProjectCard · RepoCard
+  context/           # React context providers
+    MenuContext.tsx              # Global UI state (panels, toasts, zoom, game, sidebar per-personality)
+    PersonalityContext.tsx       # Active personality + theme
+    PersonalityAnimationContext.tsx  # Refs for pill fly-out animation
+  layout/            # VSCode chrome skeleton
+    Layout.tsx       # Root shell — wires all panels + game routing + glitchPage event listener
+    Titlebar.tsx     # Menu bar + personality switcher
+    Explorer.tsx     # Sidebar file tree (Easter egg entry + glitch animation)
+    Tabsbar.tsx      # Open-file tabs (Easter egg discovery trigger)
+    Sidebar.tsx      # Professional icon sidebar (Easter egg VscBeaker icon)
+    Bottombar.tsx    # Status bar
+  overlays/          # UI layers that float above the layout
+    CommandPalette.tsx
+    TerminalPanel.tsx
+    ContextMenu.tsx · DropdownMenu.tsx
+    FindPanel.tsx · Modal.tsx · CloseDialog.tsx · Toast.tsx
+    PersonalityOnboardingModal.tsx
+    GlitchUnlockTutorial.tsx   # Canvas character walks along titlebar → clicks ⚡ Glitch Page
+  widgets/           # Page-embedded interactive components
+    ContactCode.tsx · ContactForm.tsx · ThemeInfo.tsx
+
+games/
+  questline/         # The Main Questline — Three.js open-world RPG
+    index.tsx        # QuestlineGame component
+    engine.ts · buildings.ts · geometry.ts · materials.ts
+    audio.ts · environment.ts · npcs.ts
+    data/            # Serialized world data (positions, colors, spawns)
+      zones.ts       # cityZones[] — 5 zones keyed to page paths
+      districts.ts   # gameCity, skillsCity, buildsCity — district building placements
+      npcs.ts        # NPC spawn defs, bench/picnic/laptop/cafe positions, theater data
+      theater.ts     # movieSlides[], screen position, Pixel Park billboard
+      world.ts       # PLAYER_COLORS, portal/fountain positions, street light positions
+  snake/             # MiniSnake canvas game
+    index.tsx · useSnakeGame.ts
+  shared/
+    GameDpad.tsx     # Mobile D-pad for QuestlineGame
+
+data/                # ← Edit here to update content everywhere
+  owner.ts           # Personal info, themes, default theme per personality
+  pages.ts           # Routes with per-personality filenames, icons, and labels
+  workexp.ts         # Work experience (3 personality sub-objects each)
+  projects.ts        # Project cards
+  contacts.ts        # Contact links
+  about.ts           # Personality onboarding card content
+
+styles/              # Global styles only
+  globals.css · themes.css
+
+public/              # Static assets (logos, images)
+types/               # Shared TypeScript types
 ```
 
 ---
@@ -95,35 +137,24 @@ Everything you need to change lives in `data/`. No component knowledge required.
 export const owner = {
   name:    'Your Name',
   title:   'Your Title',
-  tagline: 'Your meta description',
-  email:   'you@example.com',
+  company: 'Your Company',
   github:  'your-github-username',
-  site:    'your-site.github.io',
-  repo:    'your-repo-name',
-  branch:  'gh-pages',
-  version: '1.0.0',
-  license: 'MIT',
-  keyboard: 'your keyboard setup',
-  education: ['Degree — School (Year)'],
-  hobbies:   ['hobby1', 'hobby2'],
+  // ...
 };
 ```
-
-Changing `github` / `repo` / `branch` automatically updates the Bottombar repo link, "View Page Source" right-click action, and Help → Report Issue URL.
 
 ### Color themes — `data/owner.ts`
 
 ```ts
 export const themes: ThemeDef[] = [
   { id: 'github-dark', label: 'GitHub Dark' },
-  // add or remove themes here — they flow into the View menu,
-  // Command Palette, and terminal `theme` command automatically
+  // themes flow into the View menu, Command Palette, and terminal `theme` command
 ];
 
 export const defaultTheme = {
-  professional: 'professional',  // first-visit theme for each personality
-  gamer:        'unreal',
-  technical:    'github-dark',
+  professional: 'github-dark',
+  gamer:        'one-dark-pro',
+  technical:    'dracula',
 };
 ```
 
@@ -136,10 +167,10 @@ export const pages: PageDef[] = [
     githubFile:  'pages/work.tsx',
     professional: { name: 'experience.py', icon: '/logos/file_type_python.svg' },
     gamer:        { name: 'career.log',    icon: '/logos/file_type_log.svg' },
-    technical:    { name: 'experience.py', icon: '/logos/file_type_python.svg' },
+    technical:    { name: 'experience.sh', icon: '/logos/file_type_shell.svg' },
   },
   // add a new entry here → it appears in Explorer, Tabsbar, terminal ls/cd,
-  // CommandPalette, Titlebar Open Recent, Titlebar Go menu, and View Page Source
+  // CommandPalette, and Go menu automatically
 ];
 ```
 
@@ -147,13 +178,9 @@ export const pages: PageDef[] = [
 
 Each entry has `professional`, `technical`, and `gamer` sub-objects with personality-specific copy.
 
-### Projects — `data/projects.ts`
+### Questline game world — `games/questline/data/`
 
-Each entry has `title`, `description`, `tags`, `href`, and optional per-personality overrides.
-
-### Contact links — `data/contacts.ts`
-
-Array of `{ label, value, href }` objects displayed on the contact page.
+Game world data is split into focused files. Edit `zones.ts` to reorder zone buildings, `districts.ts` to adjust district layouts, `npcs.ts` for NPC spawns, `theater.ts` for movie slides, and `world.ts` for player colors and light positions. Behavior code stays in `games/questline/` — these files are pure data.
 
 ---
 
@@ -165,8 +192,46 @@ The active personality is stored in `localStorage` and applied via `data-persona
 - Terminal prompt character and color scheme
 - Default color theme (overridable per-session)
 - Page copy and component variants
+- Page transition animation set (3 effects each)
+- Minimize game (Snake vs The Main Questline)
+- Sidebar visibility state (independent per personality)
 
 Switch personality via the pill in the Titlebar, or visit `/settings`.
+
+---
+
+## Keyboard Shortcuts
+
+| Shortcut | Action |
+|---|---|
+| `Ctrl+Shift+P` | Command Palette |
+| `Ctrl+F` | Find in page |
+| `Ctrl+\`` | Terminal |
+| `Ctrl+B` | Toggle sidebar |
+| `Ctrl+=` / `Ctrl+-` | Zoom in / out |
+| `Ctrl+0` | Reset zoom |
+| `Esc` | Close all overlays |
+
+---
+
+## Terminal Commands
+
+| Command | Description |
+|---|---|
+| `help` | List all commands |
+| `whoami` | Portfolio owner info |
+| `ls` | List pages |
+| `pwd` | Current page path |
+| `cd <path>` | Navigate to a page |
+| `cat <file>` | Read a file |
+| `echo <text>` | Print text |
+| `theme <name>` | Change color theme |
+| `neofetch` | System info (portfolio edition) |
+| `history` | Command history |
+| `clear` | Clear terminal |
+| `start game` | Launch the mini-game |
+| `glitch` | ⚡ Glitch current page *(unlocked via Easter egg)* |
+| `open <url>` | Open a URL |
 
 ---
 
@@ -184,4 +249,4 @@ npx tsc --noEmit  # type-check only
 
 ## Deployment
 
-Deployed to GitHub Pages from the `gh-pages` branch via `next build`. The `next.config.js` sets `output: 'export'` for full static generation.
+Deployed to GitHub Pages from the `gh-pages` branch via `next build`. The `next.config.ts` sets `output: 'export'` for full static generation.

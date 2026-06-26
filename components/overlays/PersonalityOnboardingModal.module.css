@@ -1,0 +1,324 @@
+.overlay {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 500;
+  background: #0d1117;
+  overflow: hidden;
+}
+
+.overlayActive {}
+
+/* ── Blurred VSCode mockup background ── */
+
+.mockup {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  filter: blur(6px) brightness(0.45) saturate(1.4);
+  transform: scale(1.04); /* hide blur edge fringing */
+  pointer-events: none;
+  user-select: none;
+}
+
+.mockTitlebar {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 0 16px;
+  height: 38px;
+  background: #161b22;
+  border-bottom: 1px solid #21262d;
+  flex-shrink: 0;
+}
+
+.mockDots {
+  display: flex;
+  gap: 6px;
+}
+.mockDots span {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #30363d;
+}
+
+.mockTabs {
+  display: flex;
+  gap: 2px;
+}
+.mockTab {
+  padding: 0 16px;
+  font-size: 13px;
+  font-family: monospace;
+  height: 38px;
+  display: flex;
+  align-items: center;
+  background: #0d1117;
+  border-right: 1px solid #21262d;
+}
+
+.mockBody {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+.mockSidebar {
+  width: 180px;
+  background: #161b22;
+  border-right: 1px solid #21262d;
+  padding: 12px 0;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.mockFile {
+  padding: 5px 20px;
+  font-size: 12px;
+  font-family: monospace;
+  color: #8b949e;
+}
+
+.mockCol {
+  flex: 1;
+  padding: 24px 20px;
+  border-right: 1px solid;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  background: #0d1117;
+}
+.mockCol:last-child { border-right: none; }
+
+.mockColHead {
+  font-size: 14px;
+  font-weight: 700;
+  font-family: monospace;
+  margin-bottom: 4px;
+}
+
+.mockLine {
+  height: 10px;
+  border-radius: 4px;
+}
+
+.mockCard {
+  border: 1px solid;
+  border-radius: 8px;
+  padding: 12px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.mockBottombar {
+  height: 24px;
+  background: #161b22;
+  border-top: 1px solid #21262d;
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  padding: 0 16px;
+  font-size: 11px;
+  font-family: monospace;
+  color: #484f58;
+  flex-shrink: 0;
+}
+
+/* Dark scrim over the mockup so modal reads clearly */
+.scrim {
+  position: absolute;
+  inset: 0;
+  background: rgba(13, 17, 23, 0.55);
+  pointer-events: none;
+}
+
+/* ── Modal ── */
+
+.modal {
+  position: relative;
+  z-index: 1;
+  background: rgba(13, 17, 23, 0.78);
+  border: 1px solid #30363d;
+  border-radius: 16px;
+  padding: 36px 36px 28px;
+  max-width: 700px;
+  width: 92vw;
+  backdrop-filter: blur(24px);
+  box-shadow: 0 0 0 1px rgba(255,255,255,0.05), 0 32px 96px rgba(0,0,0,0.6);
+}
+
+.modalActive {}
+
+/* ── Header ── */
+
+.header {
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+.eyebrow {
+  font-size: 11px;
+  font-family: monospace;
+  letter-spacing: 0.1em;
+  color: #484f58;
+  margin: 0 0 14px;
+}
+
+.heading {
+  font-size: 26px;
+  font-weight: 700;
+  color: #e6edf3;
+  margin: 0 0 8px;
+  letter-spacing: -0.02em;
+}
+
+.sub {
+  font-size: 13px;
+  color: #8b949e;
+  margin: 0;
+}
+
+.divider {
+  height: 1px;
+  background: #21262d;
+  margin: 0 0 28px;
+}
+
+/* ── Cards ── */
+
+.cards {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+}
+
+.card {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+  background: rgba(22, 27, 34, 0.7);
+  border: 1px solid #21262d;
+  border-radius: 12px;
+  padding: 28px 16px 20px;
+  cursor: pointer;
+  transition: border-color 0.2s ease, transform 0.18s ease, background 0.2s ease, box-shadow 0.2s ease;
+  color: inherit;
+  text-align: center;
+}
+
+.card:hover {
+  border-color: var(--card-accent);
+  background: rgba(22, 27, 34, 0.95);
+  transform: translateY(-4px);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.4), 0 0 0 1px var(--card-accent), inset 0 1px 0 rgba(255,255,255,0.04);
+}
+
+.card:hover .cardCta {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.iconWrap {
+  position: relative;
+  width: 72px;
+  height: 90px;
+  margin-bottom: 16px;
+}
+
+.icon {
+  object-fit: contain;
+}
+
+.cardLabel {
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  margin-bottom: 8px;
+  display: block;
+}
+
+.cardTagline {
+  font-size: 11.5px;
+  color: #8b949e;
+  line-height: 1.6;
+  display: block;
+  margin-bottom: 14px;
+}
+
+.cardCta {
+  font-size: 11px;
+  font-family: monospace;
+  color: var(--card-accent);
+  opacity: 0;
+  transform: translateX(-4px);
+  transition: opacity 0.15s ease, transform 0.15s ease;
+  display: block;
+}
+
+/* ── Footer hint ── */
+
+.hint {
+  text-align: center;
+  font-size: 11px;
+  color: #6e7681;
+  margin: 22px 0 0;
+  font-family: monospace;
+}
+
+/* ── Mobile ── */
+
+@media (max-width: 560px) {
+  .modal {
+    padding: 28px 20px 24px;
+    width: 96vw;
+    border-radius: 12px;
+  }
+
+  .heading {
+    font-size: 20px;
+  }
+
+  .cards {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .card {
+    flex-direction: row;
+    align-items: center;
+    text-align: left;
+    gap: 16px;
+    padding: 16px 18px;
+  }
+
+  .card:hover {
+    transform: none;
+  }
+
+  .iconWrap {
+    width: 44px;
+    height: 56px;
+    margin-bottom: 0;
+    flex-shrink: 0;
+  }
+
+  .cardLabel {
+    margin-bottom: 4px;
+  }
+
+  .cardCta {
+    display: none;
+  }
+
+  .mockSidebar {
+    display: none;
+  }
+}

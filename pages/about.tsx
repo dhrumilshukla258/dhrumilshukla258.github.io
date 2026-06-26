@@ -1,5 +1,5 @@
-import styles from '@/styles/AboutPage.module.css';
-import { usePersonality } from '@/components/PersonalityContext';
+﻿import styles from './AboutPage.module.css';
+import { usePersonality } from '@/components/context/PersonalityContext';
 import { owner } from '@/data/owner';
 import { aboutProfessional, aboutTechnical, aboutGamer } from '@/data/about';
 import React, { useState, useEffect } from 'react';

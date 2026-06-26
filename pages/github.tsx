@@ -1,13 +1,13 @@
-import { useEffect, useState } from 'react';
+﻿import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import GitHubCalendar from 'react-github-calendar';
 import { VscRepo, VscPerson } from 'react-icons/vsc';
 
-import RepoCard from '@/components/RepoCard';
+import RepoCard from '@/components/cards/RepoCard';
 import { Repo, User } from '@/types';
 
 import { owner } from '@/data/owner';
-import styles from '@/styles/GithubPage.module.css';
+import styles from './GithubPage.module.css';
 
 const GithubPage = () => {
   const [user, setUser] = useState<User | null>(null);

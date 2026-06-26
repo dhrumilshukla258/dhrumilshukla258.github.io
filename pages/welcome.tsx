@@ -1,10 +1,10 @@
-import Link from 'next/link';
+﻿import Link from 'next/link';
 import Image from 'next/image';
 import { VscArrowRight, VscFileCode, VscGithub, VscBriefcase, VscAccount, VscMail, VscCode } from 'react-icons/vsc';
-import { usePersonality } from '@/components/PersonalityContext';
+import { usePersonality } from '@/components/context/PersonalityContext';
 import { pages } from '@/data/pages';
 import { owner, welcomeScreen } from '@/data/owner';
-import styles from '@/styles/WelcomePage.module.css';
+import styles from './WelcomePage.module.css';
 
 const QUICK_OPENS = [
   { path: '/work',     label: 'Work Experience', icon: <VscBriefcase /> },
@@ -18,9 +18,10 @@ export default function WelcomePage() {
   const { personality } = usePersonality();
   const { headline, sub } = welcomeScreen[personality as keyof typeof welcomeScreen] ?? welcomeScreen.professional;
 
+
   const pagesByPersonality = pages
-    .filter(p => p.path !== '/')
-    .map(p => ({ path: p.path, ...p[personality] }));
+    .filter(p => p.path !== '/' && p.path !== '/welcome')
+    .map(p => ({ path: p.path, ...p[personality as keyof typeof p] as { name: string; icon: string } }));
 
   return (
     <div className={styles.root}>
@@ -40,13 +41,13 @@ export default function WelcomePage() {
             <li>
               <Link href="/work" className={styles.actionLink}>
                 <VscBriefcase className={styles.linkIcon} />
-                New File —&nbsp;<span className={styles.linkMuted}>experience.py</span>
+                New File —&nbsp;<span className={styles.linkMuted}>{pages.find(p => p.path === '/work')![personality as 'professional'|'gamer'|'technical'].name}</span>
               </Link>
             </li>
             <li>
               <Link href="/projects" className={styles.actionLink}>
                 <VscFileCode className={styles.linkIcon} />
-                Open Folder —&nbsp;<span className={styles.linkMuted}>./projects</span>
+                Open Folder —&nbsp;<span className={styles.linkMuted}>{pages.find(p => p.path === '/projects')![personality as 'professional'|'gamer'|'technical'].name}</span>
               </Link>
             </li>
             <li>

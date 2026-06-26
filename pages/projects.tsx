@@ -1,7 +1,7 @@
-import ProjectCard from '@/components/ProjectCard';
+﻿import ProjectCard from '@/components/cards/ProjectCard';
 import { projects, projectPageHeaders } from '@/data/projects';
-import { usePersonality } from '@/components/PersonalityContext';
-import styles from '@/styles/ProjectsPage.module.css';
+import { usePersonality } from '@/components/context/PersonalityContext';
+import styles from './ProjectsPage.module.css';
 
 const ProjectsPage = () => {
   const { personality } = usePersonality();

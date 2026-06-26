@@ -1,6 +1,6 @@
-import ThemeInfo from '@/components/ThemeInfo';
+﻿import ThemeInfo from '@/components/widgets/ThemeInfo';
 
-import styles from '@/styles/SettingsPage.module.css';
+import styles from './SettingsPage.module.css';
 
 const SettingsPage = () => {
   return (

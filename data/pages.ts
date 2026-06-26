@@ -8,6 +8,13 @@ export interface PageDef {
 
 export const pages: PageDef[] = [
   {
+    path: '/welcome',
+    githubFile: 'pages/welcome.tsx',
+    professional: { name: 'welcome',      icon: '/logos/vscode_icon.svg' },
+    gamer:        { name: 'welcome.save', icon: '/logos/file_type_binary.svg' },
+    technical:    { name: 'welcome.sh',   icon: '/logos/gnubash.svg' },
+  },
+  {
     path: '/',
     githubFile: 'pages/index.tsx',
     professional: { name: 'home.c',        icon: '/logos/file_type_c.svg' },

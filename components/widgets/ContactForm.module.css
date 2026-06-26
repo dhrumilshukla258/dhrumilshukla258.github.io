@@ -1,0 +1,272 @@
+/* ── Shared utilities ── */
+.inputErr {
+  border-color: #f87171 !important;
+}
+
+.errMsg {
+  font-size: 0.72rem;
+  color: #f87171;
+  margin-top: 2px;
+  font-family: 'Source Sans Pro', sans-serif;
+  font-style: normal;
+}
+
+.charCount {
+  font-size: 0.68rem;
+  color: rgba(255, 255, 255, 0.25);
+  text-align: right;
+  display: block;
+  margin-top: 3px;
+  font-family: 'Source Sans Pro', sans-serif;
+}
+
+.successMsg {
+  background: rgba(74, 222, 128, 0.1);
+  border: 1px solid rgba(74, 222, 128, 0.3);
+  color: #4ade80;
+  border-radius: 6px;
+  padding: 0.6rem 0.85rem;
+  font-size: 0.85rem;
+  margin-bottom: 0.75rem;
+  font-family: 'Source Sans Pro', sans-serif;
+}
+
+.errorBanner {
+  background: rgba(248, 113, 113, 0.1);
+  border: 1px solid rgba(248, 113, 113, 0.3);
+  color: #f87171;
+  border-radius: 6px;
+  padding: 0.6rem 0.85rem;
+  font-size: 0.85rem;
+  margin-bottom: 0.75rem;
+  font-family: 'Source Sans Pro', sans-serif;
+}
+
+/* ── Professional ── */
+.proForm {
+  background: var(--article-bg);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 12px;
+  padding: 1.75rem;
+  margin-top: 2rem;
+}
+
+.proFormTitle {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--accent-color);
+  margin-bottom: 1.5rem;
+}
+
+.proField {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  margin-bottom: 1.1rem;
+}
+
+.proLabel {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.proInput,
+.proTextarea {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 6px;
+  color: var(--text-color);
+  font-family: inherit;
+  font-size: 0.9rem;
+  padding: 0.65rem 0.85rem;
+  outline: none;
+  transition: border-color 0.2s;
+  resize: vertical;
+  width: 100%;
+}
+
+.proInput:focus,
+.proTextarea:focus {
+  border-color: var(--accent-color);
+}
+
+.proInput::placeholder,
+.proTextarea::placeholder {
+  color: rgba(255, 255, 255, 0.25);
+}
+
+.proBtn {
+  margin-top: 0.5rem;
+  background: var(--accent-color);
+  color: var(--main-bg, #1e1b16);
+  border: none;
+  border-radius: 6px;
+  padding: 0.65rem 1.4rem;
+  font-family: inherit;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.proBtn:hover:not(:disabled) { opacity: 0.85; }
+.proBtn:disabled { opacity: 0.5; cursor: default; }
+
+/* ── Gamer ── */
+.gamerForm {
+  background: #0d0d14;
+  border: 1px solid rgba(196, 120, 41, 0.25);
+  border-radius: 8px;
+  padding: 1.5rem;
+  margin-top: 2rem;
+  width: 100%;
+  box-sizing: border-box;
+  font-family: monospace;
+}
+
+.gamerHeader {
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  color: #c47829;
+  margin-bottom: 1.25rem;
+  opacity: 0.7;
+}
+
+.gamerField {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  margin-bottom: 1rem;
+}
+
+.gamerLabel {
+  font-size: 0.65rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  color: #c47829;
+  opacity: 0.6;
+}
+
+.gamerInput,
+.gamerTextarea {
+  background: rgba(196, 120, 41, 0.05);
+  border: 1px solid rgba(196, 120, 41, 0.2);
+  border-radius: 4px;
+  color: rgba(255, 255, 255, 0.85);
+  font-family: monospace;
+  font-size: 0.85rem;
+  padding: 0.6rem 0.75rem;
+  outline: none;
+  transition: border-color 0.2s;
+  resize: vertical;
+  width: 100%;
+}
+
+.gamerInput:focus,
+.gamerTextarea:focus {
+  border-color: #c47829;
+}
+
+.gamerInput::placeholder,
+.gamerTextarea::placeholder {
+  color: rgba(255, 255, 255, 0.2);
+}
+
+.gamerBtn {
+  margin-top: 0.5rem;
+  background: rgba(196, 120, 41, 0.15);
+  color: #c47829;
+  border: 1px solid rgba(196, 120, 41, 0.4);
+  border-radius: 4px;
+  padding: 0.6rem 1.25rem;
+  font-family: monospace;
+  font-size: 0.8rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  cursor: pointer;
+  transition: background 0.2s, border-color 0.2s;
+}
+
+.gamerBtn:hover:not(:disabled) {
+  background: rgba(196, 120, 41, 0.25);
+  border-color: #c47829;
+}
+.gamerBtn:disabled { opacity: 0.5; cursor: default; }
+
+/* ── Technical ── */
+.techForm {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 8px;
+  padding: 1.5rem;
+  margin-top: 2rem;
+  font-family: 'JetBrains Mono', monospace;
+}
+
+.techComment {
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.3);
+  margin-bottom: 1.25rem;
+  font-style: italic;
+}
+
+.techField {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  margin-bottom: 1rem;
+}
+
+.techPrompt {
+  font-size: 0.7rem;
+  color: var(--accent-color);
+  letter-spacing: 0.04em;
+}
+
+.techInput,
+.techTextarea {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+  color: var(--text-color);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.85rem;
+  padding: 0.6rem 0.75rem;
+  outline: none;
+  transition: border-color 0.2s;
+  resize: vertical;
+  width: 100%;
+}
+
+.techInput:focus,
+.techTextarea:focus {
+  border-color: var(--accent-color);
+}
+
+.techInput::placeholder,
+.techTextarea::placeholder {
+  color: rgba(255, 255, 255, 0.2);
+  font-style: italic;
+}
+
+.techBtn {
+  margin-top: 0.5rem;
+  background: transparent;
+  color: var(--accent-color);
+  border: 1px solid var(--accent-color);
+  border-radius: 4px;
+  padding: 0.6rem 1.25rem;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.techBtn:hover:not(:disabled) {
+  background: rgba(255, 255, 255, 0.06);
+}
+.techBtn:disabled { opacity: 0.5; cursor: default; }

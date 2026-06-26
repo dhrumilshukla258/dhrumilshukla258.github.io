@@ -1,8 +1,8 @@
-import ContactCode from '@/components/ContactCode';
-import { ContactForm } from '@/components/ContactForm';
+﻿import ContactCode from '@/components/widgets/ContactCode';
+import { ContactForm } from '@/components/widgets/ContactForm';
 import { contactItems } from '@/data/contacts';
-import { usePersonality } from '@/components/PersonalityContext';
-import styles from '@/styles/ContactPage.module.css';
+import { usePersonality } from '@/components/context/PersonalityContext';
+import styles from './ContactPage.module.css';
 
 const ContactPage = () => {
   const { personality } = usePersonality();

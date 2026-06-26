@@ -1,11 +1,11 @@
-import { useEffect } from 'react';
+﻿import { useEffect } from 'react';
 import type { AppProps } from 'next/app';
 
-import Layout from '@/components/Layout';
-import Head from '@/components/Head';
+import Layout from '@/components/layout/Layout';
+import Head from '@/components/layout/Head';
 import { owner, defaultTheme } from '@/data/owner';
 
-import { PersonalityProvider } from '@/components/PersonalityContext';
+import { PersonalityProvider } from '@/components/context/PersonalityContext';
 import '@/styles/globals.css';
 import '@/styles/themes.css';
 

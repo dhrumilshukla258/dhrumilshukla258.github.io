@@ -1,0 +1,491 @@
+/* ═══════════════════════════════════════════════════════════════
+   LAYOUT
+═══════════════════════════════════════════════════════════════ */
+
+.layout {
+  max-width: 1100px;
+  width: 100%;
+  box-sizing: border-box;
+  margin: 0 auto;
+  padding: 2rem 1rem 4rem 0;
+  color: var(--text-color);
+  align-self: flex-start;
+  min-width: 0;
+}
+
+.pageTitle {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--accent-color);
+  margin-bottom: 0.5rem;
+  letter-spacing: -0.03em;
+  line-height: 1.2;
+}
+
+.gamerTitle { font-family: monospace; letter-spacing: 0.02em; }
+
+.pageSubtitle {
+  font-size: 1rem;
+  color: rgba(255, 255, 255, 0.55);
+  margin-bottom: 3rem;
+  max-width: 600px;
+  line-height: 1.6;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   TIMELINE TRACK
+═══════════════════════════════════════════════════════════════ */
+
+.timeline {
+  position: relative;
+  padding-left: 3.5rem;
+  min-width: 0;
+}
+
+/* the vertical line */
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 1.1rem;
+  top: 0.6rem;
+  bottom: 0;
+  width: 2px;
+  background: linear-gradient(
+    to bottom,
+    var(--accent-color),
+    rgba(255, 255, 255, 0.08) 95%
+  );
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   YEAR MARKER
+═══════════════════════════════════════════════════════════════ */
+
+.yearMarker {
+  position: relative;
+  margin-bottom: 0.5rem;
+  margin-left: -3.5rem;
+  padding-left: 0;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.yearLabel {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: rgba(255, 255, 255, 0.25);
+  text-transform: uppercase;
+  width: 2.2rem;
+  text-align: right;
+  flex-shrink: 0;
+}
+
+.yearTick {
+  width: 8px;
+  height: 2px;
+  background: rgba(255, 255, 255, 0.15);
+  margin-left: 0.35rem;
+}
+
+/* ── Professional year badge — notary stamp ── */
+.yearBadgePro {
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  color: var(--accent-color);
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+  padding: 2px 8px;
+  text-align: center;
+  flex-shrink: 0;
+}
+
+/* ── Gamer year badge — season flag ── */
+.yearBadgeGamer {
+  font-family: monospace;
+  font-size: 0.65rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  color: #c47829;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  flex-shrink: 0;
+}
+.yearBadgeGamerFlag {
+  color: #c47829;
+  font-size: 0.55rem;
+  opacity: 0.7;
+}
+
+/* ── Technical year badge — comment hash ── */
+.yearBadgeTech {
+  font-family: 'JetBrains Mono', 'SF Mono', monospace;
+  font-size: 0.68rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.22);
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  flex-shrink: 0;
+}
+.yearBadgeTechHash {
+  color: #569cd6;
+  font-weight: 700;
+  opacity: 0.8;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   ENTRY ROW
+═══════════════════════════════════════════════════════════════ */
+
+.entry {
+  position: relative;
+  margin-bottom: 1.25rem;
+  min-width: 0;
+  overflow: hidden;
+}
+
+/* dot on the line */
+.dot {
+  position: absolute;
+  left: -2.45rem;
+  top: 1rem;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--accent-color);
+  border: 2px solid var(--bg-color, #1e1e1e);
+  box-shadow: 0 0 0 2px var(--accent-color);
+  transition: transform 0.2s;
+  cursor: pointer;
+  z-index: 1;
+}
+
+.dotActive {
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { box-shadow: 0 0 0 2px var(--accent-color); }
+  50%        { box-shadow: 0 0 0 5px rgba(var(--accent-rgb, 255,130,108), 0.25); }
+}
+
+/* git-log style dot for technical */
+.dotTech {
+  background: #569CD6;
+  box-shadow: 0 0 0 2px #569CD6;
+}
+
+/* gamer dot */
+.dotGamer {
+  background: #c47829;
+  box-shadow: 0 0 0 2px #c47829;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   CARD SHELL (all personalities share this wrapper)
+═══════════════════════════════════════════════════════════════ */
+
+.card {
+  background: var(--article-bg);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 10px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  box-sizing: border-box;
+  width: 100%;
+  min-width: 0;
+}
+
+.card:hover {
+  border-color: var(--accent-color);
+}
+
+.cardExpanded {
+  border-color: var(--accent-color);
+}
+
+/* ── gamer card variant ── */
+.cardGamer {
+  background: #0d0d14;
+  border-color: rgba(196, 120, 41, 0.2);
+}
+.cardGamer:hover,
+.cardGamer.cardExpanded {
+  border-color: #c47829;
+  box-shadow: 0 0 18px rgba(196, 120, 41, 0.12);
+}
+
+/* ── technical card variant ── */
+.cardTech {
+  background: #1e1e1e;
+  border-color: rgba(86, 156, 214, 0.2);
+  font-family: Consolas, Monaco, monospace;
+}
+.cardTech:hover,
+.cardTech.cardExpanded {
+  border-color: #569CD6;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   CARD HEADER (collapsed + expanded summary row)
+═══════════════════════════════════════════════════════════════ */
+
+.cardHeader {
+  padding: 1rem 1.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  user-select: none;
+  overflow: hidden;
+}
+
+.headerLeft { flex: 1; min-width: 0; }
+
+.company {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--accent-color);
+  margin: 0 0 0.15rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.companyTech { color: #4EC9B0; }
+.companyGamer { color: var(--accent-color); }
+
+.role {
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.55);
+  margin: 0;
+}
+
+.dates {
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.35);
+  flex-shrink: 0;
+  text-align: right;
+}
+
+.chevron {
+  font-size: 0.65rem;
+  color: rgba(255, 255, 255, 0.3);
+  transition: transform 0.25s;
+  flex-shrink: 0;
+  margin-left: 0.25rem;
+}
+
+.chevronOpen {
+  transform: rotate(180deg);
+}
+
+/* gamer badge strip */
+.gamerBadge {
+  background: #110a04;
+  border-bottom: 1px solid rgba(196, 120, 41, 0.3);
+  color: #c47829;
+  font-size: 0.65rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 0.25rem 1rem;
+}
+
+/* technical prefix */
+.techPrefix {
+  font-size: 0.7rem;
+  color: #569CD6;
+  padding: 0.5rem 1.25rem 0;
+  font-family: Consolas, Monaco, monospace;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   XP BAR (shared, used in gamer view)
+═══════════════════════════════════════════════════════════════ */
+
+.xpRow {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0 1.25rem 0.75rem;
+}
+.xpLabel { font-size: 0.68rem; font-weight: 700; color: #c47829; letter-spacing: 0.08em; white-space: nowrap; }
+.xpTrack { flex: 1; height: 6px; background: rgba(255,255,255,0.08); border-radius: 4px; overflow: hidden; }
+.xpFill { height: 100%; background: linear-gradient(90deg, #7a4a14, #c47829, #e8874a); border-radius: 4px; }
+.xpValue { font-size: 0.7rem; color: rgba(255,255,255,0.4); white-space: nowrap; }
+
+/* ═══════════════════════════════════════════════════════════════
+   EXPANDED BODY
+═══════════════════════════════════════════════════════════════ */
+
+.expandBody {
+  border-top: 1px solid rgba(255, 255, 255, 0.07);
+  padding: 1.25rem 1.5rem 1.5rem;
+  animation: fadeSlide 0.2s ease;
+}
+
+.expandBodyGamer {
+  border-top: 1px solid rgba(196, 120, 41, 0.2);
+  background: #0d0d14;
+}
+
+.expandBodyTech {
+  border-top: 1px solid rgba(86, 156, 214, 0.15);
+  background: #1e1e1e;
+}
+
+@keyframes fadeSlide {
+  from { opacity: 0; transform: translateY(-6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.overview {
+  font-size: 0.87rem;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.78);
+  margin: 0 0 1rem;
+}
+
+.sectionLabel {
+  font-size: 0.65rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--accent-color);
+  opacity: 0.75;
+  margin: 0 0 0.5rem;
+}
+
+.sectionLabelGamer {
+  color: #c47829;
+  opacity: 1;
+}
+
+.sectionLabelTech {
+  color: #569CD6;
+}
+
+.list {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.list li {
+  font-size: 0.84rem;
+  line-height: 1.55;
+  color: rgba(255, 255, 255, 0.8);
+  padding-left: 1.1rem;
+  position: relative;
+}
+
+.list li::before {
+  content: '▸';
+  position: absolute;
+  left: 0;
+  color: var(--accent-color);
+  font-size: 0.7rem;
+  top: 0.15rem;
+}
+
+.listGamer li::before { color: #c47829; }
+.listTech  li::before { color: #569CD6; }
+
+.tagRow { display: flex; flex-wrap: wrap; gap: 0.35rem; margin-bottom: 1rem; }
+.tag {
+  border: 1px solid var(--accent-color);
+  color: var(--accent-color);
+  border-radius: 4px;
+  padding: 0.12rem 0.45rem;
+  font-size: 0.72rem;
+  font-weight: 500;
+  opacity: 0.75;
+}
+
+.footer {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 0.5rem;
+}
+
+.link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  background: var(--accent-color);
+  color: var(--bg-color, #1e1e1e);
+  padding: 0.4rem 0.9rem;
+  border-radius: 6px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: opacity 0.2s;
+}
+.link:hover { opacity: 0.82; }
+
+.linkGamer {
+  background: rgba(196, 120, 41, 0.15);
+  border: 1px solid #c47829;
+  color: #c47829;
+}
+.linkGamer:hover { background: #c47829; color: #0d0d14; opacity: 1; }
+
+.linkTech {
+  background: transparent;
+  border: 1px solid #569CD6;
+  color: #569CD6;
+}
+.linkTech:hover { background: #569CD6; color: #1e1e1e; opacity: 1; }
+
+/* technical code block in expand */
+.codeBlock {
+  background: #141414;
+  color: #dcdcdc;
+  font-family: Consolas, Monaco, 'Courier New', monospace;
+  font-size: 0.82em;
+  padding: 0.85rem 1rem;
+  margin: 0 0 1rem;
+  line-height: 1.65;
+  border-radius: 6px;
+  border: 1px solid rgba(86, 156, 214, 0.12);
+  white-space: pre-wrap;
+  word-break: break-word;
+  max-height: 320px;
+  overflow-y: auto;
+  scrollbar-color: #555 transparent;
+  scrollbar-width: thin;
+}
+
+.pyKw  { color: #569CD6; font-weight: bold; }
+.pyCls { color: #4EC9B0; }
+.pyFn  { color: #DCDCAA; }
+.pyStr { color: #CE9178; }
+.pyVar { color: #9CDCFE; }
+
+/* ═══════════════════════════════════════════════════════════════
+   RESPONSIVE
+═══════════════════════════════════════════════════════════════ */
+
+@media (max-width: 600px) {
+  .layout { padding: 1.25rem 1rem 3rem 0; }
+  .timeline { padding-left: 2.25rem; }
+  .timeline::before { left: 0.65rem; }
+  .dot { left: -1.65rem; }
+  .yearMarker { margin-left: -2.25rem; }
+  .yearLabel { width: 1.5rem; font-size: 0.6rem; }
+  .cardHeader { padding: 0.85rem 1rem; }
+  .expandBody { padding: 1rem 1rem 1.25rem; }
+}
