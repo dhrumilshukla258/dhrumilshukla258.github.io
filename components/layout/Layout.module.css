@@ -47,14 +47,12 @@
 }
 
 .zenWrapper {
-  position: relative;
-  width: 100vw;
-  height: 100vh;
+  position: fixed;
+  inset: 0;
   background: var(--main-bg);
   display: flex;
-  align-items: flex-start;
-  justify-content: center;
-  overflow-y: auto;
+  flex-direction: column;
+  overflow: hidden;
 }
 
 .zenExit {
@@ -80,9 +78,8 @@
 }
 
 .zenContent {
-  max-width: 800px;
-  min-height: 100vh;
-  padding: 3rem 2rem !important;
+  flex: 1;
+  min-height: 0;
 }
 
 .content {
