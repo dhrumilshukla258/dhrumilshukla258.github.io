@@ -64,6 +64,11 @@ export function SSHEffect({ onMid, onDone }: { onMid: () => void; onDone: () => 
       ctx.restore();
 
       const FS = 13; const lineH = FS + 7;
+
+      // Clip all terminal text to the window bounds so nothing overflows on small screens
+      ctx.save();
+      ctx.beginPath(); ctx.roundRect(winX, winY + 30, winW, winH - 30, [0, 0, 8, 8]); ctx.clip();
+
       CMDS.forEach((cmd, i) => {
         if (t < cmd.t) return;
         const lineA = Math.min(remap(t, cmd.t, cmd.t + 0.05), 1) * bgA;
@@ -97,6 +102,8 @@ export function SSHEffect({ onMid, onDone }: { onMid: () => void; onDone: () => 
           ctx.restore();
         }
       }
+
+      ctx.restore(); // end clip
 
       {
         const walkIn  = easeOut(clamp(remap(t, 0, 0.14), 0, 1));

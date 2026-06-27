@@ -61,20 +61,26 @@ export function useSnakeGame({ active, colors, cols = 24, rows = 18, cell = 20, 
 
   useEffect(() => { if (active) restart(); }, [active, restart]);
 
+  const OPP: Record<Dir, Dir> = { U:'D', D:'U', L:'R', R:'L' };
+
+  const pushDir = useCallback((d: Dir) => {
+    if (d !== OPP[dirRef.current]) nextDirRef.current = d;
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   // keyboard
   useEffect(() => {
     if (!active) return;
-    const OPP: Record<Dir, Dir> = { U:'D', D:'U', L:'R', R:'L' };
     const MAP: Record<string, Dir> = { ArrowUp:'U', ArrowDown:'D', ArrowLeft:'L', ArrowRight:'R', w:'U', s:'D', a:'L', d:'R' };
     const onKey = (e: KeyboardEvent) => {
       const d = MAP[e.key];
       if (!d) return;
       if (e.key.startsWith('Arrow')) e.preventDefault();
-      if (d !== OPP[dirRef.current]) nextDirRef.current = d;
+      pushDir(d);
     };
     window.addEventListener('keydown', onKey);
     return () => window.removeEventListener('keydown', onKey);
-  }, [active]);
+  }, [active, pushDir]);
 
   // game loop
   useEffect(() => {
@@ -135,5 +141,5 @@ export function useSnakeGame({ active, colors, cols = 24, rows = 18, cell = 20, 
     return () => clearInterval(id);
   }, [active, gameOver, colors, cols, rows, cell, speed, W, H]);
 
-  return { canvasRef, score, highScore, gameOver, restart, W, H };
+  return { canvasRef, score, highScore, gameOver, restart, pushDir, W, H };
 }

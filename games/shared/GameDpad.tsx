@@ -1,13 +1,10 @@
-﻿import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { InputState } from '@/games/questline/engine';
 import styles from './GameDpad.module.css';
 
 interface Props {
   inputRef: React.MutableRefObject<InputState>;
 }
-
-// Each button sets/clears a key on the shared input ref via pointer events.
-// Works for touch AND mouse so it's testable on desktop too.
 
 const DIRS: { key: keyof InputState; label: string; style: string }[] = [
   { key: 'up',    label: '▲', style: styles.dUp    },
@@ -18,10 +15,8 @@ const DIRS: { key: keyof InputState; label: string; style: string }[] = [
 
 function DpadBtn({ dir, inputRef }: { dir: typeof DIRS[0]; inputRef: Props['inputRef'] }) {
   const held = useRef(false);
-
   const start = () => { held.current = true;  inputRef.current[dir.key] = true; };
   const end   = () => { held.current = false; inputRef.current[dir.key] = false; };
-
   return (
     <button
       className={`${styles.dBtn} ${dir.style}`}
@@ -36,7 +31,6 @@ function DpadBtn({ dir, inputRef }: { dir: typeof DIRS[0]; inputRef: Props['inpu
 }
 
 export function GameDpad({ inputRef }: Props) {
-  // Release all keys if pointer leaves the dpad area entirely
   useEffect(() => {
     const clear = () => {
       inputRef.current.left = inputRef.current.right =

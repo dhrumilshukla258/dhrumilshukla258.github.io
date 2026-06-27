@@ -94,12 +94,15 @@ export function GlitchEffect({ onMid, onDone }: { onMid: () => void; onDone: () 
       if (t > MID && t < 0.84) {
         const at = remap(t, MID, 0.84);
         const a  = at < 0.18 ? at / 0.18 : at > 0.78 ? 1 - remap(at, 0.78, 1) : 1;
+        const titleSize = Math.max(16, Math.min(30, Math.floor(W * 0.07)));
+        const subSize   = Math.max(10, Math.min(13, Math.floor(W * 0.032)));
         ctx.save(); ctx.globalAlpha = a;
-        ctx.font = 'bold 30px monospace'; ctx.textAlign = 'center';
+        ctx.font = `bold ${titleSize}px monospace`; ctx.textAlign = 'center';
         ctx.fillStyle = '#00ff88'; ctx.shadowColor = '#00ff88'; ctx.shadowBlur = 16;
         ctx.fillText('[ ACCESS GRANTED ]', W / 2, H * 0.35);
-        ctx.font = '13px monospace'; ctx.fillStyle = 'rgba(0,255,136,0.5)'; ctx.shadowBlur = 0;
-        ctx.fillText('sudo personality-switch --target=technical   ✓', W / 2, H * 0.35 + 28);
+        ctx.font = `${subSize}px monospace`; ctx.fillStyle = 'rgba(0,255,136,0.5)'; ctx.shadowBlur = 0;
+        const sub = W < 480 ? 'sudo personality-switch ✓' : 'sudo personality-switch --target=technical   ✓';
+        ctx.fillText(sub, W / 2, H * 0.35 + titleSize + 4);
         ctx.restore();
       }
 

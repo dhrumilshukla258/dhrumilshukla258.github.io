@@ -212,6 +212,290 @@
   background: rgba(255,255,255,0.08);
 }
 
+/* ── Glitch animation ───────────────────────────────────────────────────────── */
+@keyframes titlebarGlitch {
+  0%   { transform: skewX(0deg);   filter: none;                                   opacity: 1; }
+  8%   { transform: skewX(-4deg);  filter: hue-rotate(90deg) saturate(3);          opacity: 0.8; }
+  16%  { transform: skewX(0deg);   filter: none;                                   opacity: 1; }
+  24%  { transform: skewX(3deg);   filter: hue-rotate(-90deg) brightness(1.6);     opacity: 0.85; }
+  34%  { transform: skewX(0deg);   filter: none;                                   opacity: 1; }
+  44%  { transform: skewX(-2deg);  filter: hue-rotate(180deg) saturate(2);         opacity: 0.75; }
+  54%  { transform: skewX(0deg);   filter: none;                                   opacity: 1; }
+  66%  { transform: skewX(2deg);   filter: hue-rotate(270deg) brightness(1.3);     opacity: 0.9; }
+  78%  { transform: skewX(0deg);   filter: none;                                   opacity: 1; }
+  88%  { transform: skewX(-1deg);  filter: hue-rotate(45deg);                      opacity: 0.95; }
+  100% { transform: skewX(0deg);   filter: none;                                   opacity: 1; }
+}
+
+.glitching {
+  animation: titlebarGlitch 0.45s steps(1, end) both;
+}
+
+/* ── Mobile hamburger button ────────────────────────────────────────────────── */
+.mobileMenuBtn {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 4px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px 6px;
+  margin-right: 4px;
+  flex-shrink: 0;
+}
+
+.mobileMenuBtn span {
+  display: block;
+  width: 16px;
+  height: 1.5px;
+  background: rgba(255, 255, 255, 0.7);
+  border-radius: 1px;
+  transition: background 0.15s ease;
+}
+
+.mobileMenuBtn:hover span {
+  background: rgba(255, 255, 255, 1);
+}
+
+/* ── Mobile side drawer ─────────────────────────────────────────────────────── */
+.mobileBackdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  background: rgba(0, 0, 0, 0.55);
+  backdrop-filter: blur(2px);
+}
+
+.mobileDrawer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 270px;
+  z-index: 201;
+  background: var(--titlebar-bg);
+  border-right: 1px solid rgba(255, 255, 255, 0.08);
+  display: flex;
+  flex-direction: column;
+  animation: drawerSlideIn 0.22s cubic-bezier(0.32, 0.72, 0, 1) both;
+}
+
+@keyframes drawerSlideIn {
+  from { transform: translateX(-100%); }
+  to   { transform: translateX(0); }
+}
+
+.mobileDrawerHeader {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 12px;
+  height: 30px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  flex-shrink: 0;
+  font-family: 'Source Sans Pro', sans-serif;
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.5);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.mobileDrawerClose {
+  margin-left: auto;
+  background: none;
+  border: none;
+  color: rgba(255, 255, 255, 0.4);
+  cursor: pointer;
+  font-size: 12px;
+  padding: 2px 4px;
+  transition: color 0.12s ease;
+}
+.mobileDrawerClose:hover { color: rgba(255, 255, 255, 0.8); }
+
+.mobileDrawerScroll {
+  flex: 1;
+  overflow-y: auto;
+  padding: 4px 0;
+  scrollbar-width: thin;
+  scrollbar-color: #555 transparent;
+}
+
+/* Accordion */
+.mobileAccordion {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.mobileAccordionHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  background: none;
+  border: none;
+  color: rgba(255, 255, 255, 0.7);
+  font-family: 'Source Sans Pro', sans-serif;
+  font-size: 13px;
+  padding: 9px 16px;
+  cursor: pointer;
+  text-align: left;
+  transition: background 0.12s ease, color 0.12s ease;
+}
+.mobileAccordionHeader:hover { background: rgba(255,255,255,0.05); color: rgba(255,255,255,0.9); }
+.mobileAccordionOpen { background: rgba(255,255,255,0.06); color: rgba(255,255,255,0.95); }
+
+.mobileChevron {
+  font-size: 10px;
+  opacity: 0.5;
+}
+
+.mobileAccordionBody {
+  padding: 2px 0 6px;
+}
+
+/* Menu items inside accordion */
+.mobileMenuItem {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  background: none;
+  border: none;
+  color: rgba(255, 255, 255, 0.6);
+  font-family: 'Source Sans Pro', sans-serif;
+  font-size: 13px;
+  padding: 7px 16px 7px 28px;
+  cursor: pointer;
+  text-align: left;
+  transition: background 0.1s ease, color 0.1s ease;
+}
+.mobileMenuItem:hover { background: rgba(255,255,255,0.06); color: rgba(255,255,255,0.9); }
+
+.mobileMenuItemDisabled {
+  opacity: 0.35;
+  cursor: default;
+}
+
+.mobileMenuItemGlitch {
+  color: #ff79c6;
+}
+
+.mobileShortcut {
+  font-size: 11px;
+  opacity: 0.35;
+  font-family: 'JetBrains Mono', monospace;
+  margin-left: 12px;
+  flex-shrink: 0;
+}
+
+.mobileSep {
+  height: 1px;
+  background: rgba(255,255,255,0.06);
+  margin: 4px 16px;
+}
+
+/* Submenu groups */
+.mobileSubmenuGroup {
+  padding: 4px 0 2px;
+}
+
+.mobileSubmenuLabel {
+  display: block;
+  color: rgba(255,255,255,0.3);
+  font-family: 'Source Sans Pro', sans-serif;
+  font-size: 11px;
+  padding: 4px 16px 2px 28px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.mobileSubItem {
+  display: flex;
+  width: 100%;
+  background: none;
+  border: none;
+  color: rgba(255, 255, 255, 0.5);
+  font-family: 'Source Sans Pro', sans-serif;
+  font-size: 12px;
+  padding: 6px 16px 6px 36px;
+  cursor: pointer;
+  text-align: left;
+  transition: background 0.1s ease, color 0.1s ease;
+}
+.mobileSubItem:hover { background: rgba(255,255,255,0.05); color: rgba(255,255,255,0.85); }
+
+/* ── Back button ────────────────────────────────────────────────────────────── */
+.mobileBackBtn {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  background: none;
+  border: none;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  color: rgba(255,255,255,0.5);
+  font-family: 'Source Sans Pro', sans-serif;
+  font-size: 12px;
+  padding: 10px 16px;
+  cursor: pointer;
+  text-align: left;
+  letter-spacing: 0.04em;
+  transition: color 0.12s ease, background 0.12s ease;
+}
+.mobileBackBtn:hover { color: rgba(255,255,255,0.85); background: rgba(255,255,255,0.04); }
+
+/* ── Theme swatch grid ──────────────────────────────────────────────────────── */
+.mobileMenuItemTheme {
+  color: rgba(255,255,255,0.7);
+}
+
+.themePickerGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  padding: 14px 14px;
+}
+
+.themeSwatchBtn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  background: none;
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 8px;
+  padding: 8px;
+  cursor: pointer;
+  transition: border-color 0.15s ease, transform 0.1s ease;
+}
+.themeSwatchBtn:hover { border-color: rgba(255,255,255,0.25); transform: scale(1.03); }
+.themeSwatchActive   { border-color: rgba(255,255,255,0.5) !important; box-shadow: 0 0 0 1px rgba(255,255,255,0.3); }
+
+.themeSwatchPreview {
+  width: 100%;
+  height: 44px;
+  border-radius: 5px;
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+}
+
+.themeSwatchAccent {
+  width: 100%;
+  height: 8px;
+  opacity: 0.85;
+}
+
+.themeSwatchLabel {
+  font-family: 'Source Sans Pro', sans-serif;
+  font-size: 10px;
+  color: rgba(255,255,255,0.55);
+  text-align: center;
+  line-height: 1.3;
+  letter-spacing: 0.02em;
+}
+
+/* ── Responsive ─────────────────────────────────────────────────────────────── */
 @media screen and (max-width: 900px) {
   .items p {
     display: none;
@@ -228,6 +512,9 @@
   .pillIcon {
     width: 16px;
     height: 20px;
+  }
+  .mobileMenuBtn {
+    display: flex;
   }
 }
 

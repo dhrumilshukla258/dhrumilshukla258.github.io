@@ -58,12 +58,16 @@ const LABELS = {
 };
 
 const CELL = 22;
-const V_CHROME = 62;
-const H_CHROME = 2;
+const V_CHROME = 62;  // titlebar + hint bar
+const H_CHROME = 4;   // border * 2
 
 function calcGrid(winW: number, winH: number) {
-  const cols = Math.floor((Math.min(winW, 900) - H_CHROME) / CELL);
-  const rows = Math.floor((Math.min(winH, 700) - V_CHROME) / CELL);
+  const isMobile = winW < 768;
+  // On mobile leave extra vertical room for browser chrome + D-pad
+  const maxW = Math.min(winW, 900) - H_CHROME;
+  const maxH = Math.min(winH, isMobile ? 560 : 700) - V_CHROME - (isMobile ? 16 : 0);
+  const cols = Math.floor(maxW / CELL);
+  const rows = Math.floor(maxH / CELL);
   return { cols: Math.max(cols, 10), rows: Math.max(rows, 8) };
 }
 
@@ -88,7 +92,7 @@ export function MiniSnake({ onRestore }: Props) {
     return () => window.removeEventListener('resize', onResize);
   }, []);
 
-  const { canvasRef, score, highScore, gameOver, restart, W, H } = useSnakeGame({
+  const { canvasRef, score, highScore, gameOver, restart, pushDir, W, H } = useSnakeGame({
     active: miniGameOpen, colors: C, cols: grid.cols, rows: grid.rows, cell: CELL,
   });
 
@@ -115,6 +119,14 @@ export function MiniSnake({ onRestore }: Props) {
               <button className={styles.exitBtn} style={{ color: C.head + '88' }} onClick={onRestore}>{L.exit}</button>
             </div>
           )}
+
+          {/* On-screen D-pad — only visible on touch devices via CSS */}
+          <div className={styles.dpad} style={{ '--snake-color': C.snake } as React.CSSProperties}>
+            <button className={`${styles.dBtn} ${styles.dUp}`}     onPointerDown={() => pushDir('U')}>▲</button>
+            <button className={`${styles.dBtn} ${styles.dLeft}`}   onPointerDown={() => pushDir('L')}>◀</button>
+<button className={`${styles.dBtn} ${styles.dDown}`}   onPointerDown={() => pushDir('D')}>▼</button>
+            <button className={`${styles.dBtn} ${styles.dRight}`}  onPointerDown={() => pushDir('R')}>▶</button>
+          </div>
         </div>
 
         <div className={styles.hint} style={{ background: C.grid, color: C.head + '55' }}>

@@ -129,3 +129,27 @@
 @media (max-width: 768px) {
   .controlsHint { display: none; }
 }
+
+/* Tilt toggle button — only on touch devices */
+.tiltBtn {
+  display: none;
+  position: absolute;
+  bottom: 24px;
+  right: 24px;
+  background: rgba(0,0,0,0.55);
+  border: 1px solid rgba(255,255,255,0.25);
+  color: rgba(255,255,255,0.75);
+  font-size: 11px;
+  font-family: monospace;
+  padding: 6px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  z-index: 20;
+  backdrop-filter: blur(4px);
+  transition: background 0.15s ease, border-color 0.15s ease;
+}
+.tiltBtn:active { background: rgba(255,255,255,0.15); }
+
+@media (pointer: coarse), (max-width: 768px) {
+  .tiltBtn { display: block; }
+}

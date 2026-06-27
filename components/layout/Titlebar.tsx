@@ -246,6 +246,19 @@ function useMenuDefs() {
   return defs;
 }
 
+const THEME_SWATCHES: Record<string, { bg: string; accent: string }> = {
+  'github-dark':  { bg: '#24292e', accent: '#f9826c' },
+  'unreal':       { bg: '#1e1e1e', accent: '#4fc3f7' },
+  'dracula':      { bg: '#282a36', accent: '#bd93f9' },
+  'ayu-dark':     { bg: '#0a0e14', accent: '#e6b450' },
+  'ayu-mirage':   { bg: '#1f2430', accent: '#e6b450' },
+  'nord':         { bg: '#2e3440', accent: '#88c0d0' },
+  'night-owl':    { bg: '#011627', accent: '#5f7e97' },
+  'professional': { bg: '#1e1b16', accent: '#c4a35a' },
+  'vscode':       { bg: '#1e1e1e', accent: '#569cd6' },
+  'unity':        { bg: '#3c3c3c', accent: '#4f80f8' },
+};
+
 const MENU_LABELS: { id: MenuId & string; label: string }[] = [
   { id: 'file',     label: 'File' },
   { id: 'edit',     label: 'Edit' },
@@ -257,17 +270,27 @@ const MENU_LABELS: { id: MenuId & string; label: string }[] = [
 ];
 
 const Titlebar = () => {
+  const router = useRouter();
   const { personality, setPersonality } = usePersonality();
   const { pillIconRefs, triggerSameClick, shaking } = usePersonalityAnimation();
   const { trigger: triggerTransition, isActive: isTransitioning } = usePageTransition();
-  const { activeMenu, setActiveMenu, setMiniGameOpen, setCloseDialogOpen } = useMenu();
+  const { activeMenu, setActiveMenu, setMiniGameOpen, setCloseDialogOpen, setTerminalOpen, setCommandPaletteOpen, setFindOpen } = useMenu();
   const menuDefs = useMenuDefs();
   const barRef = useRef<HTMLDivElement>(null);
+
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [expandedMenu, setExpandedMenu] = useState<string | null>(null);
+  const [showThemePicker, setShowThemePicker] = useState(false);
+
+  const openMobileMenu = useCallback(() => {
+    setMobileMenuOpen(true);
+  }, []);
 
   // Close menu when resized below the breakpoint where menu labels are hidden
   useEffect(() => {
     const onResize = () => {
       if (window.innerWidth <= 900) setActiveMenu(null);
+      if (window.innerWidth > 900) setMobileMenuOpen(false);
     };
     window.addEventListener('resize', onResize);
     return () => window.removeEventListener('resize', onResize);
@@ -293,6 +316,107 @@ const Titlebar = () => {
         width={15}
         className={styles.icon}
       />
+
+      {/* Mobile hamburger — hidden on desktop via CSS */}
+      <button className={styles.mobileMenuBtn} onClick={openMobileMenu} aria-label="Open menu">
+        <span /><span /><span />
+      </button>
+
+      {/* Mobile side drawer */}
+      {mobileMenuOpen && (
+        <>
+          <div className={styles.mobileBackdrop} onClick={() => { setMobileMenuOpen(false); setShowThemePicker(false); }} />
+          <div className={styles.mobileDrawer}>
+            <div className={styles.mobileDrawerHeader}>
+              <Image src="/logos/vscode_icon.svg" alt="VSCode" width={14} height={14} />
+              <span>Menu</span>
+              <button className={styles.mobileDrawerClose} onClick={() => { setMobileMenuOpen(false); setShowThemePicker(false); }}>✕</button>
+            </div>
+
+            <div className={styles.mobileDrawerScroll}>
+              {showThemePicker ? (
+                <>
+                  <button className={styles.mobileBackBtn} onClick={() => setShowThemePicker(false)}>
+                    ← View
+                  </button>
+                  <div className={styles.themePickerGrid}>
+                    {THEMES.map(t => {
+                      const swatch = THEME_SWATCHES[t.id] ?? { bg: '#1e1e1e', accent: '#569cd6' };
+                      const isActive = document.documentElement.getAttribute('data-theme') === t.id;
+                      return (
+                        <button
+                          key={t.id}
+                          className={`${styles.themeSwatchBtn} ${isActive ? styles.themeSwatchActive : ''}`}
+                          onClick={() => {
+                            menuDefs['view'].find(i => i.label === 'Change Theme')
+                              ?.submenu?.find(s => s.label === t.label)?.action?.();
+                            setMobileMenuOpen(false);
+                            setShowThemePicker(false);
+                          }}
+                        >
+                          <div className={styles.themeSwatchPreview} style={{ background: swatch.bg }}>
+                            <div className={styles.themeSwatchAccent} style={{ background: swatch.accent }} />
+                          </div>
+                          <span className={styles.themeSwatchLabel}>{t.label}</span>
+                        </button>
+                      );
+                    })}
+                  </div>
+                </>
+              ) : (
+                MENU_LABELS.map(({ id, label }) => (
+                  <div key={id} className={styles.mobileAccordion}>
+                    <button
+                      className={`${styles.mobileAccordionHeader} ${expandedMenu === id ? styles.mobileAccordionOpen : ''}`}
+                      onClick={() => setExpandedMenu(expandedMenu === id ? null : id)}
+                    >
+                      <span>{label}</span>
+                      <span className={styles.mobileChevron}>{expandedMenu === id ? '▾' : '▸'}</span>
+                    </button>
+
+                    {expandedMenu === id && menuDefs[id] && (
+                      <div className={styles.mobileAccordionBody}>
+                        {menuDefs[id].map((item, i) => {
+                          if (item.separator) return <div key={i} className={styles.mobileSep} />;
+                          if (item.label === 'Change Theme') return (
+                            <button key={i} className={`${styles.mobileMenuItem} ${styles.mobileMenuItemTheme}`}
+                              onClick={() => setShowThemePicker(true)}>
+                              <span>Change Theme</span>
+                              <span className={styles.mobileChevron}>▸</span>
+                            </button>
+                          );
+                          if (item.submenu) return (
+                            <div key={i} className={styles.mobileSubmenuGroup}>
+                              <span className={styles.mobileSubmenuLabel}>{item.label}</span>
+                              {item.submenu.map((sub, j) => (
+                                <button key={j} className={styles.mobileSubItem}
+                                  onClick={() => { if (sub.href) router.push(sub.href); sub.action?.(); setMobileMenuOpen(false); }}>
+                                  {sub.label}
+                                </button>
+                              ))}
+                            </div>
+                          );
+                          return (
+                            <button
+                              key={i}
+                              className={`${styles.mobileMenuItem} ${item.disabled ? styles.mobileMenuItemDisabled : ''} ${item.glitch ? styles.mobileMenuItemGlitch : ''}`}
+                              disabled={item.disabled}
+                              onClick={() => { if (item.href) router.push(item.href); item.action?.(); setMobileMenuOpen(false); }}
+                            >
+                              <span>{item.label}</span>
+                              {item.shortcut && <span className={styles.mobileShortcut}>{item.shortcut}</span>}
+                            </button>
+                          );
+                        })}
+                      </div>
+                    )}
+                  </div>
+                ))
+              )}
+            </div>
+          </div>
+        </>
+      )}
 
       <div className={styles.items} ref={barRef}>
         {MENU_LABELS.map(({ id, label }) => (
