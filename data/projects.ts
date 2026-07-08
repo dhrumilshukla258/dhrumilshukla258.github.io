@@ -28,6 +28,7 @@ export const projects: Project[] = [
       description: [
         'Designed the portfolio as a VS Code editor: functional sidebar, tabbed navigation, title bar, and status bar',
         'Implemented three personality modes (Professional, Technical, Gamer) that dynamically transform all page content',
+        'Built two playable minimize-to-tray games: a Three.js open-world RPG ("The Main Questline") and a canvas-based Snake game',
         'Integrated the GitHub REST API for live repository stats and contribution calendar',
         'Supports 8 VS Code themes via CSS custom properties; fully responsive across desktop and mobile',
       ],
@@ -35,10 +36,11 @@ export const projects: Project[] = [
 
     technical: {
       title: 'VSCode Themed Portfolio Website',
-      overview: 'Next.js 15 SSG site with a React Context–driven personality system, 8-theme CSS variable architecture, and GitHub REST API integration.',
+      overview: 'Next.js 15 SSG site with a React Context–driven personality system, 8-theme CSS variable architecture, GitHub REST API integration, and two custom-built browser games.',
       description: [
         'Static generation via Next.js 15 — all pages pre-rendered at build time for zero server cost',
         'PersonalityContext (React Context API) propagates personality state globally; components subscribe and re-render on switch',
+        'Three.js scene graph, custom collision resolution, and Web Audio SFX power "The Main Questline" — an open-world RPG rendered inside the "minimized" window',
         'CSS custom property cascade implements 8 VS Code themes — single :root swap triggers full repaint across all modules',
         'GitHub REST API fetched client-side on the /github route — repos, star counts, and contribution calendar rendered live',
       ],
@@ -66,6 +68,7 @@ export const projects: Project[] = [
       overview: 'Made a portfolio that IS a code editor. Recruiters open it and go "wait what?" — mission accomplished. Pick your fighter: Professional, Technical, or Gamer.',
       highlights: [
         '🎨 3 personality modes — pick your fighter',
+        '🎮 Hit minimize and play a full Three.js RPG ("The Main Questline") or a Snake game — yes, really',
         '🌙 8 VS Code themes because one is never enough',
         '📱 Fully responsive — even phones deserve this',
         '🔗 Live GitHub stats — no static screenshots here',

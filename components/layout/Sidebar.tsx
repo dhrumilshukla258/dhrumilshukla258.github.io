@@ -6,12 +6,12 @@ import {
   VscHome,
   VscBriefcase,
   VscCode,
-  VscFiles,
   VscMail,
   VscGithub,
   VscSettings,
   VscPackage,
   VscBeaker,
+  VscAccount,
 } from 'react-icons/vsc';
 import styles from './Sidebar.module.css';
 
@@ -19,7 +19,7 @@ const sidebarTopItems = [
   { Icon: VscHome,      path: '/' },
   { Icon: VscBriefcase, path: '/work' },
   { Icon: VscPackage,   path: '/projects' },
-  { Icon: VscFiles,     path: '/about' },
+  { Icon: VscAccount,   path: '/about' },
   { Icon: VscMail,      path: '/contact' },
   { Icon: VscGithub,    path: '/github' },
 ];

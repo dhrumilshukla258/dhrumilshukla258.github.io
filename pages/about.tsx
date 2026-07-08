@@ -187,7 +187,10 @@ const AboutPage = () => {
 
 export async function getStaticProps() {
   return {
-    props: { title: 'About' },
+    props: {
+      title: 'About',
+      description: `About ${owner.name} — ${owner.title} with education from DigiPen Institute of Technology, plus hobbies and interests outside of work.`,
+    },
   };
 }
 

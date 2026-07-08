@@ -23,7 +23,12 @@ const ProjectsPage = () => {
 };
 
 export async function getStaticProps() {
-  return { props: { title: 'Projects' } };
+  return {
+    props: {
+      title: 'Projects',
+      description: 'Personal projects by Dhrumil Shukla spanning game development, self-hosted infrastructure, ML research, and full-stack web development.',
+    },
+  };
 }
 
 export default ProjectsPage;

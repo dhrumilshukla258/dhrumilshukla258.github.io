@@ -121,5 +121,10 @@ export default function WelcomePage() {
 }
 
 export async function getStaticProps() {
-  return { props: { title: 'Welcome' } };
+  return {
+    props: {
+      title: 'Welcome',
+      description: owner.tagline,
+    },
+  };
 }

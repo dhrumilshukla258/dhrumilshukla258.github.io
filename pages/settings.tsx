@@ -75,7 +75,10 @@ const SettingsPage = () => {
 
 export async function getStaticProps() {
   return {
-    props: { title: 'Settings' },
+    props: {
+      title: 'Settings',
+      description: 'Choose a color theme for the portfolio editor.',
+    },
   };
 }
 

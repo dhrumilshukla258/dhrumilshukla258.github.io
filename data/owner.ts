@@ -41,7 +41,7 @@ export const owner = {
   hobbies: ['video games', 'tennis', 'skating', 'Letterboxd', 'home server'],
 
   // og:description / meta description
-  description: 'Software engineer and game developer building gameplay systems, UI/HUD, and tools shipped in NBA 2K and LEGO 2K Drive.',
+  description: 'Software engineer and game developer building gameplay systems, UI/HUD, and tools shipped in NBA 2K and LEGO 2K Drive. This portfolio is itself a playable VS Code–themed experience with a built-in Three.js RPG and a mini Snake game.',
 
   // SEO keywords
   keywords: [
@@ -49,6 +49,8 @@ export const owner = {
     'game', 'developer', 'game developer', 'programmer', 'portfolio', 'developer portfolio',
     'ide-portfolio', 'vscode-portfolio', 'unity-portfolio', 'unreal-portfolio',
     'nba 2k', 'lego 2k drive', '2k', 'take-two', 'visual concepts', 'digipen',
+    'interactive portfolio', 'three.js game', 'browser game', 'the main questline',
+    'three.js rpg', 'snake game', 'minisnake', 'gamified portfolio', 'webgl game',
   ],
 };
 

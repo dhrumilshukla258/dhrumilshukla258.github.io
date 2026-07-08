@@ -97,6 +97,23 @@
   line-height: 1.6;
 }
 
+.resumeButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  align-self: flex-start;
+  padding: 0.75rem 1.25rem;
+  margin-bottom: 1.5rem;
+  background: var(--accent-color);
+  color: #0d0d14;
+  font-weight: 700;
+  font-size: 0.9rem;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: opacity 0.2s;
+}
+.resumeButton:hover { opacity: 0.85; }
+
 .proContainer {
   display: flex;
   flex-direction: column;
@@ -137,6 +154,39 @@
   overflow-wrap: break-word;
   word-break: break-word;
 }
+
+.gamerResumeButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.25rem;
+  margin-bottom: 1.5rem;
+  background: #c47829;
+  color: #0d0d14;
+  font-weight: 800;
+  font-family: monospace;
+  letter-spacing: 0.05em;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: opacity 0.2s;
+}
+.gamerResumeButton:hover { opacity: 0.85; }
+
+.techResumeButton {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.75rem 1.25rem;
+  margin-bottom: 1.5rem;
+  background: var(--article-bg);
+  border: 1px solid var(--accent-color);
+  color: var(--accent-color);
+  font-family: monospace;
+  font-size: 0.9rem;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: background 0.2s;
+}
+.techResumeButton:hover { background: rgba(255, 255, 255, 0.05); }
 
 .gamerMenuList {
   display: flex;

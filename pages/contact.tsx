@@ -1,4 +1,5 @@
-﻿import ContactCode from '@/components/widgets/ContactCode';
+﻿import Link from 'next/link';
+import ContactCode from '@/components/widgets/ContactCode';
 import { ContactForm } from '@/components/widgets/ContactForm';
 import { contactItems } from '@/data/contacts';
 import { usePersonality } from '@/components/context/PersonalityContext';
@@ -15,6 +16,9 @@ const ContactPage = () => {
           Open to new opportunities, collaborations, and connections.
           Feel free to reach out through any channel below.
         </p>
+        <Link href="/resume" className={styles.resumeButton}>
+          Download Resume (PDF) ↓
+        </Link>
         <div className={styles.proContainer}>
           {contactItems.map((item) => (
             <a
@@ -40,6 +44,9 @@ const ContactPage = () => {
       <div className={styles.layout}>
         <h1 className={styles.gamerContactTitle}>📡 CHOOSE COMMUNICATION METHOD</h1>
         <p className={styles.pageSubtitle}>Select your channel, traveler.</p>
+        <Link href="/resume" className={styles.gamerResumeButton}>
+          📄 DOWNLOAD RESUME.PDF
+        </Link>
         <div className={styles.container}>
           <div className={styles.gamerMenuList}>
             {contactItems.map((item, i) => (
@@ -69,6 +76,9 @@ const ContactPage = () => {
       <p className={styles.pageSubtitle}>
         {'// Reach out through any of the following channels'}
       </p>
+      <Link href="/resume" className={styles.techResumeButton}>
+        $ ./resume --format=pdf
+      </Link>
       <div className={styles.container}>
         <div className={styles.contactContainer}>
           <ContactCode />
@@ -83,7 +93,10 @@ const ContactPage = () => {
 
 export async function getStaticProps() {
   return {
-    props: { title: 'Contact' },
+    props: {
+      title: 'Contact',
+      description: 'Get in touch with Dhrumil Shukla — email, GitHub, LinkedIn, and other contact channels, plus a downloadable resume.',
+    },
   };
 }
 

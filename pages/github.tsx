@@ -100,4 +100,13 @@ const GithubPage = () => {
   );
 };
 
+export async function getStaticProps() {
+  return {
+    props: {
+      title: 'GitHub',
+      description: `Browse ${owner.name}'s public GitHub repositories, contribution activity, and open-source projects.`,
+    },
+  };
+}
+
 export default GithubPage;

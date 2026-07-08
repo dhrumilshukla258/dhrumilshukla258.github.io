@@ -283,7 +283,12 @@ const WorkPage = () => {
 };
 
 export async function getStaticProps() {
-  return { props: { title: 'Experience' } };
+  return {
+    props: {
+      title: 'Experience',
+      description: 'Work experience and career timeline of Dhrumil Shukla, including roles at Visual Concepts / 2K Games, DigiPen, and Northwest Research Associates.',
+    },
+  };
 }
 
 export default WorkPage;

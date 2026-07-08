@@ -101,5 +101,10 @@ export default function HomePage() {
 }
 
 export async function getStaticProps() {
-  return { props: { title: 'Home' } };
+  return {
+    props: {
+      title: 'Home',
+      description: owner.description,
+    },
+  };
 }

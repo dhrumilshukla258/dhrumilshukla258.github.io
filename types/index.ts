@@ -62,6 +62,65 @@ export interface Project {
   gamer: ProjectGamer;
 }
 
+// ─── Resume (printable /resume page) ─────────────────────────────────────────
+
+export interface ResumeContact {
+  icon: string;
+  label: string;
+  href?: string;
+}
+
+export interface ResumeSkillGroup {
+  label: string;
+  items: string;
+}
+
+export interface ResumeEducationEntry {
+  degree: string;
+  school: string;
+  dates: string;
+}
+
+export interface ResumePublication {
+  title: string;
+  date: string;
+  authors: string;
+  technologies: string;
+}
+
+export interface ResumeSubGroup {
+  label: string;
+  bullets: string[];
+}
+
+export interface ResumeJob {
+  title: string;
+  company: string;
+  companyHref?: string;
+  dates: string;
+  bullets: string[];
+  subGroups?: ResumeSubGroup[];
+}
+
+export interface ResumeProject {
+  title: string;
+  dates: string;
+  bullets: string[];
+  href?: string;
+}
+
+export interface ResumeData {
+  name: string;
+  role: string;
+  contacts: ResumeContact[];
+  profile: string;
+  skills: ResumeSkillGroup[];
+  education: ResumeEducationEntry[];
+  publications: ResumePublication[];
+  experience: ResumeJob[];
+  projects: ResumeProject[];
+}
+
 // ─── GitHub ───────────────────────────────────────────────────────────────────
 
 export interface Repo {

@@ -1,8 +1,9 @@
 ﻿import { useEffect } from 'react';
 import type { AppProps } from 'next/app';
+import { useRouter } from 'next/router';
 
 import Layout from '@/components/layout/Layout';
-import Head from '@/components/layout/Head';
+import CustomHead from '@/components/layout/Head';
 import { owner, defaultTheme } from '@/data/owner';
 
 import { PersonalityProvider } from '@/components/context/PersonalityContext';
@@ -10,6 +11,8 @@ import '@/styles/globals.css';
 import '@/styles/themes.css';
 
 function MyApp({ Component, pageProps }: AppProps) {
+  const router = useRouter();
+
   useEffect(() => {
     const personality = localStorage.getItem('personality') || 'professional';
     const theme =
@@ -20,12 +23,27 @@ function MyApp({ Component, pageProps }: AppProps) {
     document.documentElement.setAttribute('data-personality', personality);
   }, []);
 
+  const head = (
+    <CustomHead
+      title={pageProps.title ? `${owner.name} | ${pageProps.title}` : owner.name}
+      description={pageProps.description}
+      path={router.pathname === '/' ? '' : router.pathname}
+    />
+  );
+
+  // Standalone printable page — skip the VS Code chrome entirely.
+  if (router.pathname === '/resume') {
+    return (
+      <>
+        {head}
+        <Component {...pageProps} />
+      </>
+    );
+  }
+
   return (
     <>
-    <Head>
-      <meta name="viewport" content="width=device-width, initial-scale=1.0"></meta>
-      <title>{`${owner.name} | ${pageProps.title}`}</title>
-    </Head>
+    {head}
     <PersonalityProvider>
       <Layout>
         <Component {...pageProps} />
