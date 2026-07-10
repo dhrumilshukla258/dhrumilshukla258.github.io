@@ -131,9 +131,9 @@
   font-size: 0.75rem;
   font-weight: 800;
   letter-spacing: 0.1em;
-  color: #c47829;
+  color: var(--accent-color);
   margin-bottom: 1.25rem;
-  opacity: 0.7;
+  opacity: 0.85;
 }
 
 .gamerField {
@@ -168,7 +168,7 @@
 
 .gamerInput:focus,
 .gamerTextarea:focus {
-  border-color: #c47829;
+  border-color: var(--accent-color);
 }
 
 .gamerInput::placeholder,

@@ -108,7 +108,7 @@ games/
   snake/             # MiniSnake canvas game
     index.tsx · useSnakeGame.ts
   shared/
-    GameDpad.tsx     # Mobile D-pad for QuestlineGame
+    Joystick.tsx     # Mobile analog joystick for QuestlineGame
 
 data/                # ← Edit here to update content everywhere
   owner.ts           # Personal info, themes, default theme per personality

@@ -208,14 +208,14 @@
   padding: 0.3rem 0.65rem; border-radius: 6px;
   font-size: 0.75rem; font-weight: 500; text-decoration: none; transition: all 0.2s;
 }
-.gamerGhLink:hover { border-color: var(--accent-color); color: var(--accent-color); }
+.gamerGhLink:hover { border-color: #c47829; color: #c47829; }
 .gamerBtn {
   padding: 0.35rem 0.8rem;
-  background: transparent; border: 1px solid var(--accent-color);
-  color: var(--accent-color); font-size: 0.75rem; font-weight: 600;
+  background: transparent; border: 1px solid #c47829;
+  color: #c47829; font-size: 0.75rem; font-weight: 600;
   border-radius: 6px; cursor: pointer; transition: background 0.2s, color 0.2s;
 }
-.gamerBtn:hover { background: var(--accent-color); color: #0d0d14; }
+.gamerBtn:hover { background: #c47829; color: #0d0d14; }
 
 /* Gamer modal */
 .gamerModalBar {

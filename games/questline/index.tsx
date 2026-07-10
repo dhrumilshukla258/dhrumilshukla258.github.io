@@ -1,4 +1,4 @@
-﻿import React, { useCallback, useEffect, useRef, useState } from 'react';
+﻿import React, { useEffect, useRef, useState } from 'react';
 import { useRouter } from 'next/router';
 import * as THREE from 'three';
 import {
@@ -9,7 +9,7 @@ import {
   resolveCollisions, Collider,
 } from '@/games/questline/engine';
 import { useMenu } from '@/components/context/MenuContext';
-import { GameDpad } from '@/games/shared/GameDpad';
+import { Joystick } from '@/games/shared/Joystick';
 import { MiniSnake } from '@/games/snake';
 import { cityZones, spawnBuildingLabel, worldName } from './data/zones';
 import { gameCity, skillsCity, buildsCity } from './data/districts';
@@ -50,36 +50,6 @@ export function QuestlineGame() {
   const [nearZone, setNearZone] = useState<string | null>(null);
   const [portalOpen, setPortalOpen] = useState(false);
   const nearZoneRef = useRef<Zone | null>(null);
-
-  const [tiltEnabled, setTiltEnabled] = useState(false);
-
-  const enableTilt = useCallback(async () => {
-    const DOE = DeviceOrientationEvent as unknown as { requestPermission?: () => Promise<string> };
-    if (typeof DOE.requestPermission === 'function') {
-      const res = await DOE.requestPermission();
-      if (res !== 'granted') return;
-    }
-    setTiltEnabled(true);
-  }, []);
-
-  // Gyroscope tilt controls (mobile only)
-  useEffect(() => {
-    if (!tiltEnabled) return;
-    const TILT_THRESHOLD = 8;
-    const onOrientation = (e: DeviceOrientationEvent) => {
-      const gamma = e.gamma ?? 0;
-      const beta  = e.beta  ?? 0;
-      inputRef.current.left  = gamma < -TILT_THRESHOLD;
-      inputRef.current.right = gamma >  TILT_THRESHOLD;
-      inputRef.current.up    = beta  >  TILT_THRESHOLD;
-      inputRef.current.down  = beta  < -TILT_THRESHOLD;
-    };
-    window.addEventListener('deviceorientation', onOrientation);
-    return () => {
-      window.removeEventListener('deviceorientation', onOrientation);
-      inputRef.current.left = inputRef.current.right = inputRef.current.up = inputRef.current.down = false;
-    };
-  }, [tiltEnabled]);
 
   useEffect(() => {
     const canvas = canvasRef.current!;
@@ -872,13 +842,7 @@ export function QuestlineGame() {
         </div>
       )}
       <div className={styles.controlsHint}>WASD / Arrow keys · E or Enter to enter</div>
-      <GameDpad inputRef={inputRef} />
-      {!tiltEnabled && (
-        <button className={styles.tiltBtn} onClick={enableTilt}>📱 Tilt</button>
-      )}
-      {tiltEnabled && (
-        <button className={styles.tiltBtn} onClick={() => setTiltEnabled(false)}>📱 Tilt ✓</button>
-      )}
+      <Joystick inputRef={inputRef} />
     </div>
   );
 }

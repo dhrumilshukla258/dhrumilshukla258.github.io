@@ -40,12 +40,14 @@ export function GlitchEffect({ onMid, onDone }: { onMid: () => void; onDone: () 
       const bgA = t < 0.08 ? t / 0.08 : t > 0.88 ? 1 - remap(t, 0.88, 1) : 1;
       ctx.fillStyle = `rgba(0,4,2,${bgA * 0.94})`; ctx.fillRect(0, 0, W, H);
 
-      // glitch bands
+      // glitch bands — offset scales with width so tearing reads as a subtle
+      // scanline glitch on narrow phones instead of tearing the whole screen
+      const bandOffset = Math.min(38, W * 0.09);
       if (t < 0.72) {
         const gt = t / 0.72;
         bands.forEach((b, i) => {
           const intensity = Math.sin(t * 14 + i * 2.1) * Math.sin(t * 7 + i);
-          const offset    = intensity * 38 * b.seed * easeOut(Math.min(gt * 2, 1));
+          const offset    = intensity * bandOffset * b.seed * easeOut(Math.min(gt * 2, 1));
           if (Math.abs(offset) < 2) return;
           ctx.save(); ctx.globalAlpha = Math.abs(intensity) * 0.55;
           ctx.fillStyle = intensity > 0 ? 'rgba(0,255,180,0.13)' : 'rgba(255,50,80,0.13)';
@@ -62,8 +64,10 @@ export function GlitchEffect({ onMid, onDone }: { onMid: () => void; onDone: () 
         const rainT = remap(t, 0.04, 0.94);
         const rainA = rainT < 0.12 ? rainT / 0.12 : rainT > 0.82 ? 1 - remap(rainT, 0.82, 1) : 1;
         ctx.save(); ctx.font = `${FONT}px monospace`;
+        // steps tied to H so rain fills tall portrait screens instead of
+        // stopping partway down (previously a fixed frame-time budget)
         drops.forEach((drop, col) => {
-          const steps = Math.floor(rainT * DUR / 42);
+          const steps = Math.ceil((rainT * (H + FONT * drop.speed)) / (FONT * drop.speed));
           for (let row = 0; row < steps; row++) {
             const charY = drop.y + row * FONT * drop.speed;
             if (charY < 0 || charY > H) continue;

@@ -137,8 +137,18 @@ export function useSnakeGame({ active, colors, cols = 24, rows = 18, cell = 20, 
     }
 
     draw();
-    const id = setInterval(tick, speed);
-    return () => clearInterval(id);
+    // Speed ramps up gradually as the snake grows, capped well short of unplayable.
+    const MIN_SPEED = 75;
+    const SPEED_STEP = 2.5;
+    let timeoutId: ReturnType<typeof setTimeout>;
+    const loop = () => {
+      tick();
+      const len = snakeRef.current.length;
+      const currentSpeed = Math.max(MIN_SPEED, speed - len * SPEED_STEP);
+      timeoutId = setTimeout(loop, currentSpeed);
+    };
+    timeoutId = setTimeout(loop, speed);
+    return () => clearTimeout(timeoutId);
   }, [active, gameOver, colors, cols, rows, cell, speed, W, H]);
 
   return { canvasRef, score, highScore, gameOver, restart, pushDir, W, H };
