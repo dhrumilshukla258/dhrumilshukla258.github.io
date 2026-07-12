@@ -17,6 +17,7 @@ const toClassName = (s: string) =>
 
 const GAMER_GRADIENTS: Record<string, string> = {
   'vscode-portfolio':       '135deg, #0c0e1a, #1a1840, #141230',
+  'portalcast-server':      '135deg, #0a0e1a, #10203a, #0c1830',
   'home-lab':               '135deg, #0a1420, #0f2535, #0a1828',
   'BellyBlaster':           '135deg, #200808, #3a1010, #1a0808',
   'spend-tracker':          '135deg, #0a0a18, #10152a, #0a0d20',

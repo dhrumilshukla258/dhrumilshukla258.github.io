@@ -77,13 +77,13 @@ export const projects: Project[] = [
   },
 
   {
-    slug: 'stalker-m3u-server',
-    link: 'https://github.com/dhrumilshukla258/stalker-m3u-server',
+    slug: 'portalcast-server',
+    link: 'https://github.com/dhrumilshukla258/portalcast-server',
     startDate: new Date('2026-04-26'),
     techLogo: ['/logos/file_type_typescript.svg', '/logos/file_type_node.svg', '/logos/sqlite.svg', '/logos/file_type_docker2.svg'],
 
     professional: {
-      title: 'Stalker M3U Server',
+      title: 'Portalcast Server',
       overview: 'A Node.js/TypeScript middleware bridging Stalker portals and Xtream Codes sources to any IPTV player, with a full content management layer, Jellyfin integration, and an HLS transcode proxy.',
       description: [
         'Built dual provider support for Stalker STB portals and Xtream Codes APIs, switchable from the UI without a restart',
@@ -94,7 +94,7 @@ export const projects: Project[] = [
     },
 
     technical: {
-      title: 'Stalker M3U Server',
+      title: 'Portalcast Server',
       overview: 'Hapi.js/TypeScript middleware with Sequelize/SQLite persistence, incremental cache warming, and an FFmpeg session-managed HLS transcode proxy, shipped as a Docker container.',
       description: [
         'Hapi.js server in TypeScript; Sequelize-TypeScript ORM over SQLite for portal profiles, content metadata, and virtual category mappings',
